@@ -17,6 +17,8 @@ const authReducer = (state, action) => {
 			return { ...state, errorMessage:'' }
 		case 'signout':
 			return { token: null, errorMessage:'' }
+		case 'resultss':
+			return {...state}
 		default:
 		return state;
 	}
@@ -120,7 +122,7 @@ const signin = (dispatch) => async ({ email, password }) => {
 		dispatch({ type: 'signin', payload: response.data.token});
 		
 		//navigate to main flow
-		navigate('TrackList')
+		navigate('Home')
 	} catch (err) {
 		dispatch({
 			type:'add_error',

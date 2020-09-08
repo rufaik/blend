@@ -38,6 +38,7 @@ const HomeScreen = ({ isFocused }) => {
 
 		</View>
 		);
+	
 };
 
 HomeScreen.navigationOptions = {

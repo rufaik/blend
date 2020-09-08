@@ -9,6 +9,10 @@ const authReducer = (state, action) => {
 			return { ...state, errorMessage: action.payload};
 		case 'signin':
 			return { errorMessage: '', token: action.payload };
+		case 'googlesign':
+			return { token: null, errorMessage:'' }
+		case 'reset':
+			return { token: null, errorMessage:'' }
 		case 'clear_error_message':
 			return { ...state, errorMessage:'' }
 		case 'signout':
@@ -22,9 +26,9 @@ const tryLocalSignin = dispatch => async () => {
 	const token = await AsyncStorage.getItem('token');
 	if (token) {
 		dispatch({ type: 'signin', payload: token });
-		navigate('TrackList');
+		navigate('Home');
 	} else {
-		navigate('Signup')
+		navigate('SplashScreen1')
 	}
 }
 
@@ -57,6 +61,51 @@ const signup = dispatch =>  async ({ email, password }) => {
 	};
 
 
+
+
+const googlesign = (dispatch) => async () => {
+		// Try to signin
+		// Handle success by updating state
+		// Handle failure by showing error message
+
+	try {
+		//make a request
+		// const response = await trackerApi.post('/signin', {email, password});
+		//store the token
+		await AsyncStorage.setItem('token', response.data.token);
+		//update our state
+		dispatch({ type: 'signin', payload: response.data.token});
+		//navigate to main flow
+		// navigate('TrackList')
+	} catch (err) {
+		dispatch({
+			type:'add_error',
+			payload: 'Something went wrong with sign in'
+
+		})
+	}
+}
+// const signInWithGoogleAsync = () => async () => {
+//   try {
+//     const result = await Google.logInAsync({
+//       // androidClientId: YOUR_CLIENT_ID_HERE,
+//       iosClientId:'685019101843-oep14jg11h5qpnv2qrqrpqq1jlnl0e7f.apps.googleusercontent.com',
+//       scopes: ['profile', 'email'],
+//     });
+//       await AsyncStorage.setItem('token', response.data.token);
+//       dispatch({ type: 'signin', payload: response.data.token});
+//       console.log(response.data.token)
+//     if (result.type === 'success') {
+//     	navigation.navigate('Home')
+//       console.log(response.data.token)
+//       return response.data.token;
+//     } else {
+//       return { cancelled: true };
+//     }
+//   } catch (e) {
+//     return { error: true };
+//   }
+// }
 const signin = (dispatch) => async ({ email, password }) => {
 		// Try to signin
 		// Handle success by updating state
@@ -69,6 +118,7 @@ const signin = (dispatch) => async ({ email, password }) => {
 		await AsyncStorage.setItem('token', response.data.token);
 		//update our state
 		dispatch({ type: 'signin', payload: response.data.token});
+		
 		//navigate to main flow
 		navigate('TrackList')
 	} catch (err) {
@@ -80,6 +130,23 @@ const signin = (dispatch) => async ({ email, password }) => {
 	}
 }
 
+const reset = (dispatch)  => async ({ email, newpassword }) => {
+	try {
+		//make a request
+		const response = await trackerApi.put('/reset', {email, newpassword});
+		
+		//navigate to main flow
+		navigate('Signin')
+	} catch (err) {
+		dispatch({
+			type:'add_error',
+			payload: 'Something went wrong'
+
+		})
+	}
+}
+
+
 const signout = dispatch => async () => {
 		await AsyncStorage.removeItem('token');
 		dispatch({ type:'signout' })
@@ -89,6 +156,6 @@ const signout = dispatch => async () => {
 
 export const { Provider, Context } = createDataContext(
 	authReducer,
-	{ signin, signout, signup, clearErrorMessage,tryLocalSignin },
+	{ signin, signout, googlesign, signup, clearErrorMessage,tryLocalSignin },
 	{ token: null, errorMessage: '' }
 );

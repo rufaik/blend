@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements'
 import Spacer from './Spacer';
+import GoogleLogin from './GoogleLogin'
 
 const AuthForm = ({ headerText, subheaderText, errorMessage, onSubmit, submitButtonText }) => {
 	const [email, setEmail] = useState('')
@@ -51,7 +52,15 @@ const AuthForm = ({ headerText, subheaderText, errorMessage, onSubmit, submitBut
 			/>
 			{errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
 			<Spacer>
-				<Button style={styles.button} buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} title={submitButtonText} onPress={() => onSubmit({ email, password })} />
+				<GoogleLogin />
+			</Spacer>
+			<Spacer>
+				<Button 
+					style={styles.button} 
+					buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} 
+					title={submitButtonText} 
+					onPress={() => onSubmit({ email, password })}
+				/>
 			</Spacer>
 			
 		</>

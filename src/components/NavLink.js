@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation'
 
 const NavLink = ({ navigation, text, logintext, routeName }) => {
 	return(
-		<TouchableOpacity style={styles.log} onPress={() => navigation.navigate(routeName)}>
+		<TouchableOpacity onPress={() => navigation.navigate(routeName)}>
 			<Spacer>
 				<Text style={styles.link}>
 					{text}
@@ -25,10 +25,6 @@ const styles = StyleSheet.create({
 	},
 	loglink: {
 		color: 'orange'
-	},
-	log: {
-		justifyContent: 'center',
-      	alignItems: 'center'
 	}
 });
 

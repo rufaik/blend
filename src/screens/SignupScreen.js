@@ -177,7 +177,7 @@ const SignupScreen = ({ navigation }) => {
 			
 			routeName="Signin"
 			text="Already signed up?"
-			logintext=" Log in"
+			logintext="Sign Up"
 
 			/>
 		</View>
@@ -202,11 +202,8 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		fontWeight: "800",
-		// marginLeft: 15,
 		fontFamily: 'Poppins_700Bold',
 		fontSize: Platform.OS === 'ios' ? 35 : 22,
-		// marginTop: Platform.OS === 'ios' ? 0 : 150
-		// Platform.OS === 'ios' ? 35 : 22
 		position: "absolute",
 	    left: "6%",
 	    right: "0%",

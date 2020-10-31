@@ -183,6 +183,6 @@ const signout = dispatch => async () => {
 
 export const { Provider, Context } = createDataContext(
 	authReducer,
-	{ signin, signout, googlesign, signup, clearErrorMessage,tryLocalSignin },
+	{ signin1, signin, signout, googlesign, signup, clearErrorMessage,tryLocalSignin },
 	{ token: null, errorMessage: '' }
 );

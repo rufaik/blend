@@ -55,7 +55,7 @@ const signup = dispatch =>  async ({ email, password }) => {
 		//update our state
 		dispatch({ type: 'signin', payload: response.data.token});
 		//navigate to main flow
-		navigate('TrackList')
+		navigate('Home')
 	} catch (err) {
 		dispatch({ 
 			type: 'add_error', 

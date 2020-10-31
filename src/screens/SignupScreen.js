@@ -160,7 +160,7 @@ const SignupScreen = ({ navigation }) => {
 				<Button 
 					style={styles.button} 
 					buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} 
-					title="Log In"
+					title="Sign Up"
 					onPress={() => {
 						if (password !== confirm) {
        						 alert("Passwords don't match");
@@ -177,7 +177,7 @@ const SignupScreen = ({ navigation }) => {
 			
 			routeName="Signin"
 			text="Already signed up?"
-			logintext="Sign Up"
+			logintext=" Log in"
 
 			/>
 		</View>

@@ -8,7 +8,7 @@ YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
 ])
 
-const ResultsListD = ({ title, results2, navigation }) => {
+const ResultsListD = ({ title, results2, navigation  }) => {
 	const [selectedId, setSelectedId] = useState(null);
   const [itemList, setItemList] = useState([]);
 
@@ -25,7 +25,7 @@ const ResultsListD = ({ title, results2, navigation }) => {
 
 
 	if (!results2.length){
-		return null;
+		return null;1
 	}
 
 	return(
@@ -39,10 +39,11 @@ const ResultsListD = ({ title, results2, navigation }) => {
 				renderItem={({item}) => {
 				
 				console.log("lets see", item.id)
+
 				
 					return (
-						<TouchableOpacity onPress={() => navigation.navigate('ResultsShowD', { showD: item.id })}>
-							<ResultsDetailD results2={item} />
+						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.id })}>
+							<ResultsDetailD results2={item}  />
 						</TouchableOpacity>
 					)
 				}}

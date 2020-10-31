@@ -9,7 +9,7 @@ const ResultsDetailA = ({results1}) => {
 			<Text style={styles.name} >{results1.title}</Text>
 			<View style={styles.time} >
 				<MaterialIcons  name="access-time" size={15} color="gray" />
-				<Text style={styles.icon}> 20mins</Text>
+				<Text style={styles.icon}> {results1.readyInMinutes}mins</Text>
 			</View>
 		</View>
 		);

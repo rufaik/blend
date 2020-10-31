@@ -25,7 +25,7 @@ const ResultsListC = ({ title, results, navigation }) => {
 
 
 	if (!results.length){
-		return null;
+		return null; 
 	}
 
 	return(
@@ -35,12 +35,13 @@ const ResultsListC = ({ title, results, navigation }) => {
 				showsHorizontalScrollIndicator={false}
 				data={results}
 				numColumns={2}
+				style ={{ marginLeft: 10, marginTop: 5}}
 				keyExtractor={results => results.id.toString()}
 				renderItem={({item}) => {
 					// addToList(item)
 				
 					return (
-						<TouchableOpacity onPress={() => navigation.navigate('ResultsShow', { show: item.id })}>
+						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.id})}>
 							<ResultsDetailB results={item} />
 						</TouchableOpacity>
 					)

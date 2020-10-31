@@ -13,31 +13,12 @@ import {
 } from '@expo-google-fonts/poppins'
 
 
-export const Item = ({item, onPress, style, check, box}) => {
+const ItemE = ({item, onPress, style, check, box}) => {
 
 
 	return(
 		  <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-		  <View style= {styles.imagebox}>
-			<Image style= {styles.image} source={{ uri: `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`}} />
-		</View>
-			<Text style={styles.name} >{item.name} </Text>
-			<MaterialCommunityIcons name={check} size={24} color={box} style={{ position: "absolute", right: 40}}/> 
-			
-			
- 		 </TouchableOpacity>
-		);
-};
-
-export const Item1 = ({item, onPress, style, check, box}) => {
-
-
-	return(
-		  <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-		  <View style= {styles.imagebox}>
-			<Image style= {styles.image} source={{ uri: `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`}} />
-		</View>
-			<Text style={styles.name} >{item.name} </Text>
+			<Text style={styles.name} >{item} </Text>
 			<MaterialCommunityIcons name={check} size={24} color={box} style={{ position: "absolute", right: 40}}/> 
 			
 			
@@ -57,7 +38,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingBottom: 10,
 		paddingTop:10,
-		fontFamily: 'Poppins_600SemiBold',
+		fontFamily: 'Poppins_700Bold',
 		// borderWidth: 5
 			},
 	image: {
@@ -82,7 +63,7 @@ const styles = StyleSheet.create({
 		marginLeft: 5,
 		textTransform: 'capitalize',
 		width: "100%",
-		fontFamily: 'Poppins_600SemiBold',
+		fontFamily: 'Poppins_500Medium',
 	
 	},
 	 checkbox: {
@@ -90,5 +71,5 @@ const styles = StyleSheet.create({
   },
 });
 
-
+export default ItemE;
 

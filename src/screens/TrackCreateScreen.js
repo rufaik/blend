@@ -29,11 +29,11 @@ const TrackCreateScreen = ({ isFocused }) => {
 		);
 };
 
-TrackCreateScreen.navigationOptions = {
-  title: 'Cook',
-  tabBarIcon: <MaterialCommunityIcons name="pot-mix" size={24} color="gray" />
+// TrackCreateScreen.navigationOptions = {
+//   title: 'Cook',
+//   tabBarIcon: <MaterialCommunityIcons name="pot-mix" size={24} color="gray" />
 
-}
+// }
 
 const styles = StyleSheet.create({
 	header: {

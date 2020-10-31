@@ -9,6 +9,8 @@ const authReducer = (state, action) => {
 			return { ...state, errorMessage: action.payload};
 		case 'signin':
 			return { errorMessage: '', token: action.payload };
+		case 'signin1':
+			return { errorMessage: '', token: action.payload };
 		case 'googlesign':
 			return { token: null, errorMessage:'' }
 		case 'reset':
@@ -123,6 +125,29 @@ const signin = (dispatch) => async ({ email, password }) => {
 		
 		//navigate to main flow
 		navigate('Home')
+	} catch (err) {
+		dispatch({
+			type:'add_error',
+			payload: 'Something went wrong with sign in'
+
+		})
+	}
+}
+const signin1 = (dispatch) => async ({ email, password }) => {
+		// Try to signin
+		// Handle success by updating state
+		// Handle failure by showing error message
+
+	try {
+		//make a request
+		const response = await trackerApi.post('/signin', {email, password});
+		//store the token
+		await AsyncStorage.setItem('token', response.data.token);
+		//update our state
+		dispatch({ type: 'signin', payload: response.data.token});
+		
+		//navigate to main flow
+		navigate('mainFlow')
 	} catch (err) {
 		dispatch({
 			type:'add_error',

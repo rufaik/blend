@@ -88,7 +88,7 @@ const ResultsShowScreen = ({ navigation }) => {
 			 
 			</TouchableOpacity>
 
-				<Image style={styles.imageline} source={require('../images/line.png')}/>
+			<Image style={styles.imageline} source={require('../images/line.png')}/>
 			<Text style={styles.log}>{resultsd.title}</Text>
 			<Text style={styles.log}>Preparation Time: {resultsd.preparationMinutes} Minutes</Text>
 			<Text style={styles.log}>Cooking Time: {resultsd.readyInMinutes} Minutes</Text>

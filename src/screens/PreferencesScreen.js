@@ -26,107 +26,128 @@ import {
 import { Fontisto } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
+// jewish, , southern , nordic, eastern european
 
 const DATA = [
   {
     id: "American",
-    title: "First Item",
+    title: "american",
     imageUrl: "https://source.unsplash.com/featured/?American,dinner,food"
   },
   {
-    id: "Asian",
-    title: "Second Item",
-    imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food"
-  },
-  {
-    id: "Breakfast",
-    title: "Breakfast",
-    imageUrl: "https://source.unsplash.com/featured/?Breakfast,dinner,food"
+    id: "African",
+    title: "african",
+    imageUrl: "https://source.unsplash.com/featured/?African,dinner,food"
   },
   {
     id: "British",
-    title: "First Item",
+    title: "british",
     imageUrl: "https://source.unsplash.com/featured/?British,dinner,food"
   },
   {
+    id: "Cajun",
+    title: "cajun",
+    imageUrl: "https://source.unsplash.com/featured/?cajun,dinner,food"
+  },
+  {
     id: "Caribbean",
-    title: "Second Item",
+    title: "caribbean",
     imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food"
   },
   {
     id: "Chinese",
-    title: "Third Item",
+    title: "chinese",
     imageUrl: "https://source.unsplash.com/featured/?Chinese,dinner,food"
   },
   {
-    id: "Gelato",
-    title: "Fourth Item",
-    imageUrl: "https://source.unsplash.com/featured/?Gelato,food"
+    id: "Eastern European",
+    title: "eastern european",
+    imageUrl: "https://source.unsplash.com/featured/?Eastern European,dinner,food"
+  },
+  {
+    id: "French",
+    title: "french",
+    imageUrl: "https://source.unsplash.com/featured/?French,dinner,food"
   },
   {
     id: "German",
-    title: "First Item",
+    title: "german",
     imageUrl: "https://source.unsplash.com/featured/?German,dinner,food"
   },
   {
-    id: "Ethiopian",
-    title: "First Item",
-    imageUrl: "https://source.unsplash.com/featured/?Ethiopian,dinner,food"
-  },
-  {
-    id: "Healthy",
-    title: "Second Item",
-    imageUrl: "https://source.unsplash.com/featured/?Healthy,dinner,food"
+    id: "Greek",
+    title: "greek",
+    imageUrl: "https://source.unsplash.com/featured/?Greek,dinner,food"
   },
   {
     id: "Indian",
-    title: "Third Item",
+    title: "indian",
     imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
   },
   {
     id: "Italian",
-    title: "Fourth Item",
+    title: "italian",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
+    id: "Irish",
+    title: "irish",
+    imageUrl: "https://source.unsplash.com/featured/?Irish,dinner,food"
+  },
+  {
     id: "Japanese",
-    title: "First Item",
+    title: "japanese",
     imageUrl: "https://source.unsplash.com/featured/?Japanese,dinner,food"
   },
   {
+    id: "Jewish",
+    title: "jewish",
+    imageUrl: "https://source.unsplash.com/featured/?Jewish,dinner,food"
+  },
+  {
     id: "Korean",
-    title: "Second Item",
+    title: "korean",
     imageUrl: "https://source.unsplash.com/featured/?Korean,dinner,food"
   },
   {
+    id: "Latin American",
+    title: "latin american",
+    imageUrl: "https://source.unsplash.com/featured/?Latin American,dinner,food"
+  },
+  {
     id: "Mexican",
-    title: "Third Item",
+    title: "mexican",
     imageUrl: "https://source.unsplash.com/featured/?Mexican,dinner,food"
   },
   {
-    id: "Moroccan",
-    title: "Fourth Item",
-    imageUrl: "https://source.unsplash.com/featured/?Moroccan,dinner,food"
+    id: "Middle Eastern",
+    title: "middle eastern,",
+    imageUrl: "https://source.unsplash.com/featured/?Middle Eastern,dinner,food"
+  },
+  {
+    id: "Nordic",
+    title: "nordic",
+    imageUrl: "https://source.unsplash.com/featured/?nordic,dinner,food"
+  },
+  {
+    id: "Spanish",
+    title: "spanish",
+    imageUrl: "https://source.unsplash.com/featured/?Spanish,dinner,food"
+  },
+  {
+    id: "Southern",
+    title: "southern",
+    imageUrl: "https://source.unsplash.com/featured/?Southern,dinner,food"
   },
   {
     id: "Thai",
-    title: "First Item",
+    title: "thai",
     imageUrl: "https://source.unsplash.com/featured/?Thai,dinner,food"
   },
   {
-    id: "Turkish",
-    title: "Second Item",
-    imageUrl: "https://source.unsplash.com/featured/?Turkish,dinner,food"
-  },
-  {
     id: "Vietnamese",
-    title: "Third Item",
+    title: "vietnamese",
     imageUrl: "https://source.unsplash.com/featured/?Vietnamese,dinner,food"
-  },
-  {
-    id: "Vegan",
-    title: "Fourth Item",
-    imageUrl: "https://source.unsplash.com/featured/?Vegan,dinner,food"
   }
 ];
 
@@ -164,35 +185,35 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
     //copy the selected item array
     let updatedItems = itemList;
     //use array.push to add it to the array
-    updatedItems.push(item.id);
+    updatedItems.push(item.title);
     setItemList(updatedItems);
-    setSelectedId(item.id);
-    console.log(itemList);
+    setSelectedId(item.title);
+    // console.log(itemList);
   };
 
   const removeFromList = item => {
     //copy the slected item array
     let updatedItems = itemList;
     //find the current item in the array
-    let itemIndexToRemove = updatedItems.indexOf(item.id);
+    let itemIndexToRemove = updatedItems.indexOf(item.title);
     //use splice to remove the item from list
     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
     updatedItems.splice(itemIndexToRemove, 1);
     setItemList(updatedItems);
     //this is weird but it makes it work - I can't unselect, so made a non-existing id
-    setSelectedId(item.id + "____");
-    console.log(itemList);
+    setSelectedId(item.title + "____");
+    // console.log(itemList);
   };
 
   const renderItem = ({ item }) => {
     //check if item is in the list - if so, it's selected
-    const borderColor = itemList.indexOf(item.id) > -1 ? "#14D08C" : "#F5F3F3";
+    const borderColor = itemList.indexOf(item.title) > -1 ? "#14D08C" : "#F5F3F3";
 
     return (
       <Item
         item={item}
         onPress={() =>
-          itemList.indexOf(item.id) > -1
+          itemList.indexOf(item.title) > -1
             ? removeFromList(item)
             : addToList(item)
         }
@@ -205,12 +226,12 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
     <>
     	<Spacer />
     	<Spacer />
-     <View style={{ flexDirection: 'row', alignItems: 'center',}} >
+     <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%'}} >
 		<Text style={styles.header} h1>
         Set your preferences</Text>	
 		<TouchableOpacity onPress={() => {
 					
-			navigation.navigate('Diet', {list:itemList})}
+			navigation.navigate('Diet', {list1:itemList})}
 		}>
 			<Text style={styles.nextheader}>     Next </Text>
 		</TouchableOpacity>
@@ -228,10 +249,11 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
         data={DATA}
         numColumns={2}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.title}
         extraData={selectedId}
         navigation={navigation}
         style={{ marginTop: 5}}
+        contentContainerStyle={{ alignItems: "center" }}
       />
       <Button
         style={styles.button}
@@ -246,7 +268,7 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
 		// onPress={() => onSubmit(itemList)}
 		onPress={() => {
 					
-			navigation.navigate('Diet', {list:itemList})}
+			navigation.navigate('Diet', {list1:itemList})}
 		}
       />
       <Spacer />
@@ -257,7 +279,7 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
     <Spacer />
     </ScrollView>
     </>
-  );
+  ); 
 };
 
 const styles = StyleSheet.create({
@@ -274,7 +296,7 @@ const styles = StyleSheet.create({
   item: {
     borderRadius: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 10,
     borderWidth: 5
   },
   title: {

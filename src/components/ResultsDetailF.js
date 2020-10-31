@@ -13,7 +13,7 @@ import {
 } from '@expo-google-fonts/poppins'
 
 
-export const Item = ({item, onPress, style, check, box}) => {
+const Item = ({item, onPress, style, check, box}) => {
 
 
 	return(
@@ -21,23 +21,10 @@ export const Item = ({item, onPress, style, check, box}) => {
 		  <View style= {styles.imagebox}>
 			<Image style= {styles.image} source={{ uri: `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`}} />
 		</View>
+		<View>
 			<Text style={styles.name} >{item.name} </Text>
-			<MaterialCommunityIcons name={check} size={24} color={box} style={{ position: "absolute", right: 40}}/> 
-			
-			
- 		 </TouchableOpacity>
-		);
-};
-
-export const Item1 = ({item, onPress, style, check, box}) => {
-
-
-	return(
-		  <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-		  <View style= {styles.imagebox}>
-			<Image style= {styles.image} source={{ uri: `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`}} />
+			<Text style={styles.logG} >{Math.round(item.amount.metric.value)}{item.amount.metric.unit} </Text>
 		</View>
-			<Text style={styles.name} >{item.name} </Text>
 			<MaterialCommunityIcons name={check} size={24} color={box} style={{ position: "absolute", right: 40}}/> 
 			
 			
@@ -48,10 +35,21 @@ export const Item1 = ({item, onPress, style, check, box}) => {
 
 
 const styles = StyleSheet.create({
+	logG: {
+	fontSize: 14,
+	fontWeight: "500",
+	fontFamily: 'Poppins_600SemiBold',
+	color: '#ACACAC',
+	lineHeight:22,
+	marginBottom: 5,
+	flexWrap: 'wrap',
+	marginLeft: 5,
+	width: "100%",
+	textTransform: "lowercase"
+	},
 	container:{
-		marginLeft: 15,
+	
 		width: "100%",
-		backgroundColor:"white",
 		flex: 1, 
 		flexDirection: 'row',
 		alignItems: 'center',
@@ -90,5 +88,5 @@ const styles = StyleSheet.create({
   },
 });
 
-
+export default Item;
 

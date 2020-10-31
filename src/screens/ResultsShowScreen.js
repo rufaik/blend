@@ -92,9 +92,14 @@ const ResultsShowScreen = ({ navigation }) => {
       <Image style={styles.imageline} source={require('../images/line.png')}/>
 <View style={styles.card}>
 			<Text style={styles.log}>{resultsd.title}</Text>
-			<Text style={styles.log}>Preparation Time: {resultsd.preparationMinutes} Minutes</Text>
-			<Text style={styles.log}>Cooking Time: {resultsd.readyInMinutes} Minutes</Text>
-			<Text style={styles.log}>Number of Servings: {resultsd.servings}</Text>
+			<Text style={styles.log}>Preparation Time</Text> 
+			<Text style={styles.log}>{resultsd.preparationMinutes} Minutes</Text>
+			<Text style={styles.log}>Cooking Time</Text>
+			<Text style={styles.log}>{resultsd.readyInMinutes} Minutes</Text>
+			<Text style={styles.log}>Number of Servings</Text> 
+			<Text style={styles.log}>{resultsd.servings}</Text>
+</View>			
+<View style={styles.card}>
 			<Spacer />
 			<Text style={styles.log}>INSTRUCTIONS</Text>
 					<Text style={styles.log}> Step {resultsd.analyzedInstructions[0].steps[0].number}:{resultsd.analyzedInstructions[0].steps[0].step} </Text>
@@ -146,7 +151,8 @@ const styles = StyleSheet.create({
    alignSelf: 'center',   
   },
   card:{
-  	backgroundColor:"#F7F7F7"
+  	backgroundColor:"#F7F7F7",
+  	borderRadius: 10,
   }
 });
 

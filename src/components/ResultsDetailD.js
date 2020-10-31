@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Image, ImageBackground, StyleSheet, View, Button } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import recipe from '../api/recipe';
+
 
 const ResultsDetailD = ({results2}) => {
+const [resultsA, setResultsA] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
+	 const id = results2.id
+	
+	const searchApii = async (id) => {
+
+			const responsep = await recipe.get('/', {
+				params: {
+		    		ids: `${id}`
+				}
+			 });
+			 setResultsA(responsep.data[0])
+		
+		}
+
+ 
+
+	 useEffect(() => {
+    searchApii(id)
+  }, []);
+
+	if(!resultsA) {
+		return null;
+	}
+
+
+ 
+	
+
 	return(
 		<View style= {styles.container} >
 		<View>
@@ -15,19 +46,22 @@ const ResultsDetailD = ({results2}) => {
 			<View style={styles.child}>
 
           </View>
-          <View style={{ position: 'absolute', bottom: 10, left: 10 }}>
+          <View style={{ position: 'absolute', bottom: 10, left: 10, }}>
 			 <View style={styles.time} >
 			<Text 
 				style={{
                 fontSize: 15,
                 fontWeight: "600",
                 color: 'white',
+
               }}>
               {results2.title}
             </Text>
+            <View style={styles.box}>
         	<Entypo name="dot-single" size={20} color="white" />
-            <MaterialIcons  name="access-time" size={20} color="white" />
-				<Text style={styles.icon}> 20mins</Text>
+            <MaterialIcons  name="access-time" size={13} color="white" style={{ paddingTop: 4 }} />
+				<Text style={styles.icon}> {resultsA.readyInMinutes} mins</Text>
+			</View>
 			</View>
              </View>
             </View>
@@ -66,12 +100,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.3)'
   },
   icon:{
-  	color: "white"
+  	color: "white",
+  	paddingTop: 2
   },
   time:{
 		flexDirection: "row",
 		alignItems: "center",
-		paddingTop: 5
+		paddingTop: 5,
+		flexWrap: 'wrap',
+		paddingRight: 2
+	},
+	box:{
+		flexDirection: "row",
 	}
 
 });

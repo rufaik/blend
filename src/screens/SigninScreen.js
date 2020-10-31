@@ -5,7 +5,17 @@ import { Context } from '../context/AuthContext';
 import NavLink from '../components/NavLink';
 import { Text, Input, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer';
-import GoogleLogin from '../components/GoogleLogin'
+import GoogleLogin1 from '../components/GoogleLogin1'
+import { 
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from '@expo-google-fonts/poppins'
+
 
 
 const SigninScreen = ({ navigation }) => {
@@ -26,24 +36,22 @@ const SigninScreen = ({ navigation }) => {
 				/>
 
 
-			<Text style={styles.header} h3>Log in</Text>
+			<Text style={styles.header}>Log in</Text>
 		
 			<Spacer/>
 				<Text style={styles.subheader} h5>Find, cook and save recipes, see suggested ingredients, and follow your friends.</Text>
 
-			
+			<View style={{marginTop: 160}}>
 
-			<Spacer />
 			<Input 
 			containerStyle={{
 				paddingLeft: 20,
 				paddingRight: 20,
-				marginBottom:-10
+				marginBottom:Platform.OS === 'ios' ? -10 : -16,
 			}}
 			inputStyle={{
-				fontSize: 14,
-				fontWeight: "500"
-			}}
+					fontSize: Platform.OS === 'ios' ? 14 : 12
+				}}
 				inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
 					borderWidth: 1,
@@ -51,7 +59,8 @@ const SigninScreen = ({ navigation }) => {
 					borderColor: "rgba(0, 0, 0, 0.05)",
 					borderRadius: 10,
 					padding: 5,
-					paddingLeft:10
+					paddingLeft:10,
+					height: Platform.OS === 'ios' ? 52 : 42
 				}}
 				value={email} 
 				onChangeText={setEmail}
@@ -63,12 +72,11 @@ const SigninScreen = ({ navigation }) => {
 			containerStyle={{
 				paddingLeft: 20,
 				paddingRight: 20,
-				marginBottom:-10
+				marginBottom:Platform.OS === 'ios' ? -10 : -16,
 			}} 
 			inputStyle={{
-				fontSize: 14,
-				fontWeight: "500"
-			}}
+					fontSize: Platform.OS === 'ios' ? 14 : 12
+				}}
 			inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
 					borderWidth: 1,
@@ -76,7 +84,8 @@ const SigninScreen = ({ navigation }) => {
 					borderColor: "rgba(0, 0, 0, 0.05)",
 					borderRadius: 10,
 					padding: 5,
-					paddingLeft:10
+					paddingLeft:10,
+					height: Platform.OS === 'ios' ? 52 : 42
 				}}
 				secureTextEntry
 				value={password} 
@@ -86,30 +95,34 @@ const SigninScreen = ({ navigation }) => {
 				placeholder="Password"
 			
 			/>
+		</View>
 		<View style={styles.end}>
 			<NavLink
+			style={{fontFamily: 'Poppins_700Bold'}} 
 			routeName="Reset"
-			text="Forgot your"
-			logintext=" Password?"
+			text="Forgot your password?"
+			
 			/>
 		</View>	
 			{state.errorMessage ? <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
 			<Spacer>
-				<GoogleLogin />
+				<GoogleLogin1 />
 			</Spacer>
 			<Spacer>
+			<View style={styles.button} >
 				<Button 
 					style={styles.button} 
 					buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} 
 					title="Log in"
-					onPress={() => signin({ email, password })}
+					onPress={() => signin1({ email, password })}
 				/>
+			</View>
 			</Spacer>
 		<View style={styles.log}>
 			<NavLink
 			routeName="Signup"
 			text="New to Blend?"
-			logintext="Sign up"
+			logintext=" Sign up"
 			/>
 		</View>
 			</ImageBackground>
@@ -118,11 +131,12 @@ const SigninScreen = ({ navigation }) => {
 };
 
 
-SigninScreen.navigationOptions = () => {
-	return {
-		headerShown: false
-	};
-};
+// SigninScreen.navigationOptions = () => {
+// 	return {
+// 		headerMode: "float",
+// 		headerShown: false
+// 	};
+// };
 
 const styles = StyleSheet.create({
 	errorMessage: {
@@ -134,12 +148,23 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		fontWeight: "800",
-		marginLeft: 15
+		fontFamily: 'Poppins_700Bold',
+		fontSize: Platform.OS === 'ios' ? 35 : 22,
+		position: "absolute",
+	    left: "6%",
+	    right: "0%",
+	    top: Platform.OS === 'ios' ? "13%" : "15%",
+	    bottom: "23.83%",
 	},
 	subheader: {
 		fontWeight: "800",
-		marginLeft: 15,
-		marginRight: 15
+		fontSize: Platform.OS === 'ios' ? 16 : 12,
+		fontFamily: 'Poppins_700Bold',
+		position: "absolute",
+	    left: "6%",
+	    right: "0%",
+	    top: "23%",
+	    bottom: "23.83%",
 	},
 	forgotheader: {
 		fontWeight: "800",
@@ -166,7 +191,8 @@ const styles = StyleSheet.create({
   },
   end: {
   	justifyContent: 'center',
-  	alignItems: 'flex-end'
+  	alignItems: 'flex-end',
+	fontFamily: 'Poppins_700Bold',
   }
 });
 

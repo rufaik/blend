@@ -43,7 +43,7 @@ const ResultsListA = ({ title, results1, navigation }) => {
 				console.log("lets see", item.id)
 				
 					return (
-						<TouchableOpacity onPress={() => navigation.navigate('ResultsShowA', { showA: item.id })}>
+						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.id })}>
 							<ResultsDetailA results1={item} />
 						</TouchableOpacity>
 					)
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
 		flex:1,
 		flexDirection: "row",
 		justifyContent: "center",
+		marginTop:15
 
 		
 

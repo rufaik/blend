@@ -28,15 +28,6 @@ import Spacer from './Spacer';
 import useSaveTrack from '../hooks/useSaveTrack';
 import * as Google from 'expo-google-app-auth';
 import createDataContext from '../context/createDataContext';
-import { 
-  useFonts,
-  Poppins_400Regular,
-  Poppins_500Medium,
-  Poppins_600SemiBold,
-  Poppins_700Bold,
-  Poppins_800ExtraBold,
-  Poppins_900Black,
-} from '@expo-google-fonts/poppins'
 
 
 const authReducer = (state, action) => {
@@ -51,7 +42,7 @@ const authReducer = (state, action) => {
 };
 
 
-const GoogleLogin = ({ navigation }) => {
+const GoogleLogin1 = ({ navigation }) => {
 	// const { googlesign } = useContext(Context)
 
 async function signInWithGoogleAsync() {
@@ -65,7 +56,7 @@ async function signInWithGoogleAsync() {
       // dispatch({ type: 'signin', payload: response.data.token});
       console.log(result.user.id)
     if (result.type === 'success') {
-    	navigation.navigate('Home')
+    	navigation.navigate('mainFlow')
       return response.data.token;
     } else {
       return { cancelled: true };
@@ -100,15 +91,14 @@ async function signInWithGoogleAsync() {
 const styles = StyleSheet.create({
 	subheader: {
 		fontWeight: "800",
-		marginLeft: 15,
-		fontSize: Platform.OS === 'ios' ? 17 : 13,
+    marginLeft: 15,
+    fontSize: Platform.OS === 'ios' ? 17 : 13,
     paddingBottom: Platform.OS === 'ios' ? 10 : 8,
     fontFamily: "Poppins_700Bold"
 	}, 
 	gogimage: {
-    width: Platform.OS === 'ios' ? 45 : 38,
+   width: Platform.OS === 'ios' ? 45 : 38,
     height: Platform.OS === 'ios' ? 45 : 38,
- 
   },
   gogimage1: {
     borderColor: "#F4F4F4",
@@ -151,4 +141,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default withNavigation(GoogleLogin);
+export default withNavigation(GoogleLogin1);

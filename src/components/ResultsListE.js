@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, Button, FlatList, TouchableOpacity } from 'react-native';
-import { Item1 } from './ResultsDetail'
+import Item from './ResultsDetailF'
 import  { withNavigation } from 'react-navigation'
 import { YellowBox } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -18,56 +18,56 @@ YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
 ])
 
-const ResultsList = ({ title, item, navigation }) => {
+const ResultsListE = ({ title, item, navigation }) => {
 
-	const [selectedId1, setSelectedId1] = useState(null);
-  const [itemList1, setItemList1] = useState([]);
+	const [selectedId, setSelectedId] = useState(null);
+  const [itemList, setItemList] = useState([]);
 
-  const addToList1 = item => {
+  const addToList = item => {
     //copy the selected item array
-    let updatedItems = itemList1;
+    let updatedItems = itemList;
     //use array.push to add it to the array
     updatedItems.push(item.name);
 
-    setItemList1(updatedItems);
-    setSelectedId1(item.name);
+    setItemList(updatedItems);
+    setSelectedId(item.name);
   };
 
-  const removeFromList1 = item => {
+  const removeFromList = item => {
     //copy the slected item array
-    let updatedItems = itemList1;
+    let updatedItems = itemList;
     //find the current item in the array
     let itemIndexToRemove = updatedItems.indexOf(item.name);
     //use splice to remove the item from list
     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
     updatedItems.splice(itemIndexToRemove, 1);
 
-    setItemList1(updatedItems);
+    setItemList(updatedItems);
     //this is weird but it makes it work - I can't unselect, so made a non-existing id
-    setSelectedId1(item.name + "____");
+    setSelectedId(item.name + "____");
     ;
   };
 
-console.log("ITEM LIST",itemList1)
+console.log("ITEM LIST",itemList)
 
-// const renderItem1 = ({ item }) => {
-//     //check if item is in the list - if so, it's selected
-//     const backgroundColor = itemList1.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
-//     const shadowOpacity = itemList1.indexOf(item.id) > -1 ? 0.2 : 0
-//     // const borderColor = item.id === selectedId ? "#14D08C" : "#FFFFFF";
+const renderItem = ({ item }) => {
+    //check if item is in the list - if so, it's selected
+    const backgroundColor = itemList.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
+    const shadowOpacity = itemList.indexOf(item.id) > -1 ? 0.2 : 0
+    // const borderColor = item.id === selectedId ? "#14D08C" : "#FFFFFF";
 
-//     return (
-//       <Item1
-//         item={item}
-//         onPress={() =>
-//           itemList1.indexOf(item.id) > -1
-//             ? removeFromList1(item)
-//             : addToList1(item)
-//         }
-//         style={{ backgroundColor, shadowOpacity }}
-//       />
-//     );
-//   };
+    return (
+      <Item
+        item={item}
+        onPress={() =>
+          itemList.indexOf(item.id) > -1
+            ? removeFromList(item)
+            : addToList(item)
+        }
+        style={{ backgroundColor, shadowOpacity }}
+      />
+    );
+  };
 
     
 	if (!item.length){
@@ -76,48 +76,29 @@ console.log("ITEM LIST",itemList1)
 
 	return(
 		<View style={styles.container} >
-	
-		<FlatList
-        data={itemList1}
-        numColumns={3}
-        keyExtractor={(listItem) => listItem}
-        style={{ marginLeft:10, backgroundColor:'white', borderRadius: 20}}
-        renderItem={({ item }) => {
-        	return (
-        		<View
-        		style={styles.boxlist}
-        		onPress={() =>
-		          itemList1.indexOf(item.id) > -1
-		            ? removeFromList1(item)
-		            : addToList1(item)
-        }>
-					<Text style={styles.list} >{item}</Text> 
-				</View>
 
-        )}}
-      
-      />
+
       
 
 			<FlatList
 				showsHorizontalScrollIndicator={false}
 				data={item}
 				numColumns={1}
-				extraData={selectedId1}
+				extraData={selectedId}
         		navigation={navigation}
 				keyExtractor={item => item.name}
 				renderItem={({ item }) => {
-   					const borderColor = itemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
-   					const color = itemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
-   					const name = itemList1.indexOf(item.name) > -1 ? "checkbox-marked"  : "checkbox-blank-outline";
+   					const borderColor = itemList.indexOf(item.name) > -1 ? "#14D08C" : "#D9D9D9";
+   					const color = itemList.indexOf(item.name) > -1 ? "#14D08C" : "#D9D9D9";
+   					const name = itemList.indexOf(item.name) > -1 ? "checkbox-marked"  : "checkbox-blank-outline";
    					console.log(item)
 						return (
-					      	<Item1
+					      	<Item
 					        	item={item}
 					        	onPress={() =>
-					          		itemList1.indexOf(item.name) > -1
-					            	? removeFromList1(item)
-					            	: addToList1(item)
+					          		itemList.indexOf(item.name) > -1
+					            	? removeFromList(item)
+					            	: addToList(item)
 					        	}
 					        	style={{ borderColor }}
 					        	check= {name}
@@ -166,4 +147,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withNavigation(ResultsList);
+export default withNavigation(ResultsListE);

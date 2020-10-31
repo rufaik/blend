@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-navigation';
 import Spacer from '../components/Spacer';
 import { Context  as AuthContext } from '../context/AuthContext'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+j
 const AccountScreen = () => {
 	const { signout } = useContext(AuthContext)
 

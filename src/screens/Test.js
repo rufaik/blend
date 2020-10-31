@@ -1,14 +1,8 @@
 import * as React from 'react';
-import { Text, StyleSheet, View, ImageBackground, ScrollView, TouchableOpacity,FlatList, Image } from 'react-native';
-import recipe from '../api/recipe'
-import Spacer from '../components/Spacer';
-import { FontAwesome } from '@expo/vector-icons'; 
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import Animated from 'react-native-reanimated';
 import { Constants } from 'expo';
-import { Prep, Directions, Picture, Nutrition1 } from './ResultsShowScreenDCopy'
-import { Ingred1 } from './IngredTabScreen'
-import NutritionInfo from '../components/NutritionInfo'
 import { 
   useFonts,
   Poppins_400Regular,
@@ -20,20 +14,12 @@ import {
 } from '@expo-google-fonts/poppins'
 import { Input, Button } from 'react-native-elements'
 import { withNavigation } from 'react-navigation';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
 
 
 
-const FirstRoute = (props) => {
-  const showD = props.showD;
-
-		
-return(
+const FirstRoute = ({ navigation }) => (
   <View style={styles.container}>
-  <Prep showD={showD} />
-  <Nutrition1 showD={showD} />
-{/*  <View style={styles.card}>
+  <View style={styles.card}>
 			<Text style={styles.log}>Preparation Time</Text>
 			<Text style={styles.logG}> 6 Minutes</Text>
 			<Text style={styles.log}>Cooking Time</Text>
@@ -41,73 +27,84 @@ return(
 			<Text style={styles.log}>Number of Servings</Text>
 			<Text style={styles.logG}> 4 people</Text>
 </View>	
-*/}  
+  <View style={styles.card}>
+			<Text style={styles.log}>20 Minute Pasta Carbonara. Pasta coated in a thick egg sauce with bacon and parmesan cheese. 
+A super easy weeknight dinner!
+			</Text>
+			
+</View>	
+	<View style={styles.card}>
+			<Text style={styles.log}>Nutritional Info (per serving)</Text>
+			<Text style={styles.logG}>Calories</Text>
+			<Text style={styles.logG}>Fat</Text>
+			<Text style={styles.logG}>Fibre</Text>
+			<Text style={styles.logG}>Protein</Text>
+	</View>	
 
 	<Button 
 			style={styles.button} 
 			buttonStyle={{ backgroundColor: '#F68951',padding: 15, width: '90%', borderRadius: 30}} 
 			title="Cook This Dish"
-			// onPress={() => {navigation.navigate('Diet')}}
+			onPress={() => {navigation.navigate('Diet')}}
 			titleStyle={{
 				fontSize:14,
 				fontFamily:'Poppins_600SemiBold'
 			}}
 		/>
 </View>
-)};
-
-
-const SecondRoute = (props) => {
-const showD = props.showD;
-
-
-return (
+);
+const SecondRoute = () => (
   <View style={styles.container} >
-
-	<Ingred1 showD={showD}/>
-
-
-
-
-
+  	<Text style={styles.header} h1>Servings: 4</Text>
+  	  <View style={styles.card}>
+			<Text style={styles.log}>Cucumber</Text>
+			<Text style={styles.logG}>250g, Thinly sliced</Text>
+			<Text style={styles.log}>Cherry Tomatoes</Text>
+			<Text style={styles.logG}>300g</Text>
+			<Text style={styles.log}>Garlic</Text>
+			<Text style={styles.logG}>3 cloves, minced</Text>
+	</View>	
 	<Button 
 			style={styles.button} 
 			buttonStyle={{ backgroundColor: '#F68951',padding: 15, width: '90%', borderRadius: 30}} 
 			title="Cook This Dish"
-			// onPress={() => {navigation.navigate('TrackList')}}
+			onPress={() => {navigation.navigate('TrackList')}}
 			titleStyle={{
 				fontSize:14,
 				fontFamily:'Poppins_600SemiBold'
 			}}
 		/>
   </View>
-)};
-
-
-const ThirdRoute  = (props) => {
-const showD = props.showD;
-
-
-return (
+);
+const ThirdRoute = () => (
     <View style={styles.container}>
-    <Directions showD={showD} />
+	<View style={styles.card}>
+		<Text style={styles.logGg}>1. In a large pot of boiling salted water, cook pasta according to package instructions; reserve 1/2 cup water and drain well.</Text>
 
+		<Text style={styles.logGg}>2. In a small bowl, whisk together eggs and Parmesan; set aside.</Text>
+
+		<Text style={styles.logGg}>3. Heat a large skillet over medium high heat. Add bacon and cook until brown and crispy, about 6-8 minutes; reserve excess fat.</Text>
+
+		<Text style={styles.logGg}>4. Stir in garlic until fragrant, about 1 minute. Reduce heat to low.</Text>
+
+		<Text style={styles.logGg}>5. Working quickly, stir in pasta and egg mixture, and gently toss to combine; season with salt and pepper, to taste. Add reserved pasta water, one tablespoon at a time, until desired consistency is reached.</Text>
+
+		<Text style={styles.logGg}>6. Serve immediately, garnished with parsley, if desired</Text>
+	</View>	
 	<Button 
 			style={styles.button} 
 			buttonStyle={{ backgroundColor: '#F68951',padding: 15, width: '90%', borderRadius: 30}} 
 			title="Cook This Dish"
-			// onPress={() => {navigation.navigate('TrackList')}}
+			onPress={() => {navigation.navigate('TrackList')}}
 			titleStyle={{
 				fontSize:14,
 				fontFamily:'Poppins_600SemiBold'
 			}}
 		/>
 </View>
-)};
+);
 
-
-    
-export default class Original extends React.Component {
+export default class Test extends React.Component {
   state = {
     index: 0,
     routes: [
@@ -119,11 +116,15 @@ export default class Original extends React.Component {
 
   handleIndexChange = index => this.setState({ index });
 
-  renderTabBar = props => {
+  _renderTabBar = props => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
+    console.log("three", props.navigationState.routes)
 
     return (
     	<View>
+    	<Text>
+    	Hey bab!
+    	</Text>
       <View style={styles.tabBar}>
         {props.navigationState.routes.map((route, i) => {
           const color = Animated.color(
@@ -184,10 +185,9 @@ export default class Original extends React.Component {
 
           return (
             <TouchableOpacity
-              key={route.key}
               style={styles.tabItem}
               onPress={() => this.setState({ index: i })}>
-              <Animated.Text style={{ padding: 5, fontFamily:'Poppins_500Medium', paddingHorizontal: 19, margin: 3, borderRadius: 16, overflow:"hidden", color, backgroundColor }}>{route.title}</Animated.Text>
+              <Animated.Text style={{ padding: 5, fontFamily:'Poppins_500Medium', paddingHorizontal: 20, margin: 3, borderRadius: 16, overflow:"hidden", color, backgroundColor }}>{route.title}</Animated.Text>
             </TouchableOpacity>
           );
         })}
@@ -196,69 +196,32 @@ export default class Original extends React.Component {
     );
   };
 
+  _renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+    third: ThirdRoute,
+  });
+
   render() {
-    const showD = this.props.navigation.getParam("showD");
-
-    const renderScene = ({ route }) => {
-      switch (route.key) {
-        case "first":
-          return <FirstRoute showD={this.props.navigation.getParam("showD")} />;
-        case "second":
-          return <SecondRoute showD={this.props.navigation.getParam("showD")} />;
-        case "third":
-          return <ThirdRoute showD={this.props.navigation.getParam("showD")} />;
-        default:
-          return null;
-      }
-    };
-
     return (
-      <ScrollView>
-      <View style={styles.navHeader}>
-      	<Entypo style={styles.leftIcon} name="chevron-left" size={24} color="black" onPress={() => {
-					
-			this.props.navigation.navigate('TrackList')}
-		} />
-      	<Text style={styles.titleHeader}> Explore </Text>
-      </View>
-
-       <Picture showD={showD} />
-
-        <TabView
-          navigationState={this.state}
-          renderScene={renderScene}
-          renderTabBar={this.renderTabBar}
-          onIndexChange={this.handleIndexChange}
-        />
-    </ScrollView>
+    <>
+    <Text> Hey </Text>
+      <TabView
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderTabBar={this._renderTabBar}
+        onIndexChange={this._handleIndexChange}
+      />
+    </>
     );
   }
 }
-
-
-
-
-Original.navigationOptions = {
+Test.navigationOptions = {
 	title: 'TrackList',
 	headerShown: true
 };
 
 const styles = StyleSheet.create({
-	leftIcon:{
-		position: 'absolute',
-		left:20,
-		paddingTop:38,
-	},
-	navHeader: {
-		flexDirection: 'row',
-		justifyContent: 'center',
-		paddingTop:35,
-	},
-	titleHeader:{
-	fontSize: 20,
-	fontWeight: "500",
-	fontFamily: 'Poppins_700Bold',
- },
   container: {
     flex: 1,
     backgroundColor: 'white',

@@ -1,15 +1,43 @@
-import React from 'react';
-import { Text, Image, StyleSheet, View, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, Image, ImageBackground, StyleSheet, View, Button } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import recipe from '../api/recipe';
 
 const ResultsDetailB = ({results}) => {
+	const [resultsB, setResultsB] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
+	 const id = results.id
+	
+	const searchApii = async (id) => {
+
+			const responsep = await recipe.get('/', {
+				params: {
+		    		ids: `${id}`
+				}
+			 });
+			 setResultsB(responsep.data[0])
+		
+		}
+
+ 
+
+	 useEffect(() => {
+    searchApii(id)
+  }, []);
+
+	if(!resultsB) {
+		return null;
+	}
+
+
 	return(
 		<View style= {styles.container} >
 			<Image style= {styles.image} source={{ uri: results.image }} />
 			<Text style={styles.name} >{results.title}</Text>
 			<View style={styles.time} >
 				<MaterialIcons  name="access-time" size={15} color="gray" />
-				<Text style={styles.icon}> 20mins</Text>
+				<Text style={styles.icon}> {resultsB.readyInMinutes}mins</Text>
 			</View>
 		</View>
 		);

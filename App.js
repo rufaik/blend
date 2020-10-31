@@ -2,8 +2,9 @@ import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import AccountScreen from './src/screens/AccountScreen';
+import Test from './src/screens/Test';
 import SigninScreen from './src/screens/SigninScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -20,12 +21,15 @@ import SearchScreen from './src/screens/SearchScreen';
 import ResultsShowScreen from './src/screens/ResultsShowScreen'
 import ResultsShowScreenA from './src/screens/ResultsShowScreenA'
 import ResultsShowScreenB from './src/screens/ResultsShowScreenB'
-import ResultsShowScreenD from './src/screens/ResultsShowScreenD'
+import Original from './src/screens/ResultsShowScreenD'
 import PreferencesScreen from './src/screens/PreferencesScreen'
 import ResetScreen from './src/screens/ResetScreen'
+import Page from './src/screens/Page'
 import SplashScreen1 from './src/screens/SplashScreen1'
 import SplashScreen2 from './src/screens/SplashScreen2'
 import SplashScreen3 from './src/screens/SplashScreen3'
+import TrendingAll from './src/screens/TrendingAll'
+import ForYouAll from './src/screens/ForYouAll'
 import DietScreen from './src/screens/DietScreen'
 import All from './src/screens/All'
 import { AppLoading } from "expo"
@@ -54,13 +58,33 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
+const SwipeTabs = createMaterialTopTabNavigator(
+  {
+    Splash1: { screen: SplashScreen1},
+    Splash2: { screen: SplashScreen2},
+    Splash3: { screen: SplashScreen3}
+  },
+  {
+    initialRouteName: "Splash1",
+    animationEnabled: true,
+    tabBarOptions: {
+      showLabel: false,
+      showIcon: false,
+      style: { height: 0 }
+    }
+  }
+);
+
+
 const trackListFlow = createStackNavigator({
         TrackList: TrackListScreen,
         TrackDetail: TrackDetailScreen,
         ResultsShowA: ResultsShowScreenA,
         ResultsShowB: ResultsShowScreenB,
-        ResultsShowD: ResultsShowScreenD,
-        All: All
+        Original: Original,
+        All: All,
+        TrendingAll: TrendingAll,
+        ForYou:ForYouAll
       },
       {
     headerMode: 'TrackList',
@@ -71,9 +95,19 @@ const trackListFlow = createStackNavigator({
   })
 
 const splashFlow = createStackNavigator({
+        TrackList: TrackListScreen,
         Splash1: SplashScreen1,
         Splash2: SplashScreen2,
         Splash3: SplashScreen3
+        },
+      {
+    headerMode: 'splashFlow',
+    defaultNavigationOptions: {
+      cardStyle: { backgroundColor: '#FFFFFF' },
+      title: 'TrackList',
+  headerShown: true
+      
+    },
   })
 
 
@@ -101,16 +135,18 @@ searchFlow.navigationOptions = {
 }
 
 const switchNavigator = createSwitchNavigator ({
+  // TrackList: TrackListScreen,
+  SwipeTabs,
   splashFlow,
   ResolveAuth: ResolveAuthScreen,
   loginFlow: 
     createStackNavigator({
 
       Signup: SignupScreen,
-      Signin: SigninScreen,
       Reset: ResetScreen,
       Home: PreferencesScreen,
-      Diet: DietScreen
+      Diet: DietScreen,
+      Signin: SigninScreen
       },
       {
     headerMode: 'loginFlow',
@@ -123,8 +159,9 @@ const switchNavigator = createSwitchNavigator ({
 
     createBottomTabNavigator({
       trackListFlow,
-      searchFlow
-
+      searchFlow,
+      Home: PreferencesScreen,
+      Diet: DietScreen,
   })
 })
 

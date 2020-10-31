@@ -40,7 +40,7 @@ const ResultsListB = ({ title, results, navigation }) => {
 				
 				console.log("lets see", item.id)
 					return (
-						<TouchableOpacity onPress={() => navigation.navigate('ResultsShowB', { show: item.id })}>
+						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.id })}>
 							<ResultsDetailB results={item} />
 						</TouchableOpacity>
 					)

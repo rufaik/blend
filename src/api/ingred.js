@@ -6,7 +6,7 @@ export default axios.create({
 	headers: {
 		 "content-type":"application/octet-stream",
     "x-rapidapi-host":"spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-    "x-rapidapi-key":"30459b3a1fmshe9350dda133dde9p1e5667jsne0dd8edc91e5",
+    "x-rapidapi-key":"55de7a5763mshd8c8df133f4f401p194ef9jsn40ddcd70b833",
     "useQueryString":true
 	}
 })

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { ImageBackground,TextInput, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { ImageBackground,TextInput, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { Context  as AuthContext } from '../context/AuthContext'
 import AuthForm from '../components/AuthForm'
@@ -7,6 +7,17 @@ import NavLink from '../components/NavLink'
 import Spacer from '../components/Spacer';
 import { Text, Input, Button } from 'react-native-elements'
 import GoogleLogin from '../components/GoogleLogin'
+import { Fontisto } from '@expo/vector-icons';
+import { 
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from '@expo-google-fonts/poppins'
+
 
 
 const SplashScreen2 = ({ navigation }) => {
@@ -16,11 +27,11 @@ const SplashScreen2 = ({ navigation }) => {
   const [name, setName] = useState('');
   const [newpassword, setNewpassword] = useState('');
 
-   useEffect(() => {
-    setTimeout(() => {
-    navigation.navigate('Splash3')
-  }, 5000)
-  }, [])
+  //  useEffect(() => {
+  //   setTimeout(() => {
+  //   navigation.navigate('Splash3')
+  // }, 5000)
+  // }, [])
 
     
   return( 
@@ -29,15 +40,17 @@ const SplashScreen2 = ({ navigation }) => {
       <NavigationEvents
         onWillFocus={clearErrorMessage}
       />
-      <Spacer/>
-      <Spacer/>
+
+      <Image source={require('../images/acorn.png')} style={styles.acorn} />
+     
       
     
-      <Text style={styles.header} h3>See suggested ingredients whilst cooking</Text>
+      <Text style={styles.header}>See suggested ingredients {'\n'}whilst cooking</Text>
       <Spacer />
-        <Text style={styles.subheader} h5>Ingredients are calculated and weighted by flavour combinations based on your dish.</Text>
+        <Text style={styles.subheader} h5>Ingredients are calculated and weighted {'\n'}by flavour combinations based on your {'\n'}dish.</Text>
             
         
+
     
 
     <View style={styles.log}>
@@ -49,6 +62,22 @@ const SplashScreen2 = ({ navigation }) => {
       routeName="Signin"
      
       />
+    </View>
+    <View style={styles.button} >
+    <Button 
+          
+          buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: Platform.OS === 'ios' ? 15 : 9, width: Platform.OS === 'ios' ? 150 : 120, borderRadius: 30, fontFamily: 'Poppins_700Bold'}} 
+          titleStyle={{fontSize: Platform.OS === 'ios' ? 18 : 12 }}
+          title="Next"
+          onPress={() => {
+              navigation.navigate('Splash3')}
+            }
+        />
+    </View>
+    <View style={styles.dots}>
+      <Fontisto name="ellipse" size={8} color="#F4F4F4" style={{marginRight:5}} />
+      <Fontisto name="ellipse" size={11} color="black" style={{marginRight:5}}/>
+      <Fontisto name="ellipse" size={8} color="#F4F4F4" />
     </View>
     </ImageBackground>
     </View>
@@ -62,6 +91,16 @@ SplashScreen2.navigationOptions = () => {
 };
 
 const styles = StyleSheet.create({
+  dots: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:'center',
+    position: "absolute",
+    left: "0%",
+    right: "10%",
+    top: "87%",
+    bottom: "3.83%",
+  },
   errorMessage: {
     fontSize: 10,
     color: 'red',
@@ -72,17 +111,34 @@ const styles = StyleSheet.create({
   header: {
     fontWeight: "800",
     marginLeft: 15,
+    position: "absolute",
+    left: "1%",
+    right: "0%",
+    top: "23%",
+    bottom: "23.83%",
+    lineHeight: Platform.OS === 'ios' ? 45 : 30,
+    fontFamily: 'Poppins_700Bold',
+    fontSize: Platform.OS === 'ios' ? 35 : 22
   },
   subheader: {
     fontWeight: "800",
+    fontSize: Platform.OS === 'ios' ? 17 : 10,
     marginLeft: 15,
-    fontSize: 17,
-    
+    position: "absolute",
+    left: "1%",
+    right: "0%",
+    top: "47%",
+    bottom: "23.83%",
+    fontFamily: 'Poppins_700Bold'
   },
   button: {
-     
-    justifyContent: 'center',
-      alignItems: 'center'
+    alignItems: "center",
+    justifyContent:'center',
+    position: "absolute",
+    left: "0%",
+    right: "10%",
+    top: "67%",
+    bottom: "13.83%",
   },
   container: {
     flex: 1,
@@ -93,6 +149,14 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center"
+  },
+  acorn: {
+     marginLeft: 26,
+    position: "absolute",
+    left: "1%",
+    right: "0%",
+    top: "13%",
+    bottom: "23.83%",
   }
 });
 

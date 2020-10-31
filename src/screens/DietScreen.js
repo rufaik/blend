@@ -17,76 +17,116 @@ import Spacer from '../components/Spacer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import TrackListScreen from './TrackListScreen';
 import SearchBar from '../components/SearchBar';
-import ResultsList from '../components/ResultsList'
 import ingred from '../api/ingred';
 import { Fontisto } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { 
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from '@expo-google-fonts/poppins'
+import { Item1 } from '../components/ResultsDetail'
+import { YellowBox } from 'react-native'
+
+
 
 
 
 // import SearchBar from '../components/SearchBar';
 // import useResults from '../hooks/useResults'
 // import ResultsList from '../components/ResultsList'
+ // pescetarian, lacto vegetarian, ovo vegetarian, vegan, and vegetarian
+
+
 
 const DATA = [
   {
     id: "Vegetarian",
-    title: "First Item",
+    title: "vegetarian",
     imageUrl: "https://source.unsplash.com/featured/?American,dinner,food"
   },
   {
-    id: "Dairy Free",
-    title: "Second Item",
-    imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food"
+    id: "Seafood",
+    title: "seafood",
+    imageUrl: "https://source.unsplash.com/featured/?Healthy,dinner,food"
   },
   {
     id: "Vegan",
-    title: "First Item",
+    title: "vegan",
     imageUrl: "https://source.unsplash.com/featured/?British,dinner,food"
   },
   {
-    id: "Nut Free",
-    title: "Second Item",
-    imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food"
+    id: "Gluten",
+    title: "gluten",
+    imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
   },
   {
-    id: "Low Carb",
-    title: "Third Item",
-    imageUrl: "https://source.unsplash.com/featured/?Chinese,dinner,food"
-  },
-  {
-    id: "SIBO",
-    title: "Fourth Item",
+    id: "OVO",
+    title: "ovo vegetarian",
     imageUrl: "https://source.unsplash.com/featured/?Gelato,food"
   },
   {
     id: "Pescatarian",
-    title: "First Item",
+    title: "pescetarian",
     imageUrl: "https://source.unsplash.com/featured/?Ethiopian,dinner,food"
   },
   {
-    id: "Keto",
-    title: "Second Item",
-    imageUrl: "https://source.unsplash.com/featured/?Healthy,dinner,food"
+    id: "Laco Vegetarian",
+    title: "lacto vegetarian",
+    imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food"
   },
   {
-    id: "Gluten Free",
-    title: "Third Item",
+    id: "Nut",
+    title: "Second Item",
+    imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food"
+  },
+  {
+    id: "Dairy Free",
+    title: "dairy",
     imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
   },
   {
     id: "Wheat Free",
-    title: "Fourth Item",
+    title: "wheat",
+    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
+  },
+  {
+    id: "Peanut",
+    title: "peanut",
+    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
+  },
+  {
+    id: "Tree nut",
+    title: "tree nut",
+    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
+  },
+  {
+    id: "Sesame",
+    title: "sesame",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
     id: "Soy Free",
-    title: "Fourth Item",
+    title: "soy",
+    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
+  },
+  {
+    id: "Sulphite",
+    title: "sulphite",
+    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
+  },
+  {
+    id: "Shellfish",
+    title: "shellfish",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   }
 ];
 
-const Item = ({ item, onPress, style }) => (
+const Item = ({ item, onPress, style, color }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
 
      
@@ -96,7 +136,8 @@ const Item = ({ item, onPress, style }) => (
                 fontSize: 15,
                 fontWeight: "600",
                 padding: 10,
-                
+                fontFamily: 'Poppins_600SemiBold',
+                color
                 
               }}>
               {item.id}
@@ -109,9 +150,12 @@ const Item = ({ item, onPress, style }) => (
 const DietScreen = ({ onSubmit, navigation }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [itemList, setItemList] = useState([]);
+  // console.log("plow",itemList1)
+  // console.log("WOLF", updatedItems)
 
-  const list = navigation.getParam('list')
-  const newList = list ? list.toString() : ""
+  const list1 = navigation.getParam('list1')
+  // console.log("babe", list1)
+  // const newList = list ? list.toString() : ""
   const [ term, setTerm] = useState('');
 
   const [ item, setResults ] = useState([]);
@@ -132,9 +176,9 @@ const DietScreen = ({ onSubmit, navigation }) => {
     } 
     };
 
-      useEffect(() => {
-    searchApi(newList,",")
-  }, [])
+  //     useEffect(() => {
+  //   searchApi(newList,",")
+  // }, [])
 
     useEffect(() => {
     searchApi('tomato')
@@ -168,6 +212,8 @@ const DietScreen = ({ onSubmit, navigation }) => {
   const renderItem = ({ item }) => {
     //check if item is in the list - if so, it's selected
     const backgroundColor = itemList.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
+    const shadowOpacity = itemList.indexOf(item.id) > -1 ? 0.2 : 0
+    const color = itemList.indexOf(item.id) > -1 ? "black" : '#ACACAC'
     // const borderColor = item.id === selectedId ? "#14D08C" : "#FFFFFF";
 
     return (
@@ -178,10 +224,47 @@ const DietScreen = ({ onSubmit, navigation }) => {
             ? removeFromList(item)
             : addToList(item)
         }
-        style={{ backgroundColor }}
+        style={{ backgroundColor, shadowOpacity }}
+        color={color}
       />
     );
   };
+
+  // console.log("plow",itemList1)
+
+
+const [selectedId1, setSelectedId1] = useState(null);
+  const [itemList1, setItemList1] = useState([]);
+
+  const addToList1 = item => {
+    //copy the selected item array
+    let updatedItems = itemList1;
+    //use array.push to add it to the array
+    updatedItems.push(item.name);
+
+    setItemList1(updatedItems);
+    setSelectedId1(item.name);
+  };
+
+  const removeFromList1 = item => {
+    //copy the slected item array
+    let updatedItems = itemList1;
+    //find the current item in the array
+    let itemIndexToRemove = updatedItems.indexOf(item.name);
+    //use splice to remove the item from list
+    //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+    updatedItems.splice(itemIndexToRemove, 1);
+
+    setItemList1(updatedItems);
+    //this is weird but it makes it work - I can't unselect, so made a non-existing id
+    setSelectedId1(item.name + "____");
+    ;
+  };
+
+
+
+ console.log("plow",itemList1)
+
 
   return (
     <>
@@ -189,13 +272,17 @@ const DietScreen = ({ onSubmit, navigation }) => {
     	<Spacer />
     	<Spacer />
      <View style={{ flexDirection: 'row', alignItems: 'center',}} >
+     <Entypo style={styles.leftIcon} name="chevron-left" size={24} color="black" onPress={() => {
+          navigation.navigate('Home')}
+    } />
 		<Text style={styles.header} h1>
         Set your preferences</Text>	
 		<TouchableOpacity onPress={() => {
 					
-			navigation.navigate('TrackList', {list:itemList})}
-		}>
-			<Text style={styles.nextheader}>     Done </Text>
+			navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1})
+      // console.log("preferences", list)}
+		}}>
+			<Text style={styles.nextheader}>   Done </Text>
 		</TouchableOpacity>
 		
 		</View>
@@ -214,7 +301,7 @@ const DietScreen = ({ onSubmit, navigation }) => {
         keyExtractor={item => item.id}
         extraData={selectedId}
         navigation={navigation}
-        style={{ marginTop: 5}}
+        style={{ marginTop: 5, marginLeft: 10, fontFamily: 'Poppins_600SemiBold'}}
       />
       <Spacer />
       <Image style={styles.imageline} source={require('../images/line.png')}/>
@@ -224,6 +311,8 @@ const DietScreen = ({ onSubmit, navigation }) => {
       <Text style={styles.subheader} h5>
        Have something specific? Search for ingredients you can’t eat or just don’t like.
       </Text>
+
+
       <SearchBar 
         placeholderText="Search for ingredients"
         term={term} 
@@ -232,12 +321,62 @@ const DietScreen = ({ onSubmit, navigation }) => {
         style={styles.search}
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
+      
       <ScrollView>
-      <ResultsList 
-      title="hey"
-      item={item}
+      <View style={styles.container1} >
+  
+    <FlatList
+        data={itemList1}
+        numColumns={3}
+        keyExtractor={(listItem) => listItem}
+        style={{ marginLeft:10, backgroundColor:'white', borderRadius: 20}}
+        renderItem={({ item }) => {
+          return (
+            <View
+            style={styles.boxlist}
+            onPress={() =>
+              itemList1.indexOf(item.id) > -1
+                ? removeFromList1(item)
+                : addToList1(item)
+        }>
+          <Text style={styles.list} >{item}</Text> 
+        </View>
 
+        )}}
+      
       />
+      
+
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        data={item}
+        numColumns={1}
+        extraData={selectedId1}
+            navigation={navigation}
+        keyExtractor={item => item.name}
+        renderItem={({ item }) => {
+            const borderColor = itemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
+            const color = itemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
+            const name = itemList1.indexOf(item.name) > -1 ? "checkbox-marked"  : "checkbox-blank-outline";
+            // console.log(item)
+            return (
+                  <Item1
+                    item={item}
+                    onPress={() =>
+                        itemList1.indexOf(item.name) > -1
+                        ? removeFromList1(item)
+                        : addToList1(item)
+                    }
+                    style={{ borderColor }}
+                    check= {name}
+                    box= {color}
+
+                  />
+              )
+        }}
+      />
+
+    </View>
         
     
       </ScrollView>
@@ -255,7 +394,7 @@ const DietScreen = ({ onSubmit, navigation }) => {
     // onPress={() => onSubmit(itemList)}
     onPress={() => {
           
-      navigation.navigate('TrackList', {list:itemList})}
+      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1})}
     }
       />
      <Spacer />
@@ -278,28 +417,38 @@ DietScreen.navigationOptions = {
 }
 
 const styles = StyleSheet.create({
+  leftIcon:{
+    position: 'absolute',
+    left:12,
+    top:6,
+  },
   dots: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:'center'
+    justifyContent:'center',
+    fontFamily: 'Poppins_700Bold',
 
   },
   container: {
+    fontFamily: 'Poppins_700Bold',
     flex: 1,
     marginTop: StatusBar.currentHeight || 0
   },
   item: {
+    fontFamily: 'Poppins_600SemiBold',
     borderRadius: 20,
-    marginVertical: 5,
-    marginHorizontal: 5,
+    marginVertical: 2,
+    marginHorizontal: 1,
     borderWidth: 5,
     borderColor: "white",
-    color: "yellow"
+   
   },
   title: {
+    fontFamily: 'Poppins_700Bold',
     fontSize: 32
   },
   image: {
+    fontFamily: 'Poppins_700Bold',
     width: 170,
     height: 120,
     borderRadius: 14,
@@ -314,41 +463,71 @@ const styles = StyleSheet.create({
    
   },
   header: {
+    fontFamily: 'Poppins_700Bold',
     fontSize: 24,
     fontWeight: "800",
     marginLeft: 75,
     
   },
-  subheader: {
-    fontSize: 16,
-    fontWeight: "700",
-    marginLeft: 15,
-    marginBottom: 10
-  },
   nextheader: {
-    fontSize: 20,
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 18,
     fontWeight: "700",
     marginLeft: 10,
     color: '#F68951'
    
   },
   subheader: {
+    fontFamily: 'Poppins_600SemiBold',
 		fontWeight: "800",
 		marginLeft: 15,
 		fontSize: 17,
 	},
 button: {
+  fontFamily: 'Poppins_700Bold',
 	marginTop: 10,
 	justifyContent: 'center',
     alignItems: 'center'
 	},
   child: {
+    fontFamily: 'Poppins_700Bold',
     flex: 1,
    width: 170,
     height: 120,
    borderRadius: 14,
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,0.3)'
+  },
+  title: {
+    fontFamily: 'Poppins_700Bold',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 15,
+    marginBottom: 5
+  },
+  container1: {
+    fontFamily: 'Poppins_700Bold',
+    justifyContent: "center",
+  },
+  boxlist: {
+    fontFamily: 'Poppins_700Bold',
+    borderRadius: 20,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    borderWidth: 5,
+    borderColor: "white",
+    fontSize: 15,
+    fontWeight: "600",
+   shadowOpacity: 0.2,
+    textTransform: 'capitalize',
+    backgroundColor: "white"
+  },
+  list:{
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 14,
+    fontWeight: "600",
+   padding:10,
+    textTransform: 'capitalize',
   }
 });
 

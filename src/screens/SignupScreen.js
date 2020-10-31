@@ -7,6 +7,16 @@ import NavLink from '../components/NavLink'
 import Spacer from '../components/Spacer';
 import { Text, Input, Button } from 'react-native-elements'
 import GoogleLogin from '../components/GoogleLogin'
+import { 
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from '@expo-google-fonts/poppins'
+
 
 
 const SignupScreen = ({ navigation }) => {
@@ -24,20 +34,22 @@ const SignupScreen = ({ navigation }) => {
 				onWillFocus={clearErrorMessage}
 			/>
 			<Spacer/>
-			<Text style={styles.header} h3>Sign up</Text>
+			<Text style={styles.header}>Sign up</Text>
 
 
+			<Spacer />
+			<Spacer />
 			<Spacer />
 			<Input 
 			containerStyle={{
 				paddingLeft: 20,
 				paddingRight: 20,
-				marginBottom:-10
+				marginBottom:Platform.OS === 'ios' ? -10 : -16,
+				
 
 			}}
 			inputStyle={{
-				fontSize: 14,
-				fontWeight: "500"
+				fontSize: Platform.OS === 'ios' ? 14 : 12,
 			}}
 				inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -46,7 +58,8 @@ const SignupScreen = ({ navigation }) => {
 					borderColor: "rgba(0, 0, 0, 0.05)",
 					borderRadius: 10,
 					padding: 5,
-					paddingLeft:10
+					paddingLeft:10,
+					height: Platform.OS === 'ios' ? 52 : 42
 				
 					
 				}}
@@ -60,11 +73,10 @@ const SignupScreen = ({ navigation }) => {
 			containerStyle={{
 				paddingLeft: 20,
 				paddingRight: 20,
-				marginBottom:-10
+				marginBottom:Platform.OS === 'ios' ? -10 : -16
 			}}
 			inputStyle={{
-				fontSize: 14,
-				fontWeight: "500"
+				fontSize: Platform.OS === 'ios' ? 14 : 12,
 			}}
 				inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -73,7 +85,8 @@ const SignupScreen = ({ navigation }) => {
 					borderColor: "rgba(0, 0, 0, 0.05)",
 					borderRadius: 10,
 					padding: 5,
-					paddingLeft:10
+					paddingLeft:10,
+					height: Platform.OS === 'ios' ? 52 : 42
 				}}
 				value={email} 
 				onChangeText={setEmail}
@@ -85,11 +98,10 @@ const SignupScreen = ({ navigation }) => {
 			containerStyle={{
 				paddingLeft: 20,
 				paddingRight: 20,
-				marginBottom:-10
+				marginBottom:Platform.OS === 'ios' ? -10 : -16
 			}} 
 			inputStyle={{
-				fontSize: 14,
-				fontWeight: "500"
+				fontSize: Platform.OS === 'ios' ? 14 : 12,
 			}}
 			inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -98,7 +110,8 @@ const SignupScreen = ({ navigation }) => {
 					borderColor: "rgba(0, 0, 0, 0.05)",
 					borderRadius: 10,
 					padding: 5,
-					paddingLeft:10
+					paddingLeft:10,
+					height: Platform.OS === 'ios' ? 52 : 42
 				}}
 				secureTextEntry
 				value={password} 
@@ -112,11 +125,10 @@ const SignupScreen = ({ navigation }) => {
 			containerStyle={{
 				paddingLeft: 20,
 				paddingRight: 20,
-				marginBottom:-10
+				marginBottom:Platform.OS === 'ios' ? -10 : -16
 			}}
 			inputStyle={{
-				fontSize: 14,
-				fontWeight: "500"
+				fontSize: Platform.OS === 'ios' ? 14 : 12,
 			}}
 			inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -125,7 +137,8 @@ const SignupScreen = ({ navigation }) => {
 					borderColor: "rgba(0, 0, 0, 0.05)",
 					borderRadius: 10,
 					padding: 5,
-					paddingLeft:10
+					paddingLeft:10,
+					height: Platform.OS === 'ios' ? 52 : 42
 				}}
 				secureTextEntry
 				 
@@ -143,15 +156,17 @@ const SignupScreen = ({ navigation }) => {
 			<GoogleLogin />
 			<Spacer/>
 			<Spacer>
+			<View style={styles.button} >
 				<Button 
 					style={styles.button} 
 					buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} 
-					title="Log in"
+					title="Log In"
 					onPress={() => {
 						if (password !== confirm) {
        						 alert("Passwords don't match");
     					} else {signup({ email, password })}}}
 				/>
+				</View>
 			</Spacer>
       			
     		
@@ -171,11 +186,11 @@ const SignupScreen = ({ navigation }) => {
 	);
 };
 
-SignupScreen.navigationOptions = () => {
-	return {
-		headerShown: false
-	};
-};
+// SignupScreen.navigationOptions = () => {
+// 	return {
+// 		headerShown: true
+// 	};
+// };
 
 const styles = StyleSheet.create({
 	errorMessage: {
@@ -187,13 +202,23 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		fontWeight: "800",
-		marginLeft: 15,
+		// marginLeft: 15,
+		fontFamily: 'Poppins_700Bold',
+		fontSize: Platform.OS === 'ios' ? 35 : 22,
+		// marginTop: Platform.OS === 'ios' ? 0 : 150
+		// Platform.OS === 'ios' ? 35 : 22
+		position: "absolute",
+	    left: "6%",
+	    right: "0%",
+	    top: Platform.OS === 'ios' ? "13%" : "15%",
+	    bottom: "23.83%",
 	},
 	subheader: {
 		fontWeight: "800",
 		marginLeft: 15,
 		fontSize: 17,
-		width: "35%"
+		width: "35%",
+		fontFamily: 'Poppins_700Bold'
 	},
 	button: {
 		 

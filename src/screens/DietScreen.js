@@ -81,7 +81,7 @@ const DATA = [
   },
   {
     id: "Nut",
-    title: "Second Item",
+    title: "nut",
     imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food"
   },
   {

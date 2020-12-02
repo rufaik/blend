@@ -36,23 +36,6 @@ import { Fontisto } from '@expo/vector-icons';
 
 
 
-const DATA = [
-  {
-    id: "pasta",
-    title: "First Item",
-    imageUrl: "https://source.unsplash.com/featured/?American,dinner,food"
-  },
-  {
-    id: "Roasted",
-    title: "Second Item",
-    imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food"
-  },
-  {
-    id: "chocolate",
-    title: "First Item",
-    imageUrl: "https://source.unsplash.com/featured/?British,dinner,food"
-  }
-];
 
 
 const Item = ({ item, onPress, style, color }) => (
@@ -78,14 +61,14 @@ const Item = ({ item, onPress, style, color }) => (
 
 
 const ForYouAll = ({ navigation }) => {
+  const clist = navigation.getParam('clist')
   const cuisine = navigation.getParam('cuisine')
   const diet = navigation.getParam('diet')
   const specific = navigation.getParam('specific')
   const list = navigation.getParam('list')
-  console.log('real', list)
   const newList = list ? list.toString() : ""
   console.log(newList)
-  const [ term, setTerm] = useState('burger');
+  const [ term, setTerm] = useState('');
 
 
 const [selectedId, setSelectedId] = useState(null);
@@ -125,7 +108,7 @@ const [selectedId, setSelectedId] = useState(null);
     // Only have this on to view! it costs money
   
   useEffect(() => {
-    searchApi2("burger")
+    searchApi2(itemList1)
     // console.log(newList)
   }, [])
 
@@ -178,7 +161,33 @@ const [selectedId, setSelectedId] = useState(null);
     );
   };
 
+const [selectedId1, setSelectedId1] = useState(null);
+  const [itemList1, setItemList1] = useState(["sugar"]);
 
+  const addToList1 = item => {
+    //copy the selected item array
+    let updatedItems = itemList1;
+    //use array.push to add it to the array
+    updatedItems.push(item);
+
+    setItemList1(updatedItems);
+    setSelectedId1(item);
+  };
+
+  const removeFromList1 = item => {
+    //copy the slected item array
+    let updatedItems = itemList1;
+    //find the current item in the array
+    let itemIndexToRemove = updatedItems.indexOf(item);
+    //use splice to remove the item from list
+    //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+    updatedItems.splice(itemIndexToRemove, 1);
+
+    setItemList1(updatedItems);
+    //this is weird but it makes it work - I can't unselect, so made a non-existing id
+    setSelectedId1(item + "____");
+    ;
+  };
 
 
 
@@ -191,23 +200,55 @@ const [selectedId, setSelectedId] = useState(null);
           
       navigation.navigate('TrackList')}
     } />
-        <Text style={styles.titleHeader}> Trending recipes </Text>
+        <Text style={styles.titleHeader}> Recommended recipes </Text>
       </View>
       <View>
     <FlatList
-          data={DATA}
-          numColumns={4}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          extraData={selectedId}
-          navigation={navigation}
-          style={{ marginTop: 10, marginLeft: 10, fontFamily: 'Poppins_600SemiBold'}}
-        />
+        data={itemList1}
+        numColumns={3}
+        keyExtractor={(listItem) => listItem}
+        style={{ marginLeft:10, backgroundColor:'white', borderRadius: 20, flexShrink: 0, flexGrow:0}}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+            style={styles.boxlist}
+            onPress={() =>{
+              itemList1.indexOf(item) > -1
+                ? removeFromList1(item) 
+                : addToList1(item)
+              searchApi2(term)
+        }}>
+         <Text style={styles.list} >{item}</Text> 
+        </TouchableOpacity>
+
+        )}}
+      
+      />
       <SearchBar 
         term={term} 
         onTermChange={setTerm}
-        onTermSubmit={() => searchApi(term) === null ? () => searchApiK(term) : () => searchApi(term) }
+        onTermSubmit={() => {
+          if (term.length > 0){
+          let item = term;
+          console.log("item1", item)
+           console.log("term1", term.length)
+          itemList1.indexOf(item) > -1 
+            ? null
+            : addToList1(item)
+           searchApi2(itemList1) 
+           console.log("123",itemList1)
+           setTerm('')
+           } else null
+
+        }}
+        placeholderText="add ingredient to search filters"
+
+        // onTermSubmit={() => {
+        //  searchApi(term)
+        //  // addToList(results)
+        // }}
       />
+      
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       </View>
       <ScrollView>
@@ -233,6 +274,26 @@ const [selectedId, setSelectedId] = useState(null);
 
 
 const styles = StyleSheet.create({
+  list:{
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 14,
+    fontWeight: "600",
+   padding:10,
+    textTransform: 'capitalize',
+  },
+  boxlist: {
+    fontFamily: 'Poppins_700Bold',
+    borderRadius: 20,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    borderWidth: 5,
+    borderColor: "white",
+    fontSize: 15,
+    fontWeight: "600",
+   shadowOpacity: 0.2,
+    textTransform: 'capitalize',
+    backgroundColor: "white"
+  },
   leftIcon:{
     position: 'absolute',
     left:20,

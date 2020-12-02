@@ -32,122 +32,146 @@ const DATA = [
   {
     id: "American",
     title: "american",
-    imageUrl: "https://source.unsplash.com/featured/?American,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?American,dinner,food",
+    word: ["burgers","beef","chicken","apples","flour","potatoes","ribs","sugar"]
   },
   {
     id: "African",
     title: "african",
-    imageUrl: "https://source.unsplash.com/featured/?African,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?African,dinner,food",
+    word: ["yam","bell peppers","coconut milk","onions","tamarind","egusi","plantain","rice"]
   },
   {
     id: "British",
     title: "british",
-    imageUrl: "https://source.unsplash.com/featured/?British,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?British,dinner,food",
+    word: ["potatoes","cheese","fish","beef","onion","bread","haddock","butter"]
   },
   {
     id: "Cajun",
     title: "cajun",
-    imageUrl: "https://source.unsplash.com/featured/?cajun,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?cajun,dinner,food",
+    word: ["onions","bell pepper","celery","rice","sausages","vinegar","chicken","pork"]
   },
   {
     id: "Caribbean",
     title: "caribbean",
-    imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food",
+    word: ["plantain","beans","cassava","rice","coriander","peppers","chickpeas","tomaotes"]
   },
   {
     id: "Chinese",
     title: "chinese",
-    imageUrl: "https://source.unsplash.com/featured/?Chinese,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Chinese,dinner,food",
+    word: ["rice","noodles","garlic","chilli","ginger","soy sauce","chicken","prawns"]
   },
   {
     id: "Eastern European",
     title: "eastern european",
-    imageUrl: "https://source.unsplash.com/featured/?Eastern European,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Eastern European,dinner,food",
+    word: ["eggs","cabbage","paprika","potatoes","beef","carrots","onions","garlic"]
   },
   {
     id: "French",
     title: "french",
-    imageUrl: "https://source.unsplash.com/featured/?French,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?French,dinner,food",
+    word:["garlic","flour","olive oil","cheese","truffles","mushrooms","tomatoes","butter"]
   },
   {
     id: "German",
     title: "german",
-    imageUrl: "https://source.unsplash.com/featured/?German,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?German,dinner,food",
+    word: ["sausages","mustard","cabbage","quark","juniper berries","potatoes","pork","flour"]
   },
   {
     id: "Greek",
     title: "greek",
-    imageUrl: "https://source.unsplash.com/featured/?Greek,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Greek,dinner,food",
+    word: ["olive oil","oregano","tomatoes","cheese","beef","chicken","chickpeas","yoghurt"]
   },
   {
     id: "Indian",
     title: "indian",
-    imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food",
+    word: ["lamb","cloves","cardamom","turmeric","cumin","coriander","masala","rice"]
   },
   {
     id: "Italian",
     title: "italian",
-    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food",
+    word: ["pasta","olive oil","basil","tomatoes","cheese","pesto","mushrooms","balsamic vinegar"]
   },
   {
     id: "Irish",
     title: "irish",
-    imageUrl: "https://source.unsplash.com/featured/?Irish,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Irish,dinner,food",
+    word: [ "butter","carrots","lamb","potatoes","beef","cabbage","kale","bread"]
   },
   {
     id: "Japanese",
     title: "japanese",
-    imageUrl: "https://source.unsplash.com/featured/?Japanese,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Japanese,dinner,food",
+    word: ["noodles","soy sauce","rice","mirin","nori","sesame","rice vinegar","chicken"]
   },
   {
     id: "Jewish",
     title: "jewish",
-    imageUrl: "https://source.unsplash.com/featured/?Jewish,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Jewish,dinner,food",
+    word: ["eggs","chickpeas","flour","fish","chicken","potatoes","spinach","bulgur wheat"]
   },
   {
     id: "Korean",
     title: "korean",
-    imageUrl: "https://source.unsplash.com/featured/?Korean,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Korean,dinner,food",
+    word: ["kochujang","garlic","rice","soy sauce","ginger","green onions","chili powder","sesame"]
   },
   {
     id: "Latin American",
     title: "latin american",
-    imageUrl: "https://source.unsplash.com/featured/?Latin American,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Latin American,dinner,food",
+    word: ["corn","pork","fish","lemon juice","cheese","chili","chicken","onion"]
   },
   {
     id: "Mexican",
     title: "mexican",
-    imageUrl: "https://source.unsplash.com/featured/?Mexican,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Mexican,dinner,food",
+    word: ["tortillas","beans","rice","avocado","coriander","limes","cheese","tomatoes"]
   },
   {
     id: "Middle Eastern",
     title: "middle eastern,",
-    imageUrl: "https://source.unsplash.com/featured/?Middle Eastern,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Middle Eastern,dinner,food",
+    word: ["flatbread","bulgur wheat","chickpeas","pistachios","lemon","tahini","houmous","sumac"]
   },
   {
     id: "Nordic",
     title: "nordic",
-    imageUrl: "https://source.unsplash.com/featured/?nordic,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?nordic,dinner,food",
+    word: ["bread","cheese","potatoes","beef","lamb","rye","herring","trout"]
   },
   {
     id: "Spanish",
     title: "spanish",
-    imageUrl: "https://source.unsplash.com/featured/?Spanish,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Spanish,dinner,food",
+    word: ["paprika","olive oil","peppers","garlic","onions","ham","olives","chorizo"]
   },
   {
     id: "Southern",
     title: "southern",
-    imageUrl: "https://source.unsplash.com/featured/?Southern,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Southern,dinner,food",
+    word: ["chicken","cajun","flour","cornmeal","rice","onions","beans","tomatoes"]
   },
   {
     id: "Thai",
     title: "thai",
-    imageUrl: "https://source.unsplash.com/featured/?Thai,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Thai,dinner,food",
+    word: ["thai basil","rice","noodles","coconut milk","oyster sauce","fish sauce","limes","palm sugar"]
   },
   {
     id: "Vietnamese",
     title: "vietnamese",
-    imageUrl: "https://source.unsplash.com/featured/?Vietnamese,dinner,food"
+    imageUrl: "https://source.unsplash.com/featured/?Vietnamese,dinner,food",
+    word: ["green onions","rice","lemongrass","tamarind","fish sauce","thai basil","cardamom","mint"]
   }
 ];
 
@@ -155,9 +179,9 @@ const Item = ({ item, onPress, style }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
 
     <ImageBackground 
-    	source={{ uri: item.imageUrl }} 
-    	style={styles.image} 
-    	imageStyle={{ borderRadius: 14}}
+      source={{ uri: item.imageUrl }} 
+      style={styles.image} 
+      imageStyle={{ borderRadius: 14}}
     /> 
     <View style={styles.child}>
 
@@ -179,29 +203,40 @@ const Item = ({ item, onPress, style }) => (
 
 const PreferencesScreen = ({ onSubmit, navigation }) => {
   const [selectedId, setSelectedId] = useState(null);
+  const [selectedId1, setSelectedId1] = useState(null);
   const [itemList, setItemList] = useState([]);
+  const [wordList, setWordList] = useState([]);
 
   const addToList = item => {
     //copy the selected item array
     let updatedItems = itemList;
+    let updatedItems1 = wordList;
     //use array.push to add it to the array
     updatedItems.push(item.title);
+    updatedItems1.push(item.word);
     setItemList(updatedItems);
+    setWordList(updatedItems1);
     setSelectedId(item.title);
+    setSelectedId1(item.word);
     // console.log(itemList);
   };
 
   const removeFromList = item => {
     //copy the slected item array
     let updatedItems = itemList;
+    let updatedItems1 = wordList;
     //find the current item in the array
     let itemIndexToRemove = updatedItems.indexOf(item.title);
+    let itemIndexToRemove1 = updatedItems1.indexOf(item.word);
     //use splice to remove the item from list
     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
     updatedItems.splice(itemIndexToRemove, 1);
+    updatedItems1.splice(itemIndexToRemove1, 1);
     setItemList(updatedItems);
+    setWordList(updatedItems1);
     //this is weird but it makes it work - I can't unselect, so made a non-existing id
     setSelectedId(item.title + "____");
+    setSelectedId1(item.word + "____");
     // console.log(itemList);
   };
 
@@ -224,19 +259,19 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
 
   return (
     <>
-    	<Spacer />
-    	<Spacer />
+      <Spacer />
+      <Spacer />
      <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%'}} >
-		<Text style={styles.header} h1>
-        Set your preferences</Text>	
-		<TouchableOpacity onPress={() => {
-					
-			navigation.navigate('Diet', {list1:itemList})}
-		}>
-			<Text style={styles.nextheader}>     Next </Text>
-		</TouchableOpacity>
-		
-		</View>
+    <Text style={styles.header} h1>
+        Set your preferences</Text> 
+    <TouchableOpacity onPress={() => {
+          
+      navigation.navigate('Diet', {list1:itemList, word1: wordList})}
+    }>
+      <Text style={styles.nextheader}>     Next </Text>
+    </TouchableOpacity>
+    
+    </View>
 
 
       <Spacer />
@@ -265,11 +300,11 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
           borderRadius: 30
         }}
         title="Next"
-		// onPress={() => onSubmit(itemList)}
-		onPress={() => {
-					
-			navigation.navigate('Diet', {list1:itemList})}
-		}
+    // onPress={() => onSubmit(itemList)}
+    onPress={() => {
+          
+      navigation.navigate('Diet', {list1:itemList, word1: wordList})}
+    }
       />
       <Spacer />
     <View style={styles.dots}>
@@ -330,10 +365,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_600SemiBold',
   },
 button: {
-	marginTop: 10,
-	justifyContent: 'center',
+  marginTop: 10,
+  justifyContent: 'center',
     alignItems: 'center'
-	},
+  },
   child: {
     flex: 1,
    width: 170,

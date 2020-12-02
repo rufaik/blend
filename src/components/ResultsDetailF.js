@@ -13,7 +13,30 @@ import {
 } from '@expo-google-fonts/poppins'
 
 
+
+
+
+	
+
+
+
 const Item = ({item, onPress, style, check, box}) => {
+	console.log ("item.amount.metric.unit", item.amount.metric.unit)
+
+	const Measure = () => {
+	if (item.amount.metric.unit==="g" || item.amount.metric.unit==="ml" ||
+		item.amount.metric.unit==="tsp" || item.amount.metric.unit==="tsps" || 
+		item.amount.metric.unit==="tbsp" || item.amount.metric.unit==="tbsps" ||
+		item.amount.metric.unit==="G" || item.amount.metric.unit==="Ml" ||
+		item.amount.metric.unit==="Tsp" || item.amount.metric.unit==="Tsps" || 
+		item.amount.metric.unit==="Tbsp" || item.amount.metric.unit==="Tbsps"
+		) {
+  		return (
+  		  			<Text style={styles.logG} >{Math.round(item.amount.metric.value)}{item.amount.metric.unit} </Text>
+	)} else {
+		return (
+			<Text style={styles.logG} >{Math.round(item.amount.metric.value)} {item.amount.metric.unit} </Text>
+	)}}
 
 
 	return(
@@ -23,7 +46,7 @@ const Item = ({item, onPress, style, check, box}) => {
 		</View>
 		<View>
 			<Text style={styles.name} >{item.name} </Text>
-			<Text style={styles.logG} >{Math.round(item.amount.metric.value)}{item.amount.metric.unit} </Text>
+			<Measure />
 		</View>
 			<MaterialCommunityIcons name={check} size={24} color={box} style={{ position: "absolute", right: 40}}/> 
 			
@@ -81,6 +104,7 @@ const styles = StyleSheet.create({
 		textTransform: 'capitalize',
 		width: "100%",
 		fontFamily: 'Poppins_600SemiBold',
+		flexWrap: 'wrap'
 	
 	},
 	 checkbox: {

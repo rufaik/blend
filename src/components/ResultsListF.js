@@ -9,7 +9,7 @@ YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
 ])
 
-const ResultsListA = ({ title, results1, navigation }) => {
+const ResultsListF = ({ title, results1, navigation }) => {
 	const [selectedId, setSelectedId] = useState(null);
   const [itemList, setItemList] = useState([]);
 
@@ -36,7 +36,7 @@ const ResultsListA = ({ title, results1, navigation }) => {
 				
 				showsHorizontalScrollIndicator={false}
 				data={results1}
-				numColumns={2}
+				numColumns={1}
 				keyExtractor={results1 => results1.id.toString()}
 				renderItem={({item}) => {
 				
@@ -63,9 +63,10 @@ const styles = StyleSheet.create({
 		marginBottom: 5
 	},
 	container: {
-		flex:1,
-		flexDirection: "row",
-		justifyContent: "center",
+		width: '50%',
+		// flex:1,
+		// flexDirection: "row",
+		// justifyContent: "center",
 		marginTop:15
 
 		
@@ -73,4 +74,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withNavigation(ResultsListA);
+export default withNavigation(ResultsListF);

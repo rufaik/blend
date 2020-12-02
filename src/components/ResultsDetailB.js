@@ -20,6 +20,17 @@ const ResultsDetailB = ({results}) => {
 		
 		}
 
+	const Time = () => {
+	if (resultsB.readyInMinutes > 60) {
+		let num = resultsB.readyInMinutes
+	const hours = Math.floor(num / 60);  
+  	const minutes = num % 60;
+  		return (
+  		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
+	} else {
+		return (<Text style={styles.icon}> {resultsB.readyInMinutes}mins</Text>)
+	}}
+
  
 
 	 useEffect(() => {
@@ -37,7 +48,7 @@ const ResultsDetailB = ({results}) => {
 			<Text style={styles.name} >{results.title}</Text>
 			<View style={styles.time} >
 				<MaterialIcons  name="access-time" size={15} color="gray" />
-				<Text style={styles.icon}> {resultsB.readyInMinutes}mins</Text>
+				<Time />
 			</View>
 		</View>
 		);

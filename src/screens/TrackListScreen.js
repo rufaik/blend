@@ -43,7 +43,6 @@
 // export default TrackListScreen;
 
 
-
 import React, { useState, useEffect } from 'react';
 import {
   FlatList,
@@ -64,6 +63,14 @@ import Spacer from '../components/Spacer';
 import ResultsListB from '../components/ResultsListB'
 import ResultsListA from '../components/ResultsListA'
 import ResultsListD from '../components/ResultsListD'
+import Track1 from '../components/Track1'
+import Track2 from '../components/Track2'
+import Track3 from '../components/Track3'
+import Track4 from '../components/Track4'
+import Track5 from '../components/Track5'
+import Track6 from '../components/Track6'
+import Track7 from '../components/Track7'
+import Track8 from '../components/Track8'
 import Choose from '../components/Choose'
 import { withNavigation } from 'react-navigation';
 import yelp from '../api/yelp';
@@ -150,12 +157,13 @@ const TrackListScreen = ({ navigation }) => {
 	const list = navigation.getParam('list')
 	const alist = navigation.getParam('list1')
 	const blist = navigation.getParam('list2')
-	console.log('real', list)
-	console.log('areal', alist)
-	console.log('breal', blist)
+	const Xlist = navigation.getParam('word1')
+	const [ clist, setClist ] = useState(Xlist);
 
-	const cuisine = list ? list.toString() : ""
-	const diet = alist ? alist.toString() : ""
+	console.log('creal', clist)
+
+	const diet = list ? list.toString() : ""
+	const cuisine = alist ? alist.toString() : ""
 	const specific = blist ? blist.toString() : ""
 
 	console.log('cuisine', cuisine)
@@ -172,6 +180,7 @@ const TrackListScreen = ({ navigation }) => {
 const [selectedId, setSelectedId] = useState(null);
   const [itemList, setItemList] = useState([]);
 
+  const [ all, setAll ] = useState([]);
   const [ item, setItem ] = useState([]);
   const [ errorMessage, seterrorMessage ] = useState('')
 
@@ -244,68 +253,55 @@ const InputPrompt = (props) => {
     );
   };
 
+  //-----------------------------------------------------------------------------------------------------------------------
 
+//TRENDING RECIPES
 
+	const filterResultsByLikes = (likes) => {
+		return results2.filter(results2 => {
+			return results2.likes > 1;
+		});
+	};
 
-	// const [	searchApi, results, errorMessage ] = useResults();
+	const [ results2, setResults2 ] = useState([]);
 
-	// const filterResultsByPrice = (price) => {
-	// 	return results.filter(result => {
-	// 		return result.price === price;
-	// 	});
-	// };
-
-	const [ results, setResults ] = useState([]);
-
-	const searchApi = async (searchTerm) => {
+	const searchApi3 = async (searchTerm2) => {
 		try {
 			const response = await yelp.get('/findByIngredients', {
 				params: {
-		    		number: 2,
-		    		ingredients: `${searchTerm},`
-		    		
+		    		number: 3,
+		    		ingredients: `${searchTerm2},`,
 				}
 			 });
-			 setResults(response.data)
-			 // console.log("onnnnne", response.data)
-		} catch (err) {
-			seterrorMessage('Something went wrong')
-		} 
-    };
+			 setResults2(response.data)
 
-
-    const searchApiK = async (searchTerm) => {
-		try {
-			const response = await yelp.get('/search', {
-				params: {
-		    		number: 2,
-		    		query: `${searchTerm}`,
-
-				}
-			 });
-			 setResults(response.data.results)
-			 
+			 // console.log("BBBB", results2)
+			 // console.log("BBBB1", response.data)
 		} catch (err) {
 			seterrorMessage('Something went wrong')
 		} 
     };
 
     // Only have this on to view! it costs money
-
 	
 	useEffect(() => {
-		searchApi()
+		searchApi3("milk")
 		// console.log(newList)
 	}, [])
 
+  //-----------------------------------------------------------------------------------------------------------------------
 
- 		const [ results1, setResults1 ] = useState([]);
+
+
+ 		
 
 
 // RECOMMENDED FOR YOU
 
+	const [ results1, setResults1 ] = useState([]);
 
-		const searchApi2 = async (searchTerm1, list) => {
+
+	const searchApi2 = async (searchTerm1) => {
 		try {
 			const response = await yelp.get('/search', {
 				params: {
@@ -330,45 +326,12 @@ const InputPrompt = (props) => {
 		// console.log(newList)
 	}, [])
 
-	const filterResultsByLikes = (likes) => {
-		return results2.filter(results2 => {
-			return results2.likes > 1;
-		});
-	};
-
-		const [ results2, setResults2 ] = useState([]);
-
-		const searchApi3 = async (searchTerm2) => {
-		try {
-			const response = await yelp.get('/findByIngredients', {
-				params: {
-		    		number: 3,
-		    		ingredients: `${searchTerm2},`,
-				}
-			 });
-			 setResults2(response.data)
-			 // console.log("BBBB", results2)
-			 // console.log("BBBB1", response.data)
-		} catch (err) {
-			seterrorMessage('Something went wrong')
-		} 
-    };
-
-    // Only have this on to view! it costs money
-	
-	useEffect(() => {
-		searchApi3("milk")
-		// console.log(newList)
-	}, [])
 
 
 
-
-
-
-	const sugar = 3
 
 const chevron = prompt===false ? "chevron-down" : "chevron-up"
+
 
 	return(
 		<>
@@ -410,8 +373,10 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
         		Recommended for you
         	</Text>	
         	<TouchableOpacity onPress={() => {
+
+        	
 					
-			navigation.navigate('ForYou', {cuisine: cuisine, diet:diet, specific:specific})}
+			navigation.navigate('ForYou', {cuisine: cuisine, diet:diet, specific:specific, clist:all})}
 		}>
 			<Text style={styles.nextheader}>     View all </Text>
 		</TouchableOpacity>
@@ -448,8 +413,94 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 			<ResultsListA 
 			results1={results1}
 
-
 			/>
+
+
+
+
+			{ results1.length===0 && alist && alist[0] && !alist[1]
+
+				? <>
+					<Track1 
+						word={clist}
+						alist={alist}
+						
+					/>
+				 </> 
+				: null 
+			}
+			
+			{ results1.length===0 && alist && alist[1] && !alist[2]
+
+				? <> 
+					<Track2 
+						word={clist}
+						alist={alist}
+					/>
+				 </> 
+				: null
+			}
+
+			{ results1.length===0 && alist && alist[2] && !alist[3]
+
+				? <> 
+					<Track3
+						word={clist}
+						alist={alist}
+					/>
+				 </> 
+				: null
+			}
+			{ results1.length===0 && alist && alist[3] && !alist[4]
+
+				? <> 
+					<Track4
+						word={clist}
+						alist={alist}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && alist && alist[4] && !alist[5]
+
+				? <> 
+					<Track5 
+						word={clist}
+						alist={alist}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && alist && alist[5] && !alist[6]
+
+				? <> 
+					<Track6
+						word={clist}
+						alist={alist}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && alist && alist[6] && !alist[7]
+
+				? <> 
+					<Track7
+						word={clist}
+						alist={alist}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && alist && alist[7] 
+
+				? <> 
+					<Track8 
+						word={clist}
+						alist={alist}
+					/>
+					</>
+				: null
+			}
 			
 		
 			</ScrollView>
@@ -457,10 +508,10 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 		);
 };
 
-// TrackListScreen.navigationOptions = {
-// 	title: 'TrackList',
-// 	headerShown: true
-// };
+TrackListScreen.navigationOptions = {
+	title: 'TrackList',
+	headerShown: true
+};
 
 
 

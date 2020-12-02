@@ -59,7 +59,7 @@ const All = ({ navigation }) => {
 	// const newList = list ? list.toString() : ""
 	// console.log(newList)
 	const pass = navigation.getParam('term');
-	const [ term, setTerm] = useState(pass);
+	const [ term, setTerm] = useState();
 	 const [itemList, setItemList] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
 	
@@ -180,6 +180,33 @@ const All = ({ navigation }) => {
   };
 
 
+const [selectedId1, setSelectedId1] = useState(null);
+  const [itemList1, setItemList1] = useState([pass]);
+
+  const addToList1 = item => {
+    //copy the selected item array
+    let updatedItems = itemList1;
+    //use array.push to add it to the array
+    updatedItems.push(item);
+
+    setItemList1(updatedItems);
+    setSelectedId1(item);
+  };
+
+  const removeFromList1 = item => {
+    //copy the slected item array
+    let updatedItems = itemList1;
+    //find the current item in the array
+    let itemIndexToRemove = updatedItems.indexOf(item);
+    //use splice to remove the item from list
+    //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+    updatedItems.splice(itemIndexToRemove, 1);
+
+    setItemList1(updatedItems);
+    //this is weird but it makes it work - I can't unselect, so made a non-existing id
+    setSelectedId1(item + "____");
+    ;
+  };
 
 
 	return(
@@ -188,22 +215,47 @@ const All = ({ navigation }) => {
 				titleHeader="Search Results"
 				miniHeader ="Refresh"
 				/>
-			<View >
-			<FlatList
-	        data={DATA}
-	        numColumns={4}
-	        renderItem={renderItem}
-	        keyExtractor={item => item.id}
-	        extraData={selectedId}
-	        navigation={navigation}
-	        style={{ marginTop: 5, marginLeft: 10, fontFamily: 'Poppins_600SemiBold'}}
-	      />
-	      </View>
+
+    <FlatList
+        data={itemList1}
+        numColumns={3}
+        keyExtractor={(listItem) => listItem}
+        style={{ marginLeft:10, backgroundColor:'white', borderRadius: 20, flexShrink: 0, flexGrow:0}}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+            style={styles.boxlist}
+            onPress={() =>{
+              itemList1.indexOf(item) > -1
+                ? removeFromList1(item) 
+                : addToList1(item)
+              searchApi(itemList1) === null ? () => searchApiK(itemList1) : () => searchApi(itemList1)
+        }}>
+          <Text style={styles.list} >{item}</Text> 
+        </TouchableOpacity>
+
+        )}}
+      
+      />
+      
 
 			<SearchBar 
 				term={term} 
 				onTermChange={setTerm}
-				onTermSubmit={() => searchApi(term) === null ? () => searchApiK(term) : () => searchApi(term) }
+        onTermSubmit={() => {
+          if (term.length > 0){
+          let item = term;
+          console.log("item1", item)
+           console.log("term1", term.length)
+          itemList1.indexOf(item) > -1 
+            ? null
+            : addToList1(item)
+           searchApi(itemList1) === null ? () => searchApiK(itemList1) : () => searchApi(itemList1)
+           console.log(itemList1)
+           setTerm('')
+           } else null
+
+        }}
 				placeholderText="add ingredient to search filters"
 
 				// onTermSubmit={() => {
@@ -218,10 +270,11 @@ const All = ({ navigation }) => {
 			results={results} 
 
 			/>
-				
-			
+
+    
 		
 			</ScrollView>
+
 		</>
 		)
 };
@@ -232,6 +285,26 @@ All.navigationOptions = {
 }
 
 const styles = StyleSheet.create({
+  list:{
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 14,
+    fontWeight: "600",
+   padding:10,
+    textTransform: 'capitalize',
+  },
+  boxlist: {
+    fontFamily: 'Poppins_700Bold',
+    borderRadius: 20,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    borderWidth: 5,
+    borderColor: "white",
+    fontSize: 15,
+    fontWeight: "600",
+   shadowOpacity: 0.2,
+    textTransform: 'capitalize',
+    backgroundColor: "white"
+  },
 	button: {
 		 
 		justifyContent: 'center',

@@ -154,6 +154,9 @@ const DietScreen = ({ onSubmit, navigation }) => {
   // console.log("WOLF", updatedItems)
 
   const list1 = navigation.getParam('list1')
+  const word1 = navigation.getParam('word1')
+  console.log("word", word1)
+
   // console.log("babe", list1)
   // const newList = list ? list.toString() : ""
   const [ term, setTerm] = useState('');
@@ -165,7 +168,7 @@ const DietScreen = ({ onSubmit, navigation }) => {
     try {
       const response = await ingred.get('/', {
         params: {
-            number: 3,
+            number: 20,
             query: `${searchTerm}`
         }
        });
@@ -269,23 +272,23 @@ const [selectedId1, setSelectedId1] = useState(null);
   return (
     <>
   
-    	<Spacer />
-    	<Spacer />
+      <Spacer />
+      <Spacer />
      <View style={{ flexDirection: 'row', alignItems: 'center',}} >
      <Entypo style={styles.leftIcon} name="chevron-left" size={24} color="black" onPress={() => {
           navigation.navigate('Home')}
     } />
-		<Text style={styles.header} h1>
-        Set your preferences</Text>	
-		<TouchableOpacity onPress={() => {
-					
-			navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1})
+    <Text style={styles.header} h1>
+        Set your preferences</Text> 
+    <TouchableOpacity onPress={() => {
+          
+      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1})
       // console.log("preferences", list)}
-		}}>
-			<Text style={styles.nextheader}>   Done </Text>
-		</TouchableOpacity>
-		
-		</View>
+    }}>
+      <Text style={styles.nextheader}>   Done </Text>
+    </TouchableOpacity>
+    
+    </View>
 
 
       <Spacer />
@@ -332,15 +335,15 @@ const [selectedId1, setSelectedId1] = useState(null);
         style={{ marginLeft:10, backgroundColor:'white', borderRadius: 20}}
         renderItem={({ item }) => {
           return (
-            <View
+            <TouchableOpacity
             style={styles.boxlist}
             onPress={() =>
-              itemList1.indexOf(item.id) > -1
+              itemList1.indexOf(item) > -1
                 ? removeFromList1(item)
                 : addToList1(item)
         }>
           <Text style={styles.list} >{item}</Text> 
-        </View>
+        </TouchableOpacity>
 
         )}}
       
@@ -479,16 +482,16 @@ const styles = StyleSheet.create({
   },
   subheader: {
     fontFamily: 'Poppins_600SemiBold',
-		fontWeight: "800",
-		marginLeft: 15,
-		fontSize: 17,
-	},
+    fontWeight: "800",
+    marginLeft: 15,
+    fontSize: 17,
+  },
 button: {
   fontFamily: 'Poppins_700Bold',
-	marginTop: 10,
-	justifyContent: 'center',
+  marginTop: 10,
+  justifyContent: 'center',
     alignItems: 'center'
-	},
+  },
   child: {
     fontFamily: 'Poppins_700Bold',
     flex: 1,

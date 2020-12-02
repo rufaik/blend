@@ -17,6 +17,18 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
 
+const Time = ({met, style}) => {
+	if (met > 60) {
+		let num = met
+	const hours = Math.floor(num / 60);  
+  	const minutes = num % 60;
+  		return (
+  		  			<Text style={style}>{`${hours}h${minutes}m`}</Text>)
+	} else {
+		return (<Text style={style}> {met}mins</Text>)
+	}}
+
+
 export const Copy = ({ navigation, showD }) => {
 	// const showD = navigation.getParam('showD');
 	const [resultsd, setResultsd] = useState('');
@@ -37,6 +49,8 @@ export const Copy = ({ navigation, showD }) => {
 	 useEffect(() => {
      searchApii(showD)
   }, []);
+
+
 
 	if(!resultsd) {
 		return null;
@@ -81,6 +95,10 @@ export const Copy = ({ navigation, showD }) => {
 		<View style={styles.card}>
 			<Text style={styles.log}>Prepppparation Time</Text>
 			<Text style={styles.logG}> {resultsd.preparationMinutes} Minutes</Text>
+			<Time 
+				style={styles.logG}
+				met={resultsd.preparationMinutes}
+			/>
 			<Text style={styles.log}>Cooking Time</Text>
 			<Text style={styles.logG}>{resultsd.readyInMinutes} Minutes</Text>
 			<Text style={styles.log}>Number of Servings</Text>
@@ -155,7 +173,10 @@ export const Picture = ({ navigation, showD }) => {
 		            </Text>
 		            <View style={styles.time} >
 				<MaterialIcons  name="access-time" size={15} color="white" />
-				<Text style={styles.icon}> {resultsd.readyInMinutes}mins</Text>
+				<Time 
+				style={styles.icon}
+				met={resultsd.readyInMinutes}
+			/>
 				<Entypo name="dot-single" size={24} color="white" />
 				<FontAwesome name="heart-o" size={15} color="white" />
 				<Text style={styles.icon}> {resultsd.aggregateLikes}</Text>
@@ -200,7 +221,7 @@ export const Prep = ({ navigation, showD }) => {
 				}
 			 });
 			 setResultsd(responsep.data[0])
-			console.log("wise", responsep.data[0].analyzedInstructions[0])
+			// console.log("wise", responsep.data[0].analyzedInstructions[0])
 		}
 
  
@@ -219,9 +240,15 @@ export const Prep = ({ navigation, showD }) => {
 		<View>
       		<View style={styles.card}>
 				<Text style={styles.log}>Preparation Time</Text>
-				<Text style={styles.logG}> {resultsd.preparationMinutes} Minutes</Text>
+				<Time 
+					style={styles.logG}
+					met={resultsd.preparationMinutes}
+				/>
 				<Text style={styles.log}>Cooking Time</Text>
-				<Text style={styles.logG}>{resultsd.cookingMinutes} Minutes</Text>
+				<Time 
+					style={styles.logG}
+					met={resultsd.cookingMinutes}
+				/>
 				<Text style={styles.log}>Number of Servings</Text>
 				<Text style={styles.logG}>{resultsd.servings} people</Text>
 			</View>
@@ -254,7 +281,7 @@ export const Directions = ({ navigation, showD }) => {
 				}
 			 });
 			 setResultsd(responsep.data[0])
-			 console.log('DIRECTIONS', responsep.data[0].analyzedInstructions[0])
+			 // console.log('DIRECTIONS', responsep.data[0].analyzedInstructions[0])
 			
 		}
 
@@ -268,7 +295,7 @@ export const Directions = ({ navigation, showD }) => {
 		return null;
 	}
 
-	console.log("last", showD)
+	// console.log("last", showD)
  
 	return(
       <View style={styles.card}>
@@ -430,35 +457,37 @@ export const Nutrition1 = ({ navigation, showD }) => {
 
   const searchApiN = async (showD) => {
     console.log("working", showD);
+    const [alist, setAlist] = useState(["american", "mexican"]);
+
     const responsep = await nutrition.get(`${showD}/nutritionWidget.json`);
     setResultsd(responsep);
 
     const spaceProtein = responsep.data.good.filter((x) => x.title === "Protein");
     setProtein(spaceProtein);
-    if(protein && protein[0]){
-      console.log("space", protein[0].amount);
-  }
+  //   if(protein && protein[0]){
+  //     console.log("space", protein[0].amount);
+  // }
     const spaceFiber = responsep.data.good.filter((x) => x.title === "Fiber");
     setFiber(spaceFiber);
-    if(fiber && fiber[0]){
-      console.log("space", fiber[0].amount);
-	}
+ //    if(fiber && fiber[0]){
+ //      console.log("space", fiber[0].amount);
+	// }
     const spaceFat = responsep.data.bad.filter((x) => x.title === "Saturated Fat");
     setFat(spaceFat);
-    if(sfat && sfat[0]){
-      console.log("space", sfat[0].amount);
-     }
+    // if(sfat && sfat[0]){
+    //   console.log("space", sfat[0].amount);
+    //  }
     const spaceSodium = responsep.data.bad.filter((x) => x.title === "Sodium");
     setSodium(spaceSodium);
-    if(sodium && sodium[0]){
-      console.log("space", sodium[0].amount);
-    }
+    // if(sodium && sodium[0]){
+    //   console.log("space", sodium[0].amount);
+    // }
 
     const spaceSugar = responsep.data.bad.filter((x) => x.title === "Sugar");
     setSugar(spaceSugar);
-    if(sugar && sugar[0]){
-      console.log("space", sugar[0].amount);
-    }
+    // if(sugar && sugar[0]){
+    //   console.log("space", sugar[0].amount);
+    // }
   };
 
 	 useEffect(() => {
@@ -469,7 +498,7 @@ export const Nutrition1 = ({ navigation, showD }) => {
 
 
 	if(!resultsd) {
-		return <Text style={styles.header}>Wrong!</Text>;
+		return null;
 	}
 
 

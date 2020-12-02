@@ -95,7 +95,6 @@ const trackListFlow = createStackNavigator({
   })
 
 const splashFlow = createStackNavigator({
-        TrackList: TrackListScreen,
         Splash1: SplashScreen1,
         Splash2: SplashScreen2,
         Splash3: SplashScreen3
@@ -135,7 +134,6 @@ searchFlow.navigationOptions = {
 }
 
 const switchNavigator = createSwitchNavigator ({
-  // TrackList: TrackListScreen,
   SwipeTabs,
   splashFlow,
   ResolveAuth: ResolveAuthScreen,

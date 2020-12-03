@@ -305,7 +305,7 @@ const InputPrompt = (props) => {
 		try {
 			const response = await yelp.get('/search', {
 				params: {
-		    		number: 6,
+		    		number: 8,
 		    		query: `${searchTerm1},`,
 		    		cuisine: `${cuisine}`,
 		    		diet: `${diet}`,
@@ -322,7 +322,7 @@ const InputPrompt = (props) => {
     // Only have this on to view! it costs money
 	
 	useEffect(() => {
-		searchApi2("burger")
+		searchApi2(clist[0][0])
 		// console.log(newList)
 	}, [])
 

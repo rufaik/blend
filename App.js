@@ -134,6 +134,9 @@ searchFlow.navigationOptions = {
 }
 
 const switchNavigator = createSwitchNavigator ({
+   Home: PreferencesScreen,
+  Diet: DietScreen,
+  TrackList: TrackListScreen,
   SwipeTabs,
   splashFlow,
   ResolveAuth: ResolveAuthScreen,

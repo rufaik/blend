@@ -322,7 +322,7 @@ const InputPrompt = (props) => {
     // Only have this on to view! it costs money
 	
 	useEffect(() => {
-		searchApi2(clist[0][0])
+		searchApi2('salt')
 		// console.log(newList)
 	}, [])
 

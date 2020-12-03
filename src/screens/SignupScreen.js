@@ -101,7 +101,8 @@ const SignupScreen = ({ navigation }) => {
 				marginBottom:Platform.OS === 'ios' ? -10 : -16
 			}} 
 			inputStyle={{
-				fontSize: Platform.OS === 'ios' ? 14 : 12,
+				fontSize: Platform.OS === 'ios' ? 13 : 12,
+				fontFamily: 'Poppins_500Medium'
 			}}
 			inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -128,7 +129,8 @@ const SignupScreen = ({ navigation }) => {
 				marginBottom:Platform.OS === 'ios' ? -10 : -16
 			}}
 			inputStyle={{
-				fontSize: Platform.OS === 'ios' ? 14 : 12,
+				fontSize: Platform.OS === 'ios' ? 13 : 12,
+				fontFamily: 'Poppins_500Medium'
 			}}
 			inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -160,6 +162,7 @@ const SignupScreen = ({ navigation }) => {
 				<Button 
 					style={styles.button} 
 					buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} 
+          			titleStyle={{ fontFamily: 'Poppins_500Medium' }}
 					title="Sign Up"
 					onPress={() => {
 						if (password !== confirm) {

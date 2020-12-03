@@ -1,6 +1,15 @@
 import React from 'react';
 import { Text, Image, StyleSheet, View, Button } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { 
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from '@expo-google-fonts/poppins'
 
 const ResultsDetailA = ({results1}) => {
 
@@ -40,7 +49,8 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontWeight: 'bold',
-		flexWrap: 'wrap'
+		flexWrap: 'wrap',
+		fontFamily: 'Poppins_600SemiBold',
 	
 	},
 	time:{
@@ -50,7 +60,8 @@ const styles = StyleSheet.create({
 		paddingBottom: 15
 	},
 	icon:{
-		color: "gray"
+		color: "gray",
+		fontFamily: 'Poppins_500Medium',
 	}
 });
 

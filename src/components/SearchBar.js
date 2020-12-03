@@ -1,6 +1,15 @@
 import React from 'react';
 import { TextInput, StyleSheet, View, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { 
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from '@expo-google-fonts/poppins'
 
 const SearchBar = ({ term, onTermChange, onTermSubmit, placeholderText }) => {
 	return(
@@ -11,9 +20,12 @@ const SearchBar = ({ term, onTermChange, onTermSubmit, placeholderText }) => {
 				autoCorrect={false}
 				style={styles.inputStyle}
 				placeholder={placeholderText}
+				style={{ fontSize: 16, flex: 1, fontFamily: {term} ? 'Poppins_500Medium' : 'Poppins_500Medium' }}
 				value={term}
 				onChangeText={onTermChange}
 				onEndEditing={onTermSubmit}
+				
+				
 			/>
 		</View>
 		);
@@ -32,7 +44,7 @@ const styles = StyleSheet.create({
 	},
 	inputStyle: {
 		fontSize: 16,
-		flex: 1
+		flex: 1,
 	},
 	iconStyle: {
 		fontSize: 17,

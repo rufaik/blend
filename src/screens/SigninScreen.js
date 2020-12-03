@@ -50,7 +50,8 @@ const SigninScreen = ({ navigation }) => {
 				marginBottom:Platform.OS === 'ios' ? -10 : -16,
 			}}
 			inputStyle={{
-					fontSize: Platform.OS === 'ios' ? 14 : 12
+					fontSize: Platform.OS === 'ios' ? 13 : 12,
+					fontFamily: 'Poppins_500Medium'
 				}}
 				inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -75,7 +76,8 @@ const SigninScreen = ({ navigation }) => {
 				marginBottom:Platform.OS === 'ios' ? -10 : -16,
 			}} 
 			inputStyle={{
-					fontSize: Platform.OS === 'ios' ? 14 : 12
+					fontSize: Platform.OS === 'ios' ? 13 : 12,
+					fontFamily: 'Poppins_500Medium'
 				}}
 			inputContainerStyle={{
 					backgroundColor: "rgba(247, 247, 247, 0.7)",
@@ -113,7 +115,8 @@ const SigninScreen = ({ navigation }) => {
 				<Button 
 					style={styles.button} 
 					buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} 
-					title="Log in"
+					titleStyle={{ fontFamily: 'Poppins_500Medium' }}
+					title="Log In"
 					onPress={() => signin1({ email, password })}
 				/>
 			</View>
@@ -193,6 +196,7 @@ const styles = StyleSheet.create({
   	justifyContent: 'center',
   	alignItems: 'flex-end',
 	fontFamily: 'Poppins_700Bold',
+	marginRight: 15
   }
 });
 

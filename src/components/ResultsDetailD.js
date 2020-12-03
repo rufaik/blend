@@ -3,6 +3,16 @@ import { Text, Image, ImageBackground, StyleSheet, View, Button } from 'react-na
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import recipe from '../api/recipe';
+import { 
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from '@expo-google-fonts/poppins'
+
 
 
 const ResultsDetailD = ({results2}) => {
@@ -64,6 +74,7 @@ const [resultsA, setResultsA] = useState('');
                 fontSize: 15,
                 fontWeight: "600",
                 color: 'white',
+				fontFamily: 'Poppins_600SemiBold',
 
               }}>
               {results2.title}
@@ -89,7 +100,8 @@ const styles = StyleSheet.create({
     	marginVertical: 8,
     	marginHorizontal: 16,
 		marginLeft: 15,
-		width: 289
+		width: 289,
+		fontFamily: 'Poppins_600SemiBold',
 		},
 	image: {
     	opacity: 1.9,
@@ -100,7 +112,8 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontWeight: 'bold',
-		flexWrap: 'wrap'
+		flexWrap: 'wrap',
+		fontFamily: 'Poppins_600SemiBold',
 	},
 	child: {
     flex: 1,
@@ -112,14 +125,17 @@ const styles = StyleSheet.create({
   },
   icon:{
   	color: "white",
-  	paddingTop: 2
+  	paddingTop: 2,
+  	fontFamily: 'Poppins_500Medium',
+  	fontSize: 12
   },
   time:{
 		flexDirection: "row",
 		alignItems: "center",
 		paddingTop: 5,
 		flexWrap: 'wrap',
-		paddingRight: 2
+		paddingRight: 2,
+		fontFamily: 'Poppins_600SemiBold',
 	},
 	box:{
 		flexDirection: "row",

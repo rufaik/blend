@@ -167,7 +167,7 @@ export const Picture = ({ navigation, showD }) => {
 		                fontSize: 20,
 		                fontWeight: "600",
 		                color: 'white',
-		                
+		                fontFamily: 'Poppins_600SemiBold',
 		              }}>
 		             {resultsd.title}
 		            </Text>
@@ -187,7 +187,7 @@ export const Picture = ({ navigation, showD }) => {
   			style={styles.balcony}
   			value={isSelected}
   			onPress={setSelection}>
-	   			<Text style={styles.by}> by </Text>
+	   			<Text style={styles.by}>By </Text>
 	   			<Text style={styles.source}>{resultsd.sourceName}</Text>
 	   			<View style={styles.rightBalcony}>
 	   			<Image source={require('../images/myfit.png')} style={styles.myfit} />
@@ -659,7 +659,8 @@ const styles = StyleSheet.create({
   	flexDirection: "row",
   	 // justifyContent: 'space-between',
   	 marginTop:10,
-  	 marginHorizontal:10,
+  	 marginLeft:16,
+  	 marginRight:10,
   	 paddingRight:20,
   	 paddingBottom: 11,
   	 borderBottomColor: "#E5E5E5",

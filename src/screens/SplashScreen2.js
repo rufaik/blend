@@ -67,7 +67,7 @@ const SplashScreen2 = ({ navigation }) => {
     <Button 
           
           buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: Platform.OS === 'ios' ? 15 : 9, width: Platform.OS === 'ios' ? 150 : 120, borderRadius: 30, fontFamily: 'Poppins_700Bold'}} 
-          titleStyle={{fontSize: Platform.OS === 'ios' ? 18 : 12 }}
+          titleStyle={{fontSize: Platform.OS === 'ios' ? 18 : 12, fontFamily: 'Poppins_500Medium' }}
           title="Next"
           onPress={() => {
               navigation.navigate('Splash3')}

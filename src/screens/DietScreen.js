@@ -44,15 +44,10 @@ import { YellowBox } from 'react-native'
 
 
 const DATA = [
-  {
-    id: "Vegetarian",
-    title: "vegetarian",
-    imageUrl: "https://source.unsplash.com/featured/?American,dinner,food"
-  },
-  {
-    id: "Seafood",
-    title: "seafood",
-    imageUrl: "https://source.unsplash.com/featured/?Healthy,dinner,food"
+ {
+    id: "Laco Vegetarian",
+    title: "lacto vegetarian",
+    imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food"
   },
   {
     id: "Vegan",
@@ -60,12 +55,13 @@ const DATA = [
     imageUrl: "https://source.unsplash.com/featured/?British,dinner,food"
   },
   {
-    id: "Gluten",
-    title: "gluten",
-    imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
+    id: "Vegetarian",
+    title: "vegetarian",
+    imageUrl: "https://source.unsplash.com/featured/?American,dinner,food"
   },
+  
   {
-    id: "OVO",
+    id: "OVO Vegetarian",
     title: "ovo vegetarian",
     imageUrl: "https://source.unsplash.com/featured/?Gelato,food"
   },
@@ -73,11 +69,20 @@ const DATA = [
     id: "Pescatarian",
     title: "pescetarian",
     imageUrl: "https://source.unsplash.com/featured/?Ethiopian,dinner,food"
+  }
+ 
+];
+
+const DATA4 = [
+  {
+    id: "Seafood",
+    title: "seafood",
+    imageUrl: "https://source.unsplash.com/featured/?Healthy,dinner,food"
   },
   {
-    id: "Laco Vegetarian",
-    title: "lacto vegetarian",
-    imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food"
+    id: "Gluten",
+    title: "gluten",
+    imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
   },
   {
     id: "Nut",
@@ -149,7 +154,9 @@ const Item = ({ item, onPress, style, color }) => (
 
 const DietScreen = ({ onSubmit, navigation }) => {
   const [selectedId, setSelectedId] = useState(null);
+  const [selectedId4, setSelectedId4] = useState(null);
   const [itemList, setItemList] = useState([]);
+  const [itemList4, setItemList4] = useState([]);
   // console.log("plow",itemList1)
   // console.log("WOLF", updatedItems)
 
@@ -163,6 +170,11 @@ const DietScreen = ({ onSubmit, navigation }) => {
 
   const [ item, setResults ] = useState([]);
   const [ errorMessage, seterrorMessage ] = useState('')
+  console.log("word1", itemList)
+  console.log("word2", list1)
+  console.log("word3", itemList1)
+
+
 
   const searchApi = async (searchTerm) => {
     try {
@@ -212,6 +224,32 @@ const DietScreen = ({ onSubmit, navigation }) => {
     setSelectedId(item.id + "____");
   };
 
+    const addToList4 = item => {
+    //copy the selected item array
+    let updatedItems4 = itemList4;
+    //use array.push to add it to the array
+    updatedItems4.push(item.id);
+
+    setItemList4(updatedItems4);
+    setSelectedId4(item.id);
+  };
+
+  const removeFromList4 = item => {
+    //copy the slected item array
+    let updatedItems4 = itemList4;
+    //find the current item in the array
+    let itemIndexToRemove4 = updatedItems4.indexOf(item.id);
+    //use splice to remove the item from list
+    //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+    updatedItems4.splice(itemIndexToRemove4, 1);
+
+    setItemList4(updatedItems4);
+    //this is weird but it makes it work - I can't unselect, so made a non-existing id
+    setSelectedId4(item.id + "____");
+  };
+
+
+
   const renderItem = ({ item }) => {
     //check if item is in the list - if so, it's selected
     const backgroundColor = itemList.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
@@ -226,6 +264,28 @@ const DietScreen = ({ onSubmit, navigation }) => {
           itemList.indexOf(item.id) > -1
             ? removeFromList(item)
             : addToList(item)
+        }
+        style={{ backgroundColor, shadowOpacity }}
+        color={color}
+      />
+    );
+  };
+
+
+  const renderItem4 = ({ item }) => {
+    //check if item is in the list - if so, it's selected
+    const backgroundColor = itemList4.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
+    const shadowOpacity = itemList4.indexOf(item.id) > -1 ? 0.2 : 0
+    const color = itemList4.indexOf(item.id) > -1 ? "black" : '#ACACAC'
+    // const borderColor = item.id === selectedId ? "#14D08C" : "#FFFFFF";
+
+    return (
+      <Item
+        item={item}
+        onPress={() =>
+          itemList4.indexOf(item.id) > -1
+            ? removeFromList4(item)
+            : addToList4(item)
         }
         style={{ backgroundColor, shadowOpacity }}
         color={color}
@@ -266,7 +326,7 @@ const [selectedId1, setSelectedId1] = useState(null);
 
 
 
- console.log("plow",itemList1)
+ console.log("plow",itemList4)
 
 
   return (
@@ -282,7 +342,7 @@ const [selectedId1, setSelectedId1] = useState(null);
         Set your preferences</Text> 
     <TouchableOpacity onPress={() => {
           
-      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1})
+      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})
       // console.log("preferences", list)}
     }}>
       <Text style={styles.nextheader}>   Done </Text>
@@ -299,10 +359,19 @@ const [selectedId1, setSelectedId1] = useState(null);
 
       <FlatList
         data={DATA}
-        numColumns={4}
+        numColumns={3}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         extraData={selectedId}
+        navigation={navigation}
+        style={{ marginTop: 5, marginLeft: 10, fontFamily: 'Poppins_600SemiBold'}}
+      />
+       <FlatList
+        data={DATA4}
+        numColumns={4}
+        renderItem={renderItem4}
+        keyExtractor={item => item.id}
+        extraData={selectedId4}
         navigation={navigation}
         style={{ marginTop: 5, marginLeft: 10, fontFamily: 'Poppins_600SemiBold'}}
       />
@@ -397,7 +466,7 @@ const [selectedId1, setSelectedId1] = useState(null);
     // onPress={() => onSubmit(itemList)}
     onPress={() => {
           
-      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1})}
+      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})}
     }
       />
      <Spacer />

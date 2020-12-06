@@ -157,18 +157,21 @@ const TrackListScreen = ({ navigation }) => {
 	const list = navigation.getParam('list')
 	const alist = navigation.getParam('list1')
 	const blist = navigation.getParam('list2')
+	const dlist = navigation.getParam('list4')
 	const Xlist = navigation.getParam('word1')
 	const [ clist, setClist ] = useState(Xlist);
 
-	console.log('creal', clist)
+
+	// console.log('creal', clist)
 
 	const diet = list ? list.toString() : ""
 	const cuisine = alist ? alist.toString() : ""
 	const specific = blist ? blist.toString() : ""
+	const intolerances = dlist ? dlist.toString() : ""
 
-	console.log('cuisine', cuisine)
-	console.log('diet', diet)
-	console.log('specific', specific)
+	// console.log('cuisine', cuisine)
+	// console.log('diet', diet)
+	// console.log('specific', specific)
 
 	const [ term, setTerm] = useState('');
 	const [ dog, setDog] = useState('');
@@ -178,7 +181,9 @@ const TrackListScreen = ({ navigation }) => {
 
 
 const [selectedId, setSelectedId] = useState(null);
-  const [itemList, setItemList] = useState([]);
+  const [itemList, setItemList] = useState(["salt"]);
+  	const itX = itemList ? itemList.toString() : ""
+
 
   const [ all, setAll ] = useState([]);
   const [ item, setItem ] = useState([]);
@@ -245,6 +250,7 @@ const InputPrompt = (props) => {
             ? removeFromList(item)
             : addToList(item)
            searchApi2(itemList)
+           console.log(itemList)
 
         }}
         style={{ backgroundColor, shadowOpacity, marginRight, marginTop }}
@@ -302,6 +308,7 @@ const InputPrompt = (props) => {
 
 
 	const searchApi2 = async (searchTerm1) => {
+		console.log("searchTerm1", searchTerm1)
 		try {
 			const response = await yelp.get('/search', {
 				params: {
@@ -309,6 +316,7 @@ const InputPrompt = (props) => {
 		    		query: `${searchTerm1},`,
 		    		cuisine: `${cuisine}`,
 		    		diet: `${diet}`,
+		    		intolerances: `${intolerances}`,
 		    		excludeIngredients: `${specific}`
 				}
 			 });
@@ -417,90 +425,6 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 
 
 
-
-			{ results1.length===0 && alist && alist[0] && !alist[1]
-
-				? <>
-					<Track1 
-						word={clist}
-						alist={alist}
-						
-					/>
-				 </> 
-				: null 
-			}
-			
-			{ results1.length===0 && alist && alist[1] && !alist[2]
-
-				? <> 
-					<Track2 
-						word={clist}
-						alist={alist}
-					/>
-				 </> 
-				: null
-			}
-
-			{ results1.length===0 && alist && alist[2] && !alist[3]
-
-				? <> 
-					<Track3
-						word={clist}
-						alist={alist}
-					/>
-				 </> 
-				: null
-			}
-			{ results1.length===0 && alist && alist[3] && !alist[4]
-
-				? <> 
-					<Track4
-						word={clist}
-						alist={alist}
-					/>
-					</>
-				: null
-			}
-			{ results1.length===0 && alist && alist[4] && !alist[5]
-
-				? <> 
-					<Track5 
-						word={clist}
-						alist={alist}
-					/>
-					</>
-				: null
-			}
-			{ results1.length===0 && alist && alist[5] && !alist[6]
-
-				? <> 
-					<Track6
-						word={clist}
-						alist={alist}
-					/>
-					</>
-				: null
-			}
-			{ results1.length===0 && alist && alist[6] && !alist[7]
-
-				? <> 
-					<Track7
-						word={clist}
-						alist={alist}
-					/>
-					</>
-				: null
-			}
-			{ results1.length===0 && alist && alist[7] 
-
-				? <> 
-					<Track8 
-						word={clist}
-						alist={alist}
-					/>
-					</>
-				: null
-			}
 			
 		
 			</ScrollView>

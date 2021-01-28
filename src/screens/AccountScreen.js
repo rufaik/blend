@@ -1,25 +1,77 @@
-import React, { useContext } from 'react';
-import { Text, TextInput, StyleSheet } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, TextInput, Image, StyleSheet, FlatList, TouchableOpacity  } from 'react-native';
 import { Input, Button } from 'react-native-elements'
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, NavigationEvents } from 'react-navigation';
 import Spacer from '../components/Spacer';
 import { Context  as AuthContext } from '../context/AuthContext'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ListItem } from 'react-native-elements';
+import { Context as TrackContext } from '../context/TrackContext';
 
-const AccountScreen = () => {
-	const { signout } = useContext(AuthContext)
+const AccountScreen = ({ navigation }) => {
+	const { state, fetchTracks } = useContext(TrackContext);
+	const [photo, setPhoto] = useState(null);
+
+  // const handleChoosePhoto = () => {
+  //   const options = {
+  //     noData: true,
+  //   }
+  //   ImagePicker.launchImageLibrary(options, response => {
+  //     if (response.uri) {
+  //       setPhoto(response)
+  //     }
+  //   })
+  // }
+
+
+ 
+
+	
+
+	// console.log(state)
+
 
 	return (
-		<SafeAreaView forceInset={{ top: 'always' }}>
-			<Text style={{ fontSize: 48}}></Text>
-			<Spacer/>
-			<Spacer/>
-			<Spacer/>
-			<Spacer>
-				<Button style={styles.button} title="Sign Out" buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} onPress={signout} />
-			</Spacer>
+			<>	
+			<NavigationEvents onWillFocus={fetchTracks} />
+			<FlatList
+				numColumns={1}
+				data={state}
+				keyExtractor={item => item._id}
+				renderItem={({ item }) => {
+					return(
+						<TouchableOpacity onPress={() => 
+							navigation.navigate('TrackDetail', { _id: item._id })
+							}
+						>
+						
+						<Text style={{ fontSize: 28}}>{item.itemList}</Text>
+						<Text style={{ fontSize: 28}}>{item.itemList1}</Text>
+						<Text style={{ fontSize: 28}}>{item.itemList4}</Text>
+						<Text style={{ fontSize: 28}}>{item.list1}</Text>
+					</TouchableOpacity>
+					);
+				}}
+			/>
+			
+			<Button 
+				style={styles.button} 
+				title="Sign Out" 
+				buttonStyle={{backgroundColor: 'black', fontSize: 18, padding: 15, width: 250, borderRadius: 30}} 
+			    onPress={() => {
+			    	// console.log("state", state[0]._id)
+			      navigation.navigate('Edit', {id:state[0]._id})}
+			    } />
 
-		</SafeAreaView>
+
+    
+   
+
+    
+
+		</>
+
+	
 	);
 };
 
@@ -35,6 +87,14 @@ const styles = StyleSheet.create({
       alignItems: 'center'
 	}
 });
+
+
+
+	
+
+	
+
+
 
 export default AccountScreen;
 

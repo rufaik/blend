@@ -31,7 +31,10 @@ import SplashScreen3 from './src/screens/SplashScreen3'
 import TrendingAll from './src/screens/TrendingAll'
 import ForYouAll from './src/screens/ForYouAll'
 import DietScreen from './src/screens/DietScreen'
+import EditScreen from './src/screens/EditScreen'
+import EditDScreen from './src/screens/EditDScreen'
 import All from './src/screens/All'
+import ImageUpload from './src/screens/Upload'
 import { AppLoading } from "expo"
 import { 
   useFonts,
@@ -118,6 +121,8 @@ trackListFlow.navigationOptions = {
 
 const searchFlow = createStackNavigator({
       Account: AccountScreen,
+      Edit:EditScreen,
+      EditD:EditDScreen,
       ResultsShow: ResultsShowScreen
       },
       {
@@ -134,9 +139,11 @@ searchFlow.navigationOptions = {
 }
 
 const switchNavigator = createSwitchNavigator ({
-   Home: PreferencesScreen,
-  Diet: DietScreen,
-  TrackList: TrackListScreen,
+  //  Home: PreferencesScreen,
+  // Diet: DietScreen,
+  // TrackList: TrackListScreen,
+  // Account: AccountScreen,
+  ImageUpload: ImageUpload,
   SwipeTabs,
   splashFlow,
   ResolveAuth: ResolveAuthScreen,

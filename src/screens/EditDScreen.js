@@ -35,6 +35,9 @@ import { useContext } from 'react';
 import { Context as TrackContext } from '../context/TrackContext';
 // import { Context as LocationContext } from '../context/LocationContext';
 import { navigate } from '../navigationRef';
+// import { Context } from '../context/TrackContext';
+import { Context as AuthContext } from '../context/AuthContext'
+
 
 
 
@@ -155,16 +158,22 @@ const Item = ({ item, onPress, style, color }) => (
   </TouchableOpacity>
 );
 
-const DietScreen = ({ onSubmit, navigation }) => {
+const EditDScreen = ({ onSubmit, navigation }) => {
+   const id = navigation.getParam('id');
+  const { state, editTrack1 } = useContext(TrackContext);
   const [selectedId, setSelectedId] = useState(null);
   const [selectedId4, setSelectedId4] = useState(null);
-  const [itemList, setItemList] = useState([]);
-  const [itemList4, setItemList4] = useState([]);
+  const [newitemList, setnewItemList] = useState(state[0].itemList);
+  const [newitemList4, setnewItemList4] = useState(state[0].itemList4);
+  const {updatepref} = useContext(AuthContext);
+
   // console.log("plow",itemList1)
   // console.log("WOLF", updatedItems)
-
   const list1 = navigation.getParam('list1')
-  const word1 = navigation.getParam('word1')
+  const newlist1 = list1
+  const newword1 = navigation.getParam('word1')
+
+  const userId = state[0].userId
   // console.log("word", word1)
 
   // console.log("babe", list1)
@@ -205,48 +214,48 @@ const DietScreen = ({ onSubmit, navigation }) => {
 
   const addToList = item => {
     //copy the selected item array
-    let updatedItems = itemList;
+    let updatedItems = newitemList;
     //use array.push to add it to the array
     updatedItems.push(item.id);
 
-    setItemList(updatedItems);
+    setnewItemList(updatedItems);
     setSelectedId(item.id);
   };
 
   const removeFromList = item => {
     //copy the slected item array
-    let updatedItems = itemList;
+    let updatedItems = newitemList;
     //find the current item in the array
     let itemIndexToRemove = updatedItems.indexOf(item.id);
     //use splice to remove the item from list
     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
     updatedItems.splice(itemIndexToRemove, 1);
 
-    setItemList(updatedItems);
+    setnewItemList(updatedItems);
     //this is weird but it makes it work - I can't unselect, so made a non-existing id
     setSelectedId(item.id + "____");
   };
 
     const addToList4 = item => {
     //copy the selected item array
-    let updatedItems4 = itemList4;
+    let updatedItems4 = newitemList4;
     //use array.push to add it to the array
     updatedItems4.push(item.id);
 
-    setItemList4(updatedItems4);
+    setnewItemList4(updatedItems4);
     setSelectedId4(item.id);
   };
 
   const removeFromList4 = item => {
     //copy the slected item array
-    let updatedItems4 = itemList4;
+    let updatedItems4 = newitemList4;
     //find the current item in the array
     let itemIndexToRemove4 = updatedItems4.indexOf(item.id);
     //use splice to remove the item from list
     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
     updatedItems4.splice(itemIndexToRemove4, 1);
 
-    setItemList4(updatedItems4);
+    setnewItemList4(updatedItems4);
     //this is weird but it makes it work - I can't unselect, so made a non-existing id
     setSelectedId4(item.id + "____");
   };
@@ -255,16 +264,16 @@ const DietScreen = ({ onSubmit, navigation }) => {
 
   const renderItem = ({ item }) => {
     //check if item is in the list - if so, it's selected
-    const backgroundColor = itemList.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
-    const shadowOpacity = itemList.indexOf(item.id) > -1 ? 0.2 : 0
-    const color = itemList.indexOf(item.id) > -1 ? "black" : '#ACACAC'
+    const backgroundColor = newitemList.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
+    const shadowOpacity = newitemList.indexOf(item.id) > -1 ? 0.2 : 0
+    const color = newitemList.indexOf(item.id) > -1 ? "black" : '#ACACAC'
     // const borderColor = item.id === selectedId ? "#14D08C" : "#FFFFFF";
 
     return (
       <Item
         item={item}
         onPress={() =>
-          itemList.indexOf(item.id) > -1
+          newitemList.indexOf(item.id) > -1
             ? removeFromList(item)
             : addToList(item)
         }
@@ -277,16 +286,16 @@ const DietScreen = ({ onSubmit, navigation }) => {
 
   const renderItem4 = ({ item }) => {
     //check if item is in the list - if so, it's selected
-    const backgroundColor = itemList4.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
-    const shadowOpacity = itemList4.indexOf(item.id) > -1 ? 0.2 : 0
-    const color = itemList4.indexOf(item.id) > -1 ? "black" : '#ACACAC'
+    const backgroundColor = newitemList4.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
+    const shadowOpacity = newitemList4.indexOf(item.id) > -1 ? 0.2 : 0
+    const color = newitemList4.indexOf(item.id) > -1 ? "black" : '#ACACAC'
     // const borderColor = item.id === selectedId ? "#14D08C" : "#FFFFFF";
 
     return (
       <Item
         item={item}
         onPress={() =>
-          itemList4.indexOf(item.id) > -1
+          newitemList4.indexOf(item.id) > -1
             ? removeFromList4(item)
             : addToList4(item)
         }
@@ -300,28 +309,28 @@ const DietScreen = ({ onSubmit, navigation }) => {
 
 
 const [selectedId1, setSelectedId1] = useState(null);
-  const [itemList1, setItemList1] = useState([]);
+  const [newitemList1, setnewItemList1] = useState(state[0].itemList1);
 
   const addToList1 = item => {
     //copy the selected item array
-    let updatedItems = itemList1;
+    let updatedItems = newitemList1;
     //use array.push to add it to the array
     updatedItems.push(item.name);
 
-    setItemList1(updatedItems);
+    setnewItemList1(updatedItems);
     setSelectedId1(item.name);
   };
 
   const removeFromList1 = item => {
     //copy the slected item array
-    let updatedItems = itemList1;
+    let updatedItems = newitemList1;
     //find the current item in the array
     let itemIndexToRemove = updatedItems.indexOf(item.name);
     //use splice to remove the item from list
     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
     updatedItems.splice(itemIndexToRemove, 1);
 
-    setItemList1(updatedItems);
+    setnewItemList1(updatedItems);
     //this is weird but it makes it work - I can't unselect, so made a non-existing id
     setSelectedId1(item.name + "____");
     ;
@@ -331,19 +340,18 @@ const [selectedId1, setSelectedId1] = useState(null);
 
  // console.log("plow",itemList4)
 
+// const Conx = () => {
+// const { createTrack } = useContext(TrackContext);
 
-const Conx = () => {
-const { createTrack } = useContext(TrackContext);
+//   const saveTrack = () => {
+//     createTrack(newitemList, newlist1, newitemList1, newword1, newitemList4)
+//     console.log('please');
+//   };
 
-  const saveTrack = () => {
-    createTrack(itemList, list1, itemList1, word1, itemList4)
-    console.log('please');
-  };
+//   return [saveTrack];
+// };
 
-  return [saveTrack];
-};
-
-const [saveTrack] = Conx();
+// const [saveTrack] = Conx();
 
 
   return (
@@ -357,11 +365,15 @@ const [saveTrack] = Conx();
     } />
     <Text style={styles.header} h1>
         Set your preferences</Text> 
-    <TouchableOpacity onPress={() => {saveTrack(),
+    <TouchableOpacity 
+
+
+      // editTrack1(newitemList, newlist1, newitemList1, newword1, newitemList4), saveTrack(),
           
-      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})
+      // navigation.navigate('TrackList', {list:newitemList, list1: newlist1, list2:newitemList1, word1: newword1, list4:newitemList4})
+      onPress={() => updatepref({ userId, newitemList, newlist1, newitemList1, newword1, newitemList4 })}
       // console.log("preferences", list)}
-    }}>
+    >
       <Text style={styles.nextheader}>   Done </Text>
     </TouchableOpacity>
     
@@ -415,7 +427,7 @@ const [saveTrack] = Conx();
       <View style={styles.container1} >
   
     <FlatList
-        data={itemList1}
+        data={newitemList1}
         numColumns={3}
         keyExtractor={(listItem) => listItem}
         style={{ marginLeft:10, backgroundColor:'white', borderRadius: 20}}
@@ -424,7 +436,7 @@ const [saveTrack] = Conx();
             <TouchableOpacity
             style={styles.boxlist}
             onPress={() =>
-              itemList1.indexOf(item) > -1
+              newitemList1.indexOf(item) > -1
                 ? removeFromList1(item)
                 : addToList1(item)
         }>
@@ -444,15 +456,15 @@ const [saveTrack] = Conx();
             navigation={navigation}
         keyExtractor={item => item.name}
         renderItem={({ item }) => {
-            const borderColor = itemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
-            const color = itemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
-            const name = itemList1.indexOf(item.name) > -1 ? "checkbox-marked"  : "checkbox-blank-outline";
+            const borderColor = newitemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
+            const color = newitemList1.indexOf(item.name) > -1 ? "#14D08C" : "#F5F3F3";
+            const name = newitemList1.indexOf(item.name) > -1 ? "checkbox-marked"  : "checkbox-blank-outline";
             // console.log(item)
             return (
                   <Item1
                     item={item}
                     onPress={() =>
-                        itemList1.indexOf(item.name) > -1
+                        newitemList1.indexOf(item.name) > -1
                         ? removeFromList1(item)
                         : addToList1(item)
                     }
@@ -481,9 +493,11 @@ const [saveTrack] = Conx();
         }}
         title="Get Started"
     // onPress={() => onSubmit(itemList)}
-    onPress={() => {
+    onPress={() => { 
+
+      // editTrack1(newitemList, newlist1, newitemList1, newword1, newitemList4),
           
-      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})}
+      navigation.navigate('TrackList', {list:inewtemList, list1: newlist1, list2:newitemList1, word1: newword1, list4:newitemList4})}
     }
       />
      <Spacer />
@@ -499,7 +513,7 @@ const [saveTrack] = Conx();
   );
 };
 
-DietScreen.navigationOptions = {
+EditDScreen.navigationOptions = {
   title: 'Diet',
   tabBarIcon: <MaterialCommunityIcons name="pot-mix" size={24} color="gray" />
 
@@ -620,4 +634,4 @@ button: {
   }
 });
 
-export default withNavigation(DietScreen);
+export default withNavigation(EditDScreen);

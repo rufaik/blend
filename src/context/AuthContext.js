@@ -173,6 +173,23 @@ const reset = (dispatch)  => async ({ email, newpassword }) => {
 	}
 }
 
+const updatepref = (dispatch)  => async ({ userId, newitemList, newlist1, newitemList1, newword1, newitemList4 }) => {
+	try {
+		//make a request
+		console.log('try')
+		const response = await trackerApi.put('/updatepref', {userId, newitemList, newlist1, newitemList1, newword1, newitemList4});
+		console.log('done')
+		//navigate to main flow
+		navigate('TrackList')
+	} catch (err) {
+		dispatch({
+			type:'add_error',
+			payload: 'I didnt update'
+
+		})
+	}
+}
+
 
 const signout = dispatch => async () => {
 		await AsyncStorage.removeItem('token');
@@ -183,6 +200,6 @@ const signout = dispatch => async () => {
 
 export const { Provider, Context } = createDataContext(
 	authReducer,
-	{ signin1, signin, signout, googlesign, signup, clearErrorMessage,tryLocalSignin },
+	{ signin1, signin, signout, googlesign, signup, reset, updatepref, clearErrorMessage,tryLocalSignin },
 	{ token: null, errorMessage: '' }
 );

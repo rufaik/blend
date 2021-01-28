@@ -10,7 +10,7 @@ import GoogleLogin from '../components/GoogleLogin'
 
 
 const ResetScreen = ({ navigation }) => {
-	const { state, signup, clearErrorMessage } = useContext(AuthContext);
+	const { state, signup, reset, clearErrorMessage } = useContext(AuthContext);
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('');
 	const [name, setName] = useState('');
@@ -125,7 +125,8 @@ const ResetScreen = ({ navigation }) => {
 					onPress={() => {
 						if (password === newpassword) {
        						 alert("Choose something new");
-    					} else navigation.navigate('Signin')}}
+    					} else reset({ email, newpassword }),
+    					navigation.navigate('Signin')}}
     					// use email to find user id and update the password
 				/>
 			</Spacer>

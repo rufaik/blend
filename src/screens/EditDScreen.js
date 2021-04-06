@@ -160,20 +160,21 @@ const Item = ({ item, onPress, style, color }) => (
 
 const EditDScreen = ({ onSubmit, navigation }) => {
    const id = navigation.getParam('id');
-  const { state, editTrack1 } = useContext(TrackContext);
+  const { state, editTrack1, updatepref, createTrack1, createTrack2, createTrack3, createTrack4, createTrack5 } = useContext(TrackContext);
   const [selectedId, setSelectedId] = useState(null);
   const [selectedId4, setSelectedId4] = useState(null);
-  const [newitemList, setnewItemList] = useState(state[0].itemList);
-  const [newitemList4, setnewItemList4] = useState(state[0].itemList4);
-  const {updatepref} = useContext(AuthContext);
+  const [newitemList, setnewItemList] = useState(state.diet);
+  const [newitemList4, setnewItemList4] = useState(state.allergies);
+  const [userId, setuserId] = useState(state.userId);
+  // const {updatepref} = useContext(AuthContext);
+  
 
-  // console.log("plow",itemList1)
+  console.log("plowwww", state)
   // console.log("WOLF", updatedItems)
   const list1 = navigation.getParam('list1')
   const newlist1 = list1
   const newword1 = navigation.getParam('word1')
 
-  const userId = state[0].userId
   // console.log("word", word1)
 
   // console.log("babe", list1)
@@ -309,7 +310,7 @@ const EditDScreen = ({ onSubmit, navigation }) => {
 
 
 const [selectedId1, setSelectedId1] = useState(null);
-  const [newitemList1, setnewItemList1] = useState(state[0].itemList1);
+  const [newitemList1, setnewItemList1] = useState(state.avoid);
 
   const addToList1 = item => {
     //copy the selected item array
@@ -371,8 +372,17 @@ const [selectedId1, setSelectedId1] = useState(null);
       // editTrack1(newitemList, newlist1, newitemList1, newword1, newitemList4), saveTrack(),
           
       // navigation.navigate('TrackList', {list:newitemList, list1: newlist1, list2:newitemList1, word1: newword1, list4:newitemList4})
-      onPress={() => updatepref({ userId, newitemList, newlist1, newitemList1, newword1, newitemList4 })}
-      // console.log("preferences", list)}
+      onPress={() => {
+            console.log("bambi", userId, newitemList, newlist1, newitemList1, newword1, newitemList4)
+          createTrack1(newlist1); 
+           createTrack2(newitemList);
+           createTrack3(newitemList4); 
+           createTrack4(newitemList1);
+           createTrack5(newword1);
+            updatepref({ userId, newitemList, newlist1, newitemList1, newword1, newitemList4 })
+              }}
+
+      // console.log("bambi", userId, newitemList, newlist1, newitemList1, newword1, newitemList4)
     >
       <Text style={styles.nextheader}>   Done </Text>
     </TouchableOpacity>

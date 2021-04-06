@@ -43,7 +43,7 @@
 // export default TrackListScreen;
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   FlatList,
   ScrollView,
@@ -86,6 +86,9 @@ import {
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
+import { Context as TrackContext } from '../context/TrackContext';
+
+
 
 
 
@@ -154,15 +157,31 @@ const Item = ({ item, onPress, style, color }) => (
 
 
 const TrackListScreen = ({ navigation }) => {
-	const list = navigation.getParam('list')
-	const alist = navigation.getParam('list1')
-	const blist = navigation.getParam('list2')
-	const dlist = navigation.getParam('list4')
-	const Xlist = navigation.getParam('word1')
+
+	const { state } = useContext(TrackContext);
+	const list = state.diet
+	const [alist, setAlist] = useState(state.cusine)
+	const blist = state.avoid
+	const dlist = state.allergies
+	const Xlist = state.word
 	const [ clist, setClist ] = useState(Xlist);
 
+	// const list = navigation.getParam('list')
+	// const alist = navigation.getParam('list1')
+	// const blist = navigation.getParam('list2')
+	// const dlist = navigation.getParam('list4')
+	// const Xlist = navigation.getParam('word1')
+	// const [ clist, setClist ] = useState(Xlist);
 
-	// console.log('creal', clist)
+	  
+
+// list1 = cuisine = list1
+// itemList = diet = list
+// itemList4 = allergies =list4
+// itemList1 = avoid = list2
+
+
+	// console.log('creal', state)
 
 	const diet = list ? list.toString() : ""
 	const cuisine = alist ? alist.toString() : ""
@@ -188,7 +207,8 @@ const [selectedId, setSelectedId] = useState(null);
   const [ all, setAll ] = useState([]);
   const [ item, setItem ] = useState([]);
   const [ errorMessage, seterrorMessage ] = useState('')
-
+	// const { email } = useContext(AuthContext);
+	// console.log("194", token)
 
   
 
@@ -338,7 +358,10 @@ const InputPrompt = (props) => {
 	}, [])
 
 
-
+console.log("dayy", results1.length)
+console.log("alist", state.cuisine)
+console.log("alist1", state.cuisine[0])
+console.log("clist", clist)
 
 
 const chevron = prompt===false ? "chevron-down" : "chevron-up"
@@ -425,6 +448,91 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 			results1={results1}
 
 			/>
+
+
+			{ results1.length===0 && state.cuisine && state.cuisine[0] && !state.cuisine[1]
+
+				? <>
+					<Track1 
+						word={clist}
+						alist={state.cuisine}
+
+					/>
+				 </> 
+				: null 
+			}
+
+			{ results1.length===0 && state.cuisine && state.cuisine[1] && !state.cuisine[2]
+
+				? <> 
+					<Track2 
+						word={clist}
+						alist={state.cuisine}
+					/>
+				 </> 
+				: null
+			}
+
+			{ results1.length===0 && state.cuisine && state.cuisine[2] && !state.cuisine[3]
+
+				? <> 
+					<Track3
+						word={clist}
+						alist={state.cuisine}
+					/>
+				 </> 
+				: null
+			}
+			{ results1.length===0 && state.cuisine && state.cuisine[3] && !state.cuisine[4]
+
+				? <> 
+					<Track4
+						word={clist}
+						alist={state.cuisine}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && state.cuisine && state.cuisine[4] && !state.cuisine[5]
+
+				? <> 
+					<Track5 
+						word={clist}
+						alist={state.cuisine}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && state.cuisine && state.cuisine[5] && !state.cuisine[6]
+
+				? <> 
+					<Track6
+						word={clist}
+						alist={state.cuisine}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && state.cuisine && state.cuisine[6] && !state.cuisine[7]
+
+				? <> 
+					<Track7
+						word={clist}
+						alist={state.cuisine}
+					/>
+					</>
+				: null
+			}
+			{ results1.length===0 && state.cuisine && state.cuisine[7] 
+
+				? <> 
+					<Track8 
+						word={clist}
+						alist={state.cuisine}
+					/>
+					</>
+				: null
+			}
 
 
 

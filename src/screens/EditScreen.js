@@ -212,11 +212,11 @@ const EditScreen = ({ onSubmit, navigation }) => {
   
 
 
-  const [itemList, setItemList] = useState(state[0].list1)
-  const [wordList, setWordList] = useState(state[0].word1);
+  const [itemList, setItemList] = useState(state.cuisine)
+  const [wordList, setWordList] = useState(state.word);
 
-  const preference = state.find(preference => state[0]._id === id);
-  console.log('predddd', preference)
+  // const preference = state.find(preference => state._id === id);
+  // console.log('predddd', preference)
  
 
   const addToList = item => {
@@ -315,7 +315,7 @@ const EditScreen = ({ onSubmit, navigation }) => {
     // onPress={() => onSubmit(itemList)}
     onPress={() => {
           
-      navigation.navigate('EditD', {list1:itemList, word1: wordList})}
+      navigation.navigate('EditD', {list1:itemList, word1: wordList, id:id})}
     }
       />
       <Spacer />

@@ -26,6 +26,7 @@ import {
 import { Fontisto } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
+
 // jewish, , southern , nordic, eastern european
 
 const DATA = [
@@ -218,7 +219,7 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
     setWordList(updatedItems1);
     setSelectedId(item.title);
     setSelectedId1(item.word);
-    // console.log(itemList);
+    console.log(itemList);
   };
 
   const removeFromList = item => {

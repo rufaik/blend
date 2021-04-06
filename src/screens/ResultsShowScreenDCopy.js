@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, StyleSheet, View, ImageBackground, TouchableOpacity, Button,FlatList, Image } from 'react-native';
 import recipe from '../api/recipe';
 import nutrition from '../api/nutrition';
@@ -15,6 +15,8 @@ import {
 } from '@expo-google-fonts/poppins'
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { Context as TrackContext } from '../context/TrackContext';
+
 
 
 const Time = ({met, style}) => {
@@ -120,11 +122,81 @@ export const Copy = ({ navigation, showD }) => {
 	
 };
 
+
+
 export const Picture = ({ navigation, showD }) => {
 	// const showD = navigation.getParam('showD');
 	const [resultsd, setResultsd] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 	const [isSelected, setSelection] = useState(false);
+	// const [name, setName] = useState("heart-o");
+	  const { state, changeLiked } = useContext(TrackContext);
+	  console.log("state", state)
+
+
+const [selectedId, setSelectedId1] = useState(null);
+  const [recipeIds, setRecipeIds] = useState(state.liked);
+  console.log("paper", recipeIds)
+  const id = showD ? showD.toString() : ""
+
+  const DATA = [
+  {
+    id: showD
+  },
+];
+
+const Item = ({ item, onPress, style, name }) => (
+  <TouchableOpacity onPress={onPress} >
+
+    <FontAwesome name={name} size={24} color="black" />
+
+  </TouchableOpacity>
+);
+
+
+  const addToList = item => {
+    //copy the selected item array
+    let updatedItems = recipeIds;
+    //use array.push to add it to the array
+    updatedItems.push(item.id);
+    setRecipeIds(updatedItems);
+    setSelectedId1(item.id);
+    // console.log(itemList);
+  };
+
+  const removeFromList = item => {
+    //copy the slected item array
+    let updatedItems = recipeIds;
+    //find the current item in the array
+    let itemIndexToRemove = updatedItems.indexOf(item.id);
+    //use splice to remove the item from list
+    //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+    updatedItems.splice(itemIndexToRemove, 1);
+    setRecipeIds(updatedItems);
+    //this is weird but it makes it work - I can't unselect, so made a non-existing id
+    setSelectedId1(item.id + "____");
+    // console.log(itemList);
+  };
+
+  const renderItem = ({ item }) => {
+    //check if item is in the list - if so, it's selected
+    const name = recipeIds.indexOf(item.id) > -1 ? "heart" : "heart-o";
+
+    return (
+      <Item
+        item={item}
+        onPress={() =>{ 
+          recipeIds.indexOf(item.id) > -1
+            ? removeFromList(item)
+            : addToList(item)
+            console.log("line 192", recipeIds)
+            changeLiked({recipeIds})
+        }}
+        name={name}
+      />
+    );
+  };
+
 
 	
 	const searchApii = async (showD) => {
@@ -183,21 +255,30 @@ export const Picture = ({ navigation, showD }) => {
 			</View>
 		    </View>
         </View>
-  		<TouchableOpacity 
+  		<View 
   			style={styles.balcony}
-  			value={isSelected}
-  			onPress={setSelection}>
+  			// value={isSelected}
+  			// onPress={setSelection}
+  			>
 	   			<Text style={styles.by}>By </Text>
 	   			<Text style={styles.source}>{resultsd.sourceName}</Text>
 	   			<View style={styles.rightBalcony}>
 	   			<Image source={require('../images/myfit.png')} style={styles.myfit} />
 	   			<Image source={require('../images/share1.png')} style={{marginHorizontal: 17, width:27, height: 27}} />
-	   				{isSelected 
-				   	? <FontAwesome name="heart" size={24} color="black" />
-				   	: <FontAwesome name="heart-o" size={24} color="black" />
-				   	}
+	   				
+
+				 <FlatList
+        data={DATA}
+        numColumns={1}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        extraData={selectedId}
+        navigation={navigation}
+        style={{ marginTop: 5}}
+        contentContainerStyle={{ alignItems: "center" }}
+      />
 				 </View>
-		</TouchableOpacity>
+		</View>
 	</View>
 
 		);
@@ -205,6 +286,10 @@ export const Picture = ({ navigation, showD }) => {
 	
 };
 
+// {isSelected 
+//				   	? <FontAwesome name="heart" size={24} color="black" />
+//				   	: <FontAwesome name="heart-o" size={24} color="black" />
+//				   	}
 
 
 export const Prep = ({ navigation, showD }) => {

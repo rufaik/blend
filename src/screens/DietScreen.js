@@ -32,7 +32,7 @@ import {
 import { Item1 } from '../components/ResultsDetail'
 import { YellowBox } from 'react-native'
 import { useContext } from 'react';
-import { Context as TrackContext } from '../context/TrackContext';
+import { Context  as TrackContext } from '../context/TrackContext'
 // import { Context as LocationContext } from '../context/LocationContext';
 import { navigate } from '../navigationRef';
 
@@ -173,6 +173,9 @@ const DietScreen = ({ onSubmit, navigation }) => {
 
   const [ item, setResults ] = useState([]);
   const [ errorMessage, seterrorMessage ] = useState('')
+  const { createTrack1, createTrack2, createTrack3, createTrack4, createTrack5, sendTrack } = useContext(TrackContext);
+
+
   // console.log("word1", itemList)
   // console.log("word2", list1)
   // console.log("word3", itemList1)
@@ -332,18 +335,18 @@ const [selectedId1, setSelectedId1] = useState(null);
  // console.log("plow",itemList4)
 
 
-const Conx = () => {
-const { createTrack } = useContext(TrackContext);
+// const Conx = () => {
+// const { createTrack } = useContext(TrackContext);
 
-  const saveTrack = () => {
-    createTrack(itemList, list1, itemList1, word1, itemList4)
-    console.log('please');
-  };
+//   const saveTrack = () => {
+//     createTrack(itemList, list1, itemList1, word1, itemList4)
+//     console.log('please');
+//   };
 
-  return [saveTrack];
-};
+//   return [saveTrack];
+// };
 
-const [saveTrack] = Conx();
+// const [saveTrack] = Conx();
 
 
   return (
@@ -357,10 +360,16 @@ const [saveTrack] = Conx();
     } />
     <Text style={styles.header} h1>
         Set your preferences</Text> 
-    <TouchableOpacity onPress={() => {saveTrack(),
-          
-      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})
-      // console.log("preferences", list)}
+    <TouchableOpacity onPress={() => {
+           navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})
+           createTrack1(list1); 
+           createTrack2(itemList);
+           createTrack3(itemList4); 
+           createTrack4(itemList1);
+           createTrack5(word1); 
+           sendTrack({itemList, list1, itemList1, word1, itemList4});
+console.log("itemList", list1, itemList1, word1, itemList4)
+    
     }}>
       <Text style={styles.nextheader}>   Done </Text>
     </TouchableOpacity>

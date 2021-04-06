@@ -20,10 +20,10 @@ import {
 
 
 const SignupScreen = ({ navigation }) => {
-	const { state, signup, clearErrorMessage } = useContext(AuthContext);
+	const { state, addname, signup, clearErrorMessage } = useContext(AuthContext);
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('');
-	const [name, setName] = useState('');
+	const [prof, setProf] = useState('');
 	const [confirm, setConfirm] = useState('');
 
 		
@@ -63,8 +63,8 @@ const SignupScreen = ({ navigation }) => {
 				
 					
 				}}
-				value={name} 
-				onChangeText={setName}
+				value={prof} 
+				onChangeText={setProf}
 				autoCapitalize="none"
 				autoCorrect={false}
 				placeholder="Name"
@@ -167,7 +167,9 @@ const SignupScreen = ({ navigation }) => {
 					onPress={() => {
 						if (password !== confirm) {
        						 alert("Passwords don't match");
-    					} else {signup({ email, password })}}}
+    					} else {signup({ email, prof, password })}
+    							
+    				}}
 				/>
 				</View>
 			</Spacer>

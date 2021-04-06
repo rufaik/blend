@@ -1,16 +1,23 @@
+import axios from 'axios'
 import { AsyncStorage } from 'react-native';
 import createDataContext from './createDataContext';
 import trackerApi from '../api/tracker';
 import { navigate } from '../navigationRef';
 
+
 const authReducer = (state, action) => {
+	console.log("line 9", state)
 	switch (action.type) {
 		case 'add_error':
 			return { ...state, errorMessage: action.payload};
+		case 'placeholder':
+			return { ...state, email: action.payload};
 		case 'signin':
-			return { errorMessage: '', token: action.payload };
+			return { errorMessage: '', token: action.payload};
 		case 'signin1':
 			return { errorMessage: '', token: action.payload };
+		case 'create_track':
+			return { cuisine: action.payload };
 		case 'googlesign':
 			return { token: null, errorMessage:'' }
 		case 'reset':
@@ -19,12 +26,32 @@ const authReducer = (state, action) => {
 			return { ...state, errorMessage:'' }
 		case 'signout':
 			return { token: null, errorMessage:'' }
+		case 'add_name':
+			return { ...state, prof: action.payload }
 		case 'resultss':
 			return {...state}
 		default:
 		return state;
 	}
 };
+
+const addname = dispatch => async ({ prof }) => {
+	try {
+	const response1 = await trackerApi.post('/names', {prof});
+	console.log("name", prof)
+	// dispatch ({ type: 'add_name', payload: prof })
+
+} catch (err) {
+		dispatch({
+			type:'add_error',
+			payload: 'Something went wrong'
+
+		})
+	}
+}
+
+
+
 
 const tryLocalSignin = dispatch => async () => {
 	const token = await AsyncStorage.getItem('token');
@@ -40,7 +67,7 @@ const clearErrorMessage = dispatch => () => {
 	dispatch({ type: 'clear_error_message' });
 };
 
-const signup = dispatch =>  async ({ email, password }) => {
+const signup = dispatch =>  async ({ prof, email, password }) => {
 	// make api request to sign up with that email and password
 
 	//if we sign up, modify our state and say we are authenticated
@@ -50,11 +77,15 @@ const signup = dispatch =>  async ({ email, password }) => {
 	try {
 		//make a request
 		const response = await trackerApi.post('/signup', {email, password});
+		
 		//store the token
 		await AsyncStorage.setItem('token', response.data.token);
 		//update our state
 		dispatch({ type: 'signin', payload: response.data.token});
+		dispatch({ type: 'placeholder', payload: email});
+		dispatch ({ type: 'add_name', payload: prof })
 		//navigate to main flow
+
 		navigate('Home')
 	} catch (err) {
 		dispatch({ 
@@ -63,6 +94,26 @@ const signup = dispatch =>  async ({ email, password }) => {
 		})
 	};
 	};
+
+const red = "red"
+
+const createtrack = dispatch => async (itemList, list1, itemList1, word1, itemList4, red) => {
+	console.log("heyyyyy", itemList, list1, itemList1, word1, itemList4)
+	
+
+	try {
+		const response2 = await trackerApi.post('/preference', {itemList, list1, itemList1, word1, itemList4});
+		dispatch({ type: 'create_track', payload: list1 })
+
+} catch (err) {
+		dispatch({
+			type:'add_error',
+			payload: 'Something went wrong'
+
+		})
+	};
+};
+
 
 
 
@@ -111,6 +162,8 @@ const googlesign = (dispatch) => async () => {
 //   }
 // }
 const signin = (dispatch) => async ({ email, password }) => {
+
+	console.log("120", email)
 		// Try to signin
 		// Handle success by updating state
 		// Handle failure by showing error message
@@ -133,7 +186,8 @@ const signin = (dispatch) => async ({ email, password }) => {
 		})
 	}
 }
-const signin1 = (dispatch) => async ({ email, password }) => {
+const signin1 = (dispatch) => async ({ email, password, prof }) => {
+	console.log("144", email)
 		// Try to signin
 		// Handle success by updating state
 		// Handle failure by showing error message
@@ -145,6 +199,8 @@ const signin1 = (dispatch) => async ({ email, password }) => {
 		await AsyncStorage.setItem('token', response.data.token);
 		//update our state
 		dispatch({ type: 'signin', payload: response.data.token});
+		dispatch({ type: 'placeholder', payload: email});
+
 		
 		//navigate to main flow
 		navigate('mainFlow')
@@ -173,7 +229,7 @@ const reset = (dispatch)  => async ({ email, newpassword }) => {
 	}
 }
 
-const updatepref = (dispatch)  => async ({ userId, newitemList, newlist1, newitemList1, newword1, newitemList4 }) => {
+const updatepref1 = (dispatch)  => async ({ userId, newitemList, newlist1, newitemList1, newword1, newitemList4 }) => {
 	try {
 		//make a request
 		console.log('try')
@@ -191,6 +247,80 @@ const updatepref = (dispatch)  => async ({ userId, newitemList, newlist1, newite
 }
 
 
+// const addname = (dispatch)  => async ({ name, mine, liked, fave, extra,}) => {
+// 	try {
+// 		//make a request
+// 		console.log('try')
+// 		const response = await trackerApi.put('/updatepref', {userId, newitemList, newlist1, newitemList1, newword1, newitemList4});
+// 		console.log('done')
+// 		//navigate to main flow
+// 		navigate('TrackList')
+// 	} catch (err) {
+// 		dispatch({
+// 			type:'add_error',
+// 			payload: 'I didnt update'
+
+// 		})
+	
+// 	}
+
+// }
+const profile = (dispatch)  => async ({ result }) => {
+	// const image = result
+	console.log("ass", result)
+	const logo = require('../images/splash1.png')
+
+// const image = {result}
+// const data = new FormData();
+// data.append('image', result);
+
+// var formdata = new FormData();
+// formdata.append("result", result[0], "IMG_5868.PNG");
+
+    let formData = new FormData();
+
+    formData.append("image", result.uri, "acorn.png");
+    // formData.append("imageType", "Image_URL_1");
+    // formData.append("file", "Image_URL_1");
+
+// bob@bob.com
+
+const dats = 
+
+
+console.log("jjjk", formData)
+
+	
+	try {
+		//make a request
+		console.log('bags')
+		const token = await AsyncStorage.getItem('token');
+		const response = await axios.post('http://5f71d85fa69f.ngrok.io/image-upload', formData._parts[0], {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    Authorization:`Bearer ${token}`
+                    // "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWUzNjFkMmYzNDQ1Njc5OTE5YjE4ODEiLCJpYXQiOjE1OTE5NjY0NDd9.e-xdaHaeCTEeNHf9s_sQSaWVm2OaowJAF4Rjo7zUhxA"
+                },
+            })
+            .then(function () {
+                console.log("SUCCESS!!");
+            });
+	} catch (err) {
+		// dispatch({
+		// 	type:'add_error',
+		// 	payload: 'I didnt change'
+
+		// })
+		console.log(err.message)
+	}
+}
+
+
+
+
+
+
+
 const signout = dispatch => async () => {
 		await AsyncStorage.removeItem('token');
 		dispatch({ type:'signout' })
@@ -200,6 +330,6 @@ const signout = dispatch => async () => {
 
 export const { Provider, Context } = createDataContext(
 	authReducer,
-	{ signin1, signin, signout, googlesign, signup, reset, updatepref, clearErrorMessage,tryLocalSignin },
-	{ token: null, errorMessage: '' }
+	{ signin1, signin, addname, signout, googlesign, signup, reset, createtrack, updatepref1, profile, clearErrorMessage,tryLocalSignin },
+	{ token: null, errorMessage: '', prof:'', email:'', cuisine: '' }
 );

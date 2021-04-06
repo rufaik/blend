@@ -34,7 +34,8 @@ import DietScreen from './src/screens/DietScreen'
 import EditScreen from './src/screens/EditScreen'
 import EditDScreen from './src/screens/EditDScreen'
 import All from './src/screens/All'
-import ImageUpload from './src/screens/Upload'
+import Upload from './src/screens/Upload'
+import CameraScreen from './src/screens/CameraScreen'
 import { AppLoading } from "expo"
 import { 
   useFonts,
@@ -112,6 +113,19 @@ const splashFlow = createStackNavigator({
     },
   })
 
+const CameraFlow = createStackNavigator({
+        Upload: Upload,
+        CameraScreen: CameraScreen,
+        },
+      {
+    headerMode: 'Camera',
+    defaultNavigationOptions: {
+      cardStyle: { backgroundColor: '#FFFFFF' },
+      title: 'TrackList',
+  headerShown: true
+      
+    },
+  })
 
 
 trackListFlow.navigationOptions = {
@@ -143,7 +157,7 @@ const switchNavigator = createSwitchNavigator ({
   // Diet: DietScreen,
   // TrackList: TrackListScreen,
   // Account: AccountScreen,
-  ImageUpload: ImageUpload,
+  // Upload: Upload,
   SwipeTabs,
   splashFlow,
   ResolveAuth: ResolveAuthScreen,
@@ -170,6 +184,7 @@ const switchNavigator = createSwitchNavigator ({
       searchFlow,
       Home: PreferencesScreen,
       Diet: DietScreen,
+      CameraFlow
   })
 })
 

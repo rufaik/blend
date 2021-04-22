@@ -167,7 +167,8 @@ const SignupScreen = ({ navigation }) => {
 					onPress={() => {
 						if (password !== confirm) {
        						 alert("Passwords don't match");
-    					} else {signup({ email, prof, password })}
+    					} else {signup({ email, prof, password })
+    							addname({ prof })}
     							
     				}}
 				/>

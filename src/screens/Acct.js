@@ -9,6 +9,7 @@ import { Constants } from 'expo';
 import { Prep, Directions, Picture, Nutrition1 } from './ResultsShowScreenDCopy'
 import { Ingred1 } from './IngredTabScreen'
 import NutritionInfo from '../components/NutritionInfo'
+import AccountScreen, { ScreenOne } from './AccountScreen'
 import { 
   useFonts,
   Poppins_400Regular,
@@ -28,31 +29,10 @@ import { Entypo } from '@expo/vector-icons';
 const FirstRoute = (props) => {
   const showD = props.showD;
 
-		
+    
 return(
   <View style={styles.container}>
-  <Prep showD={showD} />
-  <Nutrition1 showD={showD} />
-{/*  <View style={styles.card}>
-			<Text style={styles.log}>Preparation Time</Text>
-			<Text style={styles.logG}> 6 Minutes</Text>
-			<Text style={styles.log}>Cooking Time</Text>
-			<Text style={styles.logG}>10 Minutes</Text>
-			<Text style={styles.log}>Number of Servings</Text>
-			<Text style={styles.logG}> 4 people</Text>
-</View>	
-*/}  
-
-	<Button 
-			style={styles.button} 
-			buttonStyle={{ backgroundColor: '#F68951',padding: 15, width: '90%', borderRadius: 30}} 
-			title="Cook This Dish"
-			// onPress={() => {navigation.navigate('Diet')}}
-			titleStyle={{
-				fontSize:14,
-				fontFamily:'Poppins_600SemiBold'
-			}}
-		/>
+  <ScreenOne />
 </View>
 )};
 
@@ -63,23 +43,7 @@ const showD = props.showD;
 
 return (
   <View style={styles.container} >
-
-	<Ingred1 showD={showD}/>
-
-
-
-
-
-	<Button 
-			style={styles.button} 
-			buttonStyle={{ backgroundColor: '#F68951',padding: 15, width: '90%', borderRadius: 30}} 
-			title="Cook This Dish"
-			// onPress={() => {navigation.navigate('TrackList')}}
-			titleStyle={{
-				fontSize:14,
-				fontFamily:'Poppins_600SemiBold'
-			}}
-		/>
+  <ScreenOne />
   </View>
 )};
 
@@ -90,30 +54,19 @@ const showD = props.showD;
 
 return (
     <View style={styles.container}>
-    <Directions showD={showD} />
-
-	<Button 
-			style={styles.button} 
-			buttonStyle={{ backgroundColor: '#F68951',padding: 15, width: '90%', borderRadius: 30}} 
-			title="Cook This Dish"
-			// onPress={() => {navigation.navigate('TrackList')}}
-			titleStyle={{
-				fontSize:14,
-				fontFamily:'Poppins_600SemiBold'
-			}}
-		/>
+     <ScreenOne />
 </View>
 )};
 
 
     
-export default class Original extends React.Component {
+export default class Acct extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'Overview' },
-      { key: 'second', title: 'Ingredients' },
-      { key: 'third', title: 'Directions' },
+      { key: 'first', title: 'My recipes' },
+      { key: 'second', title: 'Liked recipes' },
+      { key: 'third', title: 'Recents' },
     ],
   };
 
@@ -123,7 +76,7 @@ export default class Original extends React.Component {
     const inputRange = props.navigationState.routes.map((x, i) => i);
 
     return (
-    	<View>
+      <View>
       <View style={styles.tabBar}>
         {props.navigationState.routes.map((route, i) => {
           const color = Animated.color(
@@ -197,17 +150,17 @@ export default class Original extends React.Component {
   };
 
   render() {
-    const showD = this.props.navigation.getParam("showD");
-    console.log("kool", this.props)
+    // const showD = this.props.navigation.getParam("showD");
+    // console.log("loopo",this.props)
 
     const renderScene = ({ route }) => {
       switch (route.key) {
         case "first":
-          return <FirstRoute showD={this.props.navigation.getParam("showD")} />;
+          return <FirstRoute  />;
         case "second":
-          return <SecondRoute showD={this.props.navigation.getParam("showD")} />;
+          return <SecondRoute  />;
         case "third":
-          return <ThirdRoute showD={this.props.navigation.getParam("showD")} />;
+          return <ThirdRoute  />;
         default:
           return null;
       }
@@ -215,15 +168,14 @@ export default class Original extends React.Component {
 
     return (
       <ScrollView>
-      <View style={styles.navHeader}>
-      	<Entypo style={styles.leftIcon} name="chevron-left" size={24} color="black" onPress={() => {
-					
-			this.props.navigation.navigate('TrackList')}
-		} />
-      	<Text style={styles.titleHeader}> Explore </Text>
-      </View>
+    
+      <TouchableOpacity onPress={() => {
+        console.log("hey")
+      this.props.navigation.navigate('Settings')}}>
+            <Text style={styles.sub}> Settings </Text>
+      </TouchableOpacity>
 
-       <Picture showD={showD} />
+       <AccountScreen />
 
         <TabView
           navigationState={this.state}
@@ -239,26 +191,26 @@ export default class Original extends React.Component {
 
 
 
-Original.navigationOptions = {
-	title: 'TrackList',
-	headerShown: true
+Acct.navigationOptions = {
+  title: 'TrackList',
+  headerShown: true
 };
 
 const styles = StyleSheet.create({
-	leftIcon:{
-		position: 'absolute',
-		left:20,
-		paddingTop:38,
-	},
-	navHeader: {
-		flexDirection: 'row',
-		justifyContent: 'center',
-		paddingTop:35,
-	},
-	titleHeader:{
-	fontSize: 20,
-	fontWeight: "500",
-	fontFamily: 'Poppins_700Bold',
+  leftIcon:{
+    position: 'absolute',
+    left:20,
+    paddingTop:38,
+  },
+  navHeader: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop:35,
+  },
+  titleHeader:{
+  fontSize: 20,
+  fontWeight: "500",
+  fontFamily: 'Poppins_700Bold',
  },
   container: {
     flex: 1,
@@ -274,33 +226,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
+  sub: {
+  fontFamily: 'Poppins_600SemiBold',
+    fontSize: 15,
+    fontWeight: "700",
+    position: "relative",
+    marginLeft:"80%",
+    color: '#F68951',
+    marginTop:51,
+    zIndex: 2 
+  },
   card:{
-  	backgroundColor:"#F7F7F7",
-  	borderRadius: 10,
+    backgroundColor:"#F7F7F7",
+    borderRadius: 10,
     marginHorizontal: 17,
     marginTop:10,
     padding: 10,
     paddingLeft:15,
   },
   log: {
-	fontSize: 14,
-	fontWeight: "500",
-	fontFamily: 'Poppins_600SemiBold',
-	lineHeight:22
+  fontSize: 14,
+  fontWeight: "500",
+  fontFamily: 'Poppins_600SemiBold',
+  lineHeight:22
   },
   logG: {
-	fontSize: 14,
-	fontWeight: "500",
-	fontFamily: 'Poppins_600SemiBold',
-	color: '#ACACAC',
-	lineHeight:22,
-	marginBottom: 5
+  fontSize: 14,
+  fontWeight: "500",
+  fontFamily: 'Poppins_600SemiBold',
+  color: '#ACACAC',
+  lineHeight:22,
+  marginBottom: 5
   },
     logGg: {
-	lineHeight:21,
-	marginBottom: 5,
-	color: '#012243',
-	fontFamily: 'Poppins_500Medium',
+  lineHeight:21,
+  marginBottom: 5,
+  color: '#012243',
+  fontFamily: 'Poppins_500Medium',
   },
   header: {
     fontSize: 24,
@@ -310,8 +272,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_700Bold',
   },
   button: {
-	justifyContent: 'center',
+  justifyContent: 'center',
     alignItems: 'center',
     marginTop:24,
-	},
+  },
 });

@@ -3,7 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation-tabs';
-import AccountScreen from './src/screens/AccountScreen';
+import Settings from './src/screens/Settings';
 import Test from './src/screens/Test';
 import SigninScreen from './src/screens/SigninScreen';
 import HomeScreen from './src/screens/HomeScreen';
@@ -33,7 +33,9 @@ import ForYouAll from './src/screens/ForYouAll'
 import DietScreen from './src/screens/DietScreen'
 import EditScreen from './src/screens/EditScreen'
 import EditDScreen from './src/screens/EditDScreen'
+import AccountScreen from './src/screens/AccountScreen'
 import All from './src/screens/All'
+import Acct from './src/screens/Acct'
 import Upload from './src/screens/Upload'
 import CameraScreen from './src/screens/CameraScreen'
 import { AppLoading } from "expo"
@@ -114,6 +116,9 @@ const splashFlow = createStackNavigator({
   })
 
 const CameraFlow = createStackNavigator({
+        Acct: Acct,
+        Account: AccountScreen,
+        Settings: Settings,
         Upload: Upload,
         CameraScreen: CameraScreen,
         },
@@ -134,7 +139,7 @@ trackListFlow.navigationOptions = {
 }
 
 const searchFlow = createStackNavigator({
-      Account: AccountScreen,
+      // Account: AccountScreen,
       Edit:EditScreen,
       EditD:EditDScreen,
       ResultsShow: ResultsShowScreen

@@ -30,6 +30,7 @@ import { Context  as TrackContext } from '../context/TrackContext'
     if (cameraRef) {
       const photo = await cameraRef.current.takePictureAsync();
        AsyncStorage.setItem(`${state.userId}-photo`, photo.uri);
+       navigation.goBack();
     }
   };
 

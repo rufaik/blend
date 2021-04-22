@@ -9,7 +9,13 @@ const trackReducer = (state, action) => {
 		case 'add_error':
 			return { ...state, errorMessage: action.payload};
 		case 'fetch_tracks':
-			return action.payload;
+			return { ...state, cuisine: action.payload[0].list1,
+			 _id: action.payload[0]._id, 
+			 allergies: action.payload[0].itemList4,
+			avoid: action.payload[0].itemList1, 
+			diet: action.payload[0].itemList,
+			userId: action.payload[0].userId,
+			word: action.payload[0].word1};
 		case 'change_id':
 			return { ...state, _id: action.payload };
 		case 'change_userid':
@@ -41,9 +47,10 @@ const trackReducer = (state, action) => {
 };
 
 const fetchTracks = dispatch => async () => {
-	const response = await trackerApi.get('/choose');
+	const response = await trackerApi.get('/chooses');
 	dispatch ({ type: 'fetch_tracks', payload: response.data })
-	// console.log("response", response)
+
+
 };
 
 const changeName1 = dispatch => (name) => {
@@ -70,9 +77,36 @@ const createTrack5 = dispatch => (word1) => {
 	dispatch({ type: 'change_word', payload: word1 })
 }
 
-const changeLiked = dispatch  => (recipeIds) => {
+const changeLiked = dispatch  => (userId, recipeIds) => {
+	const liked = recipeIds
+		const response =  trackerApi.put('/names', {userId, liked});
 	dispatch({ type: 'change_liked', payload: recipeIds })
 }
+
+
+// const changeLiked = dispatch  => async (userId, recipeIds) => {
+// 	console.log("rec111111111", recipeIds.recipeIds)
+// 	const liked = recipeIds.recipeIds
+// 	console.log("rec22222222", liked)
+// 	const mine = []
+// 	const fave = []
+// 	const extra = ''
+// 	const prof = 'pro'
+// 	try {
+// 		//make a request
+// 		// console.log('try')
+// 		const response = await trackerApi.put('/names', {userId, prof, mine, liked, fave, extra});
+// 	dispatch({ type: 'change_liked', payload: liked })
+// 		console.log('done', response)
+// 		//navigate to main flow
+// 	} catch (err) {
+// 		dispatch({
+// 			type:'add_error',
+// 			payload: 'I didnt update'
+
+// 		})
+// 	}
+// }
 
 
 const sendTrack1 = dispatch => async (itemList, list1, itemList1, word1, itemList4) => {
@@ -125,6 +159,24 @@ const updatepref = (dispatch)  => async ({ userId, newitemList, newlist1, newite
 	}
 }
 
+const kool = (dispatch)  => async ({ userId, prof, liked }) => {
+	console.log("pro", prof)
+	try {
+		//make a request
+		// console.log('try')
+		const response = await trackerApi.put('/names', {userId, prof, liked});
+		// console.log('done')
+		//navigate to main flow
+		// navigate('TrackList')
+	} catch (err) {
+		dispatch({
+			type:'add_error',
+			payload: 'I didnt update'
+
+		})
+	}
+}
+
 const changeLiked1 = (dispatch)  => async ({ recipeIds}) => {
 	console.log("changeLiked", recipeIds )
 	try {
@@ -142,6 +194,7 @@ const changeLiked1 = (dispatch)  => async ({ recipeIds}) => {
 		})
 	}
 }
+
 
 
 
@@ -171,7 +224,7 @@ const editTrack1 = dispatch => async (itemList, list1, itemList1, word1, itemLis
 
 export const { Provider, Context } = createDataContext(
 	trackReducer,
-	{ fetchTracks, createTrack1, createTrack2, createTrack3, updatepref, changeLiked, createTrack4, createTrack5, sendTrack, editTrack, editTrack1 },
+	{ fetchTracks, createTrack1, createTrack2, createTrack3, updatepref, changeLiked, kool, createTrack4, createTrack5, sendTrack, editTrack, editTrack1 },
 	{ cuisine: [], diet: [], allergies: [], avoid: [], word: [], _id:'', userId:'', liked: ["kemi"] }
 	);
 

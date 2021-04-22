@@ -16,6 +16,8 @@ const authReducer = (state, action) => {
 			return { errorMessage: '', token: action.payload};
 		case 'signin1':
 			return { errorMessage: '', token: action.payload };
+		case 'signup':
+			return { errorMessage: '', token: action.payload };
 		case 'create_track':
 			return { cuisine: action.payload };
 		case 'googlesign':
@@ -36,6 +38,7 @@ const authReducer = (state, action) => {
 };
 
 const addname = dispatch => async ({ prof }) => {
+	console.log("nammmmmmmmmmmmme", prof)
 	try {
 	const response1 = await trackerApi.post('/names', {prof});
 	console.log("name", prof)
@@ -49,7 +52,6 @@ const addname = dispatch => async ({ prof }) => {
 		})
 	}
 }
-
 
 
 
@@ -199,11 +201,12 @@ const signin1 = (dispatch) => async ({ email, password, prof }) => {
 		await AsyncStorage.setItem('token', response.data.token);
 		//update our state
 		dispatch({ type: 'signin', payload: response.data.token});
-		dispatch({ type: 'placeholder', payload: email});
+		dispatch({ type: 'placeholder', payload: response.data});
 
-		
+		// console.log(REPO, response)
 		//navigate to main flow
 		navigate('mainFlow')
+
 	} catch (err) {
 		dispatch({
 			type:'add_error',
@@ -212,6 +215,7 @@ const signin1 = (dispatch) => async ({ email, password, prof }) => {
 		})
 	}
 }
+
 
 const reset = (dispatch)  => async ({ email, newpassword }) => {
 	try {

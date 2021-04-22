@@ -130,8 +130,12 @@ export const Picture = ({ navigation, showD }) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [isSelected, setSelection] = useState(false);
 	// const [name, setName] = useState("heart-o");
-	  const { state, changeLiked } = useContext(TrackContext);
-	  console.log("state", state)
+	  const { state, changeLiked, kool } = useContext(TrackContext);
+	  const prof = 'lemmy'
+	    const [userId, setuserId] = useState(state.userId);
+
+	  console.log("state", state)	  
+	  console.log("liked", state.liked)
 
 
 const [selectedId, setSelectedId1] = useState(null);
@@ -189,8 +193,9 @@ const Item = ({ item, onPress, style, name }) => (
           recipeIds.indexOf(item.id) > -1
             ? removeFromList(item)
             : addToList(item)
-            console.log("line 192", recipeIds)
-            changeLiked({recipeIds})
+            // console.log("line 192", recipeIds)
+            changeLiked({ userId, recipeIds })
+            kool({ userId, prof, recipeIds })
         }}
         name={name}
       />

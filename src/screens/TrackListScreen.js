@@ -72,7 +72,7 @@ import Track6 from '../components/Track6'
 import Track7 from '../components/Track7'
 import Track8 from '../components/Track8'
 import Choose from '../components/Choose'
-import { withNavigation } from 'react-navigation';
+import { withNavigation, NavigationEvents } from 'react-navigation';
 import yelp from '../api/yelp';
 import { 
   useFonts,
@@ -158,7 +158,7 @@ const Item = ({ item, onPress, style, color }) => (
 
 const TrackListScreen = ({ navigation }) => {
 
-	const { state } = useContext(TrackContext);
+	const { state, fetchTracks } = useContext(TrackContext);
 	const list = state.diet
 	const [alist, setAlist] = useState(state.cusine)
 	const blist = state.avoid
@@ -336,11 +336,11 @@ const InputPrompt = (props) => {
 			const response = await yelp.get('/search', {
 				params: {
 		    		number: 8,
-		    		query: `${searchTerm1},`,
-		    		cuisine: `${cuisine}`,
-		    		diet: `${diet}`,
-		    		intolerances: `${intolerances}`,
-		    		excludeIngredients: `${specific}`
+		    		query: `${state.word[0][0]},`,
+		    		cuisine: `${state.cuisine}`,
+		    		diet: `${state.diet}`,
+		    		intolerances: `${state.allergies}`,
+		    		excludeIngredients: `${state.avoid}`
 				}
 			 });
 			 setResults1(response.data.results)
@@ -358,10 +358,12 @@ const InputPrompt = (props) => {
 	}, [])
 
 
-console.log("dayy", results1.length)
-console.log("alist", state.cuisine)
-console.log("alist1", state.cuisine[0])
-console.log("clist", clist)
+// console.log("dayy", results1.length)
+// console.log("alist", state.cuisine)
+// console.log("alist1", state.cuisine[0])
+// console.log("clist", clist)
+
+// console.log("workkkkk", state)
 
 
 const chevron = prompt===false ? "chevron-down" : "chevron-up"
@@ -369,6 +371,8 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 
 	return(
 		<>
+		    	<NavigationEvents onWillFocus={fetchTracks} />
+
 			<Spacer />
 			<SearchBar 
 				term={term} 
@@ -454,7 +458,7 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 
 				? <>
 					<Track1 
-						word={clist}
+						word={state.word}
 						alist={state.cuisine}
 
 					/>

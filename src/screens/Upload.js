@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Image, Text, View, Platform, StyleSheet, TouchableOpacity, ImageBackground, TextInput, ScrollView} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -6,7 +6,8 @@ import { Input, Button } from 'react-native-elements'
 import { Context  as AuthContext } from '../context/AuthContext'
 import { Context  as TrackContext } from '../context/TrackContext'
 import { AsyncStorage } from 'react-native';
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "react-navigation-hooks";
+import { Avatar } from "react-native-paper";
 import { 
   useFonts,
   Poppins_400Regular,
@@ -43,9 +44,16 @@ import Spacer from '../components/Spacer';
     setPhoto(photoUri);
   };
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   getProfilePicture(state);
+  // }, [state]
+  // );
+
+  useFocusEffect(
+useCallback(() => {
     getProfilePicture(state);
-  }, [state]);
+  }, [state])
+)
 
   useEffect(() => {
     (async () => {
@@ -89,7 +97,22 @@ import Spacer from '../components/Spacer';
       <Text style={styles.cancelSave}> Save </Text>
     </TouchableOpacity>
     </View>
- <Image source={{ uri: photo }} style={{ width:116, height: 116, borderRadius: 250, borderWidth: 1, borderColor: "#F4F4F4"}} />
+
+ <View>
+        <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+          {!photo && (
+            <Avatar.Icon size={180} icon="human" backgroundColor="#F68951" />
+          )}
+          {photo && (
+            <Avatar.Image
+              size={180}
+              source={{ uri: photo }}
+              backgroundColor="#2182BD"
+            />
+          )}
+        </TouchableOpacity>
+      </View>
+
       <Button 
       title="Choose Image" 
       onPress={() => {

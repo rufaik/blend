@@ -22,6 +22,7 @@ const SigninScreen = ({ navigation }) => {
 	const { state, signin, signin1, clearErrorMessage } = useContext(Context);
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('');
+	
 
 
 	

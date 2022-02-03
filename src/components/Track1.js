@@ -58,7 +58,7 @@ const Track1 = ({ navigation, word, alist }) => {
 				}
 			 });
 			 setResultsH1(responseH1.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("responseH1", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH')
 		} 
@@ -90,7 +90,7 @@ const Track1 = ({ navigation, word, alist }) => {
 				}
 			 });
 			 setResultsH2(responseH2.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("responseH2", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH2')
 		} 
@@ -122,7 +122,7 @@ const [ resultsH3, setResultsH3 ] = useState([]);
 				}
 			 });
 			 setResultsH3(responseH3.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("responseH3", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH3')
 		} 
@@ -154,7 +154,7 @@ const [ resultsH4, setResultsH4 ] = useState([]);
 				}
 			 });
 			 setResultsH4(responseH4.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("searchTermH4", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH4')
 		} 
@@ -186,7 +186,7 @@ const [ resultsH5, setResultsH5 ] = useState([]);
 				}
 			 });
 			 setResultsH5(responseH5.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("responseH5", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH5')
 		} 
@@ -218,7 +218,7 @@ const [ resultsH6, setResultsH6 ] = useState([]);
 				}
 			 });
 			 setResultsH6(responseH6.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("responseH6", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH6')
 		} 
@@ -250,7 +250,7 @@ const [ resultsH7, setResultsH7 ] = useState([]);
 				}
 			 });
 			 setResultsH7(responseH7.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("responseH7", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH7')
 		} 
@@ -282,7 +282,7 @@ const [ resultsH8, setResultsH8 ] = useState([]);
 				}
 			 });
 			 setResultsH8(responseH8.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("responseH8", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH8')
 		} 

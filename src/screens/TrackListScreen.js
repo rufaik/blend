@@ -62,7 +62,9 @@ import Spacer from '../components/Spacer';
 // import useResults from '../hooks/useResults'
 import ResultsListB from '../components/ResultsListB'
 import ResultsListA from '../components/ResultsListA'
+import ResultsListA1 from '../components/ResultsListA1'
 import ResultsListD from '../components/ResultsListD'
+import ResultsListD1 from '../components/ResultsListD1'
 import Track1 from '../components/Track1'
 import Track2 from '../components/Track2'
 import Track3 from '../components/Track3'
@@ -73,7 +75,9 @@ import Track7 from '../components/Track7'
 import Track8 from '../components/Track8'
 import Choose from '../components/Choose'
 import { withNavigation, NavigationEvents } from 'react-navigation';
+import { appID, appKey } from '../api/keys';
 import yelp from '../api/yelp';
+import edamam from '../api/edamam';
 import { 
   useFonts,
   Poppins_400Regular,
@@ -88,6 +92,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Context as TrackContext } from '../context/TrackContext';
 
+
+import axios from "axios";
 
 
 
@@ -165,6 +171,7 @@ const TrackListScreen = ({ navigation }) => {
 	const dlist = state.allergies
 	const Xlist = state.word
 	const [ clist, setClist ] = useState(Xlist);
+	console.log("kems", appID)
 
 	// const list = navigation.getParam('list')
 	// const alist = navigation.getParam('list1')
@@ -210,7 +217,37 @@ const [selectedId, setSelectedId] = useState(null);
 	// const { email } = useContext(AuthContext);
 	// console.log("194", token)
 
+
+// 	const apiURL = "https://api.edamam.com/search?q=";
+// const apiKey = "d6fb195201baeebd8aec7b27fbefafef";
+// const apiId = "242794b7";
+// const maxTime = "&time=30";
+// const maxIngreds = `&ingr=10`;
+
+// const fetchRecipes = async (...ingredients) => {
+//   const mappedIngreds = ingredients
+//     .map((ingredient, idx) => {
+//       if (idx < ingredients.length - 1) {
+//         return ingredient + "+";
+//       } else {
+//         return ingredient;
+//       }
+//     })
+//     .join("");
+
+//   const url = `${apiURL}${mappedIngreds}${maxIngreds}${maxTime}${apiId}${apiKey}`;
+//   const res = await axios.get(url);
+//   const recipes = res.data;
+//   console.log("recipes",recipes);
+//   addToList(recipes)
+// };
+
+
+// useEffect(() => {
+// 		fetchRecipes("zucchini", "broccoli", "carrots");
+// 	}, [])
   
+
 
   	
 
@@ -282,27 +319,61 @@ const InputPrompt = (props) => {
     );
   };
 
+
   //-----------------------------------------------------------------------------------------------------------------------
 
-//TRENDING RECIPES
+//EDAMAM RECIPES
 
-	const filterResultsByLikes = (likes) => {
-		return results2.filter(results2 => {
-			return results2.likes > 1;
-		});
-	};
 
-	const [ results2, setResults2 ] = useState([]);
 
-	const searchApi3 = async (searchTerm2) => {
+
+	// const searchApiE3 = async () => {
+	// 	try {
+
+	// 		const response = await edamam.get('/api/recipes/v2', {
+	// 			params: {
+	// 				type:"public",
+	// 	    		q: "bacon",
+	// 	    		health: "sugar-conscious",
+	// 	    		app_id: appID,
+ //   					app_key: appKey
+	// 			}
+	// 		 });
+	// 		 console.log("edam", response.data.hits)
+
+	// 		 // console.log("BBBB", results2)
+	// 		 // console.log("BBBB1", response.data)
+	// 	} catch (err) {
+	// 		seterrorMessage('Something went wrong')
+	// 	} 
+ //    };
+
+ //    // Only have this on to view! it costs money
+	
+	// useEffect(() => {
+	// 	searchApiE3()
+	// 	// console.log(newList)
+	// }, [])
+
+  //-----------------------------------------------------------------------------------------------------------------------
+
+// EDAMAM TRENDING RECIPES
+
+	const [ results3, setResults3 ] = useState([]);
+
+  const searchApiE3 = async () => {
 		try {
-			const response = await yelp.get('/findByIngredients', {
+
+			const response = await edamam.get('/api/recipes/v2', {
 				params: {
-		    		number: 3,
-		    		ingredients: `${searchTerm2},`,
+					type:"public",
+		    		q: "bacon",
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
-			 setResults2(response.data)
+			setResults3(response.data.hits)
+			 // console.log("edam13", response.data.hits)
 
 			 // console.log("BBBB", results2)
 			 // console.log("BBBB1", response.data)
@@ -314,9 +385,47 @@ const InputPrompt = (props) => {
     // Only have this on to view! it costs money
 	
 	useEffect(() => {
-		searchApi3("milk")
+		searchApiE3()
 		// console.log(newList)
 	}, [])
+
+
+  //-----------------------------------------------------------------------------------------------------------------------
+
+// TRENDING RECIPES
+
+	// const filterResultsByLikes = (likes) => {
+	// 	return results2.filter(results2 => {
+	// 		return results2.likes > 1;
+	// 	});
+	// };
+
+	// const [ results2, setResults2 ] = useState([]);
+
+	// const searchApi3 = async (searchTerm2) => {
+	// 	try {
+	// 		const response = await yelp.get('/findByIngredients', {
+	// 			params: {
+	// 	    		number: 3,
+	// 	    		ingredients: `${searchTerm2},`,
+	// 			}
+	// 		 });
+	// 		 setResults2(response.data)
+	// 		 console.log('res', response.data)
+
+	// 		 // console.log("BBBB", results2)
+	// 		 // console.log("BBBB1", response.data)
+	// 	} catch (err) {
+	// 		seterrorMessage('Something went wrong')
+	// 	} 
+ //    };
+
+ //    // Only have this on to view! it costs money
+	
+	// useEffect(() => {
+	// 	searchApi3("bacon")
+	// 	// console.log(newList)
+	// }, [])
 
   //-----------------------------------------------------------------------------------------------------------------------
 
@@ -332,6 +441,7 @@ const InputPrompt = (props) => {
 
 	const searchApi2 = async (searchTerm1) => {
 		console.log("searchTerm1", searchTerm1)
+		console.log("searchTerm12", state)
 		try {
 			const response = await yelp.get('/search', {
 				params: {
@@ -344,18 +454,25 @@ const InputPrompt = (props) => {
 				}
 			 });
 			 setResults1(response.data.results)
-			 // console.log("AAAAAA", response.data.results)
+			 console.log("AAAAAA", response.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrong')
 		} 
     };
 
     // Only have this on to view! it costs money
+
+
+	useEffect(() => {
+		fetchTracks()
+
+	}, [])
+
 	
 	useEffect(() => {
 		searchApi2('salt')
-		// console.log(newList)
-	}, [])
+		console.log("newList", state)
+	}, [state])
 
 
 // console.log("dayy", results1.length)
@@ -364,6 +481,59 @@ const InputPrompt = (props) => {
 // console.log("clist", clist)
 
 // console.log("workkkkk", state)
+
+
+  //-----------------------------------------------------------------------------------------------------------------------
+
+	const [ results4, setResults4 ] = useState([]);
+
+  const searchApiE2 = async () => {
+  	console.log("searchApiE2 EDAMAM", state)
+		try {
+
+			const response = await edamam.get('/api/recipes/v2', {
+				params: {
+					type:"public",
+		    		app_id: appID,
+   					app_key: appKey,
+   					q: "onions",
+		    		cuisineType: "Caribbean",
+		    		health: "vegan",
+		    		// intolerances: `${state.allergies}`,
+		    		excluded: "soy"
+				}
+			 });
+			setResults4(response.data.hits)
+			 console.log("edam13 EDAMAM", response.data.hits)
+
+			 // console.log("BBBB", results2)
+			 // console.log("BBBB1", response.data)
+		} catch (err) {
+			seterrorMessage('Something went wrong')
+		} 
+    };
+
+
+
+
+
+
+
+useEffect(() => {
+		searchApiE2()
+		console.log("newList EDAMAM", state)
+	}, [state])
+
+
+    // Only have this on to view! it costs money
+	
+	// useEffect(() => {
+	// 	searchApiE3()
+	// 	// console.log(newList)
+	// }, [])
+
+
+  //-----------------------------------------------------------------------------------------------------------------------
 
 
 const chevron = prompt===false ? "chevron-down" : "chevron-up"
@@ -384,6 +554,40 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 			/>
 			{errorMessage ? <Text>{errorMessage}</Text> : null}
 			<ScrollView>
+
+
+
+{/*			//////
+*/}			
+
+
+{/*		<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal:10}} >
+			<Text style={styles.header} h1>
+        		Trending recipes
+        	</Text>	
+        	<TouchableOpacity onPress={() => {
+					
+			navigation.navigate('TrendingAll')}
+		}>
+			<Text style={styles.nextheader}>     View all </Text>
+		</TouchableOpacity>
+		</View>
+		 <ResultsListD 
+			// results2={filterResultsByLikes()} 
+			results2={results2} 
+			
+			/>
+
+	
+			<Image style={styles.imageline} source={require('../images/line.png')}/>
+
+*/}
+
+{/*//////
+*/}
+
+
+
 			
 		<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal:10}} >
 			<Text style={styles.header} h1>
@@ -396,13 +600,19 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 			<Text style={styles.nextheader}>     View all </Text>
 		</TouchableOpacity>
 		</View>
-			<ResultsListD 
-			results2={filterResultsByLikes()} 
-			// results2={results2} 
+
+		 <ResultsListD1 
+			// results2={filterResultsByLikes()} 
+			results2={results3} 
 			
 			/>
-		
+
+	
 			<Image style={styles.imageline} source={require('../images/line.png')}/>
+
+
+
+
 			
 
 		<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal:10}} >
@@ -446,13 +656,17 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 
 	      {prompt && <InputPrompt />}
 	    
-		
-
+{/*		{state && state.length > 1 ? searchApi2('salt') (<Text>pop</Text>) : console.log("newList0", state)}
+*/}
 			<ResultsListA 
 			results1={results1}
 
 			/>
 
+			{/*<ResultsListA1 
+			results1={results4}
+
+			/>*/}
 
 			{ results1.length===0 && state.cuisine && state.cuisine[0] && !state.cuisine[1]
 

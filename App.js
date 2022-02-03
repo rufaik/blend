@@ -117,7 +117,6 @@ const splashFlow = createStackNavigator({
 
 const CameraFlow = createStackNavigator({
         Acct: Acct,
-        Account: AccountScreen,
         Settings: Settings,
         Upload: Upload,
         CameraScreen: CameraScreen,
@@ -168,7 +167,6 @@ const switchNavigator = createSwitchNavigator ({
   ResolveAuth: ResolveAuthScreen,
   loginFlow: 
     createStackNavigator({
-
       Signup: SignupScreen,
       Reset: ResetScreen,
       Home: PreferencesScreen,
@@ -219,9 +217,9 @@ let [fontsLoaded, error] = useFonts({
   Poppins_900Black_Italic 
 })
 
-if (!fontsLoaded) {
-  return <AppLoading />
-}
+  if (!fontsLoaded) {
+    return null;
+  }
 
 
 

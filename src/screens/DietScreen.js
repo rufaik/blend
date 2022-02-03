@@ -491,9 +491,16 @@ console.log("itemList", list1, itemList1, word1, itemList4)
         title="Get Started"
     // onPress={() => onSubmit(itemList)}
     onPress={() => {
-          
-      navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})}
-    }
+           navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})
+           createTrack1(list1); 
+           createTrack2(itemList);
+           createTrack3(itemList4); 
+           createTrack4(itemList1);
+           createTrack5(word1); 
+           sendTrack({itemList, list1, itemList1, word1, itemList4});
+console.log("itemList", list1, itemList1, word1, itemList4)
+    
+    }}
       />
      <Spacer />
     <View style={styles.dots}>

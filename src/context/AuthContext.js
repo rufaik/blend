@@ -87,7 +87,7 @@ const signup = dispatch =>  async ({ prof, email, password }) => {
 		dispatch({ type: 'placeholder', payload: email});
 		dispatch ({ type: 'add_name', payload: prof })
 		//navigate to main flow
-
+		console.log("signup", response)
 		navigate('Home')
 	} catch (err) {
 		dispatch({ 
@@ -188,7 +188,7 @@ const signin = (dispatch) => async ({ email, password }) => {
 		})
 	}
 }
-const signin1 = (dispatch) => async ({ email, password, prof }) => {
+const signin1 = (dispatch) => async ({ email, password }) => {
 	console.log("144", email)
 		// Try to signin
 		// Handle success by updating state
@@ -203,7 +203,7 @@ const signin1 = (dispatch) => async ({ email, password, prof }) => {
 		dispatch({ type: 'signin', payload: response.data.token});
 		dispatch({ type: 'placeholder', payload: response.data});
 
-		// console.log(REPO, response)
+		console.log("REPO", response)
 		//navigate to main flow
 		navigate('mainFlow')
 

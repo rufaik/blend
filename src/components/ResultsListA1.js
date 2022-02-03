@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, Button, FlatList, TouchableOpacity } from 'react-native';
-import ResultsDetailD from './ResultsDetailD'
+import ResultsDetailB from './ResultsDetailB'
+import ResultsDetailA from './ResultsDetailA1'
 import  { withNavigation } from 'react-navigation'
-import { YellowBox } from 'react-native'
+import { LogBox } from 'react-native'
 
-YellowBox.ignoreWarnings([
+LogBox.ignoreLogs([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
 ])
-
-const ResultsListD = ({ title, results2, navigation  }) => {
+const ResultsListA1 = ({ title, results1, navigation }) => {
 	const [selectedId, setSelectedId] = useState(null);
   const [itemList, setItemList] = useState([]);
-  // console.log("ResultsListD unfilt", results2)
 
   // const addToList = results => {
   //   //copy the selected item array
@@ -25,33 +24,34 @@ const ResultsListD = ({ title, results2, navigation  }) => {
   // };
 
 
-	if (!results2.length){
-		return null;1
-	}
+	// if (!results1.length){
+	// 	return null;
+	// }
 
 	return(
 		<View style={styles.container}>
-			<FlatList
-				horizontal
+		{results1
+
+		?	<FlatList
+			style={{ left:10, right: 10}}
+				
 				showsHorizontalScrollIndicator={false}
-				data={results2}
-				numColumns={1}
-				keyExtractor={results2 => results2.id.toString()}
+				data={results1}
+				numColumns={2}
+				keyExtractor={results1 => results1.recipe.uri.toString()}
 				renderItem={({item}) => {
 				
-				console.log("lets see", item.id)
-
+					console.log("lets go ResultsListA")
 				
 					return (
 						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.id })}>
-				
-							<ResultsDetailD results2={item}  />
+							<ResultsDetailA results1={item} />
 						</TouchableOpacity>
 					)
 				}}
 			/>
-		
-
+		: console.log('nope ResultsListA1')
+}
 		</View>
 		);
 };
@@ -64,10 +64,14 @@ const styles = StyleSheet.create({
 		marginBottom: 5
 	},
 	container: {
-		justifyContent: "center"
+		flex:1,
+		flexDirection: "row",
+		justifyContent: "center",
+		marginTop:15
+
 		
 
 	}
 });
 
-export default withNavigation(ResultsListD);
+export default withNavigation(ResultsListA1);

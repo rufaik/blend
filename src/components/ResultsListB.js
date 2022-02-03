@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Text, StyleSheet, View, Button, FlatList, TouchableOpacity } from 'react-native';
 import ResultsDetailB from './ResultsDetailB'
 import  { withNavigation } from 'react-navigation'
-import { YellowBox } from 'react-native'
+import { LogBox } from 'react-native'
 
-YellowBox.ignoreWarnings([
+LogBox.ignoreLogs([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
 ])
 

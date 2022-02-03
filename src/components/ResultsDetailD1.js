@@ -18,40 +18,40 @@ import {
 const ResultsDetailD = ({results2}) => {
 const [resultsA, setResultsA] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
-	 const id = results2.id
-	 // console.log("ResultsDetailD")
+	 // const id = results2.id
+	 // console.log("ResultsDetailD1")
 	
-	const searchApii = async (id) => {
+	// const searchApii = async (id) => {
 
-			const responsep = await recipe.get('/', {
-				params: {
-		    		ids: `${id}`
-				}
-			 });
-			 setResultsA(responsep.data[0])
+	// 		const responsep = await recipe.get('/', {
+	// 			params: {
+	// 	    		ids: `${id}`
+	// 			}
+	// 		 });
+	// 		 setResultsA(responsep.data[0])
 		
-		}
+	// 	}
 
-	const Time = () => {
-	if (resultsA.readyInMinutes > 60) {
-		let num = resultsB.readyInMinutes
-	const hours = Math.floor(num / 60);  
-  	const minutes = num % 60;
-  		return (
-  		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
-	} else {
-		return (<Text style={styles.icon}> {resultsA.readyInMinutes}mins</Text>)
-	}}
+	// const Time = () => {
+	// if (resultsA.readyInMinutes > 60) {
+	// 	let num = resultsB.readyInMinutes
+	// const hours = Math.floor(num / 60);  
+ //  	const minutes = num % 60;
+ //  		return (
+ //  		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
+	// } else {
+	// 	return (<Text style={styles.icon}> {resultsA.readyInMinutes}mins</Text>)
+	// }}
 
  
 
-	 useEffect(() => {
-    searchApii(id)
-  }, []);
+	//  useEffect(() => {
+ //    searchApii(id)
+ //  }, []);
 
-	if(!resultsA) {
-		return null;
-	}
+	// if(!resultsA) {
+	// 	return null;
+	// }
 
 
  
@@ -62,7 +62,7 @@ const [resultsA, setResultsA] = useState('');
 		<View>
 			<ImageBackground 
 			style= {styles.image} 
-			source={{ uri: results2.image }}
+			source={{ uri: results2.recipe.image }}
 			imageStyle={{ borderRadius: 14}}
 			/>
 			<View style={styles.child}>
@@ -78,12 +78,12 @@ const [resultsA, setResultsA] = useState('');
 				fontFamily: 'Poppins_600SemiBold',
 
               }}>
-              {results2.title}
+              {results2.recipe.label}
             </Text>
             <View style={styles.box}>
         	<Entypo name="dot-single" size={20} color="white" />
             <MaterialIcons  name="access-time" size={13} color="white" style={{ paddingTop: 4 }} />
-				<Time />
+			
 			</View>
 			</View>
              </View>

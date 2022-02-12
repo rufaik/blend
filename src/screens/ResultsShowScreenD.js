@@ -199,6 +199,7 @@ export default class Original extends React.Component {
   render() {
     const showD = this.props.navigation.getParam("showD");
     console.log("kool", this.props)
+    console.log("koolLLLLLLLL", showD)
 
     const renderScene = ({ route }) => {
       switch (route.key) {

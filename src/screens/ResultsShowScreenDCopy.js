@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, StyleSheet, View, ImageBackground, TouchableOpacity, Button,FlatList, Image } from 'react-native';
 import recipe from '../api/recipe';
+import spoon from '../api/spoon';
+import { appID, appKey, spoonKey } from '../api/keys';
+import edamam from '../api/edamam';
 import nutrition from '../api/nutrition';
 import Spacer from '../components/Spacer';
 import { FontAwesome } from '@expo/vector-icons'; 
@@ -39,12 +42,14 @@ export const Copy = ({ navigation, showD }) => {
 
 	const searchApii = async (showD) => {
 		c
-			const responsep = await recipe.get('/', {
+			const responsep = await spoon.get(`/`,{
 				params: {
-		    		ids: `${showD}`
+		    		apiKey: spoonKey,
+   					url: showD
 				}
 			 });
-			 setResultsd(responsep.data[0])
+			 setResultsd(responsep.data)
+			 console.log("COPY")
 			
 		}
 
@@ -95,14 +100,22 @@ export const Copy = ({ navigation, showD }) => {
 {/*Prep time blurb*/}
 
 		<View style={styles.card}>
+		{resultsd.preparationMinutes ?
+			<>
 			<Text style={styles.log}>Prepppparation Time</Text>
 			<Text style={styles.logG}> {resultsd.preparationMinutes} Minutes</Text>
 			<Time 
 				style={styles.logG}
 				met={resultsd.preparationMinutes}
 			/>
+			</>
+			: null}
+		{resultsd.preparationMinutes ?
+			<>
 			<Text style={styles.log}>Cooking Time</Text>
 			<Text style={styles.logG}>{resultsd.readyInMinutes} Minutes</Text>
+			</>
+			: null}
 			<Text style={styles.log}>Number of Servings</Text>
 			<Text style={styles.logG}>{resultsd.servings} people</Text>
 		</View>
@@ -206,12 +219,13 @@ const Item = ({ item, onPress, style, name }) => (
 	
 	const searchApii = async (showD) => {
 
-			const responsep = await recipe.get('/', {
+			const responsep = await spoon.get(`/`,{
 				params: {
-		    		ids: `${showD}`
+		    		apiKey: spoonKey,
+   					url: showD
 				}
 			 });
-			 setResultsd(responsep.data[0])
+			 setResultsd(responsep.data)
 		
 		}
 
@@ -302,22 +316,23 @@ export const Prep = ({ navigation, showD }) => {
 	const [resultsd, setResultsd] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 	const [isSelected, setSelection] = useState(false);
-
+	console.log("PREPPPP", showD)
 	
-	const searchApii = async (showD) => {
-			const responsep = await recipe.get('/', {
+	const searchApii = async () => {
+			const responsep = await spoon.get(`/`,{
 				params: {
-		    		ids: `${showD}`
+		    		apiKey: spoonKey,
+   					url: showD
 				}
 			 });
-			 setResultsd(responsep.data[0])
-			// console.log("wise", responsep.data[0].analyzedInstructions[0])
+			 setResultsd(responsep.data)
+			console.log("wise", responsep.data)
 		}
 
  
 
 	 useEffect(() => {
-    searchApii(showD)
+    searchApii()
   }, []);
 
 	if(!resultsd) {
@@ -365,13 +380,14 @@ export const Directions = ({ navigation, showD }) => {
 
 	
 	const searchApii = async (showD) => {
-			const responsep = await recipe.get('/', {
+			const responsep = await spoon.get(`/`,{
 				params: {
-		    		ids: `${showD}`
+		    		apiKey: spoonKey,
+   					url: showD
 				}
 			 });
-			 setResultsd(responsep.data[0])
-			 // console.log('DIRECTIONS', responsep.data[0].analyzedInstructions[0])
+			 setResultsd(responsep.data)
+			 // console.log('DIRECTIONS', responsep.data.analyzedInstructions[0])
 			
 		}
 

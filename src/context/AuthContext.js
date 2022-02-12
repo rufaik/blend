@@ -88,7 +88,7 @@ const signup = dispatch =>  async ({ prof, email, password }) => {
 		dispatch ({ type: 'add_name', payload: prof })
 		//navigate to main flow
 		console.log("signup", response)
-		navigate('Home')
+		navigate('Home', {fetch:true})
 	} catch (err) {
 		dispatch({ 
 			type: 'add_error', 

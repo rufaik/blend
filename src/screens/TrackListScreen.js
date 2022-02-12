@@ -163,7 +163,8 @@ const Item = ({ item, onPress, style, color }) => (
 
 
 const TrackListScreen = ({ navigation }) => {
-
+	  const fetch = navigation.getParam('fetch');
+	  console.log("FETCH", fetch)
 	const { state, fetchTracks } = useContext(TrackContext);
 	const list = state.diet
 	const [alist, setAlist] = useState(state.cusine)
@@ -464,9 +465,10 @@ const InputPrompt = (props) => {
 
 
 	useEffect(() => {
-		fetchTracks()
+		
+		{!fetch ? fetchTracks() : null}
 
-	}, [])
+	}, [fetch])
 
 	
 	useEffect(() => {
@@ -486,23 +488,27 @@ const InputPrompt = (props) => {
   //-----------------------------------------------------------------------------------------------------------------------
 
 	const [ results4, setResults4 ] = useState([]);
+	const [ newDiet, setNewDiet ] = useState([]);
 
   const searchApiE2 = async () => {
   	console.log("searchApiE2 EDAMAM", state)
+  	// paramEdit()
 		try {
 
-			const response = await edamam.get('/api/recipes/v2', {
-				params: {
-					type:"public",
-		    		app_id: appID,
-   					app_key: appKey,
-   					q: "onions",
-		    		cuisineType: "Caribbean",
-		    		health: "vegan",
-		    		// intolerances: `${state.allergies}`,
-		    		excluded: "soy"
-				}
-			 });
+			const response = await edamam.get(`/api/recipes/v2?${newDiet}`)
+			// , { 
+			// 	params: {
+			// 		type:"public",
+		 //    		app_id: appID,
+   // 					app_key: appKey,
+   // 					q: "potatoes",
+		 //    		// cuisineType: "Caribbean",
+		 //    		// health: "vegan",
+		 //    		// // intolerances: `${state.allergies}`,
+		 //    		// excluded: "soy"
+			// 	}
+			// 	});
+			 
 			setResults4(response.data.hits)
 			 console.log("edam13 EDAMAM", response.data.hits)
 
@@ -512,16 +518,82 @@ const InputPrompt = (props) => {
 			seterrorMessage('Something went wrong')
 		} 
     };
+const [ edamamDiet, setEdamamDiet ] = useState({});
+const paramEdit = () => {
+	console.log("state.diet", state.diet)
+	const params = new URLSearchParams();
+	state.diet.map((type, i) => {
+		return(
+			params.append('health', type)
+			
+			)
+	})
+	state.avoid.map((type1, i) => {
+		return(
+			params.append('excluded', type1)
+			
+			)
+	})
+	state.cuisine.map((type2, i) => {
+		return(
+			params.append('cuisineType', type2)
+			
+			)
+	})
+	state.allergies.map((type3, i) => {
+		return(
+			params.append('health', type3)
+			
+			)
+	})
+	params.append('type', "public")
+	params.append('app_id', appID)
+	params.append('app_key', appKey)
+	params.append('q', state.word[0][0])
 
 
+	setNewDiet(params.toString())
+	// console.log("edamamDiet",params1)
+	console.log("newDiet", newDiet)
+}
 
 
+//     cuisine: `${state.cuisine}`,
+// 		    		diet: `${state.diet}`,
+// 		    		intolerances: `${state.allergies}`,
+// 		    		excludeIngredients: `${state.avoid}`
 
+// 	state.diet.map	    		
+
+
+// const params = new URLSearchParams();
+// params.append('param1', 'value1');
+// params.append('param2', 'value2');
+// axios.post('/foo', params);
+
+
+//   const removeFromList = item => {
+//     //copy the slected item array
+//     let updatedItems = itemList;
+//     //find the current item in the array
+//     let itemIndexToRemove = updatedItems.indexOf(item.id);
+//     //use splice to remove the item from list
+//     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+//     updatedItems.splice(itemIndexToRemove, 1);
+
+//     setItemList(updatedItems);
+//     //this is weird but it makes it work - I can't unselect, so made a non-existing id
+//     setSelectedId(item.id + "____");
+//   };
 
 
 useEffect(() => {
 		searchApiE2()
 		console.log("newList EDAMAM", state)
+	}, [newDiet, state])
+
+useEffect(() => {
+		{state.diet[0] ? paramEdit() : console.log("nope newDiet")}
 	}, [state])
 
 
@@ -537,7 +609,22 @@ useEffect(() => {
 
 
 const chevron = prompt===false ? "chevron-down" : "chevron-up"
+console.log("newDiet LAST",newDiet)
 
+// var params = new URLSearchParams();
+// params.append("foo", 5);
+// params.append("foo", 2);
+// params.append("foo", 11);
+// var request = {
+//   params: params
+// };
+
+// console.log("request", request)
+
+const url = "http://www.site.comrec/234234234"
+const strs = url.split('rec/');
+const id = strs[1]
+console.log(id)
 
 	return(
 		<>
@@ -658,15 +745,15 @@ const chevron = prompt===false ? "chevron-down" : "chevron-up"
 	    
 {/*		{state && state.length > 1 ? searchApi2('salt') (<Text>pop</Text>) : console.log("newList0", state)}
 */}
-			<ResultsListA 
+{/*			<ResultsListA 
 			results1={results1}
 
-			/>
+			/>*/}
 
-			{/*<ResultsListA1 
+			{<ResultsListA1 
 			results1={results4}
 
-			/>*/}
+			/>}
 
 			{ results1.length===0 && state.cuisine && state.cuisine[0] && !state.cuisine[1]
 

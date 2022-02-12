@@ -21,21 +21,39 @@ import {
 
 
 const Item = ({item, onPress, style, check, box}) => {
-	console.log ("item.amount.metric.unit", item.amount.metric.unit)
+	console.log ("item.metric.unit", item.measures.metric.unitShort)
+	const [measurement, setMeasurement] = useState('metric');
 
 	const Measure = () => {
-	if (item.amount.metric.unit==="g" || item.amount.metric.unit==="ml" ||
-		item.amount.metric.unit==="tsp" || item.amount.metric.unit==="tsps" || 
-		item.amount.metric.unit==="tbsp" || item.amount.metric.unit==="tbsps" ||
-		item.amount.metric.unit==="G" || item.amount.metric.unit==="Ml" ||
-		item.amount.metric.unit==="Tsp" || item.amount.metric.unit==="Tsps" || 
-		item.amount.metric.unit==="Tbsp" || item.amount.metric.unit==="Tbsps"
+
+	if (item.measures.metric.unitShort==="g" || item.measures.metric.unitShort==="ml" ||
+		item.measures.metric.unitShort==="tsp" || item.measures.metric.unitShort==="tsps" || 
+		item.measures.metric.unitShort==="tbsp" || item.measures.metric.unitShort==="tbsps" ||
+		item.measures.metric.unitShort==="G" || item.measures.metric.unitShort==="Ml" ||
+		item.measures.metric.unitShort==="Tsp" || item.measures.metric.unitShort==="Tsps" || 
+		item.measures.metric.unitShort==="Tbsp" || item.measures.metric.unitShort==="Tbsps"
 		) {
   		return (
-  		  			<Text style={styles.logG} >{Math.round(item.amount.metric.value)}{item.amount.metric.unit} </Text>
+  		  			<Text style={styles.logG} >{Math.round(item.measures.metric.amount)}{item.measures.metric.unitShort} </Text>
 	)} else {
 		return (
-			<Text style={styles.logG} >{Math.round(item.amount.metric.value)} {item.amount.metric.unit} </Text>
+			<Text style={styles.logG} >{Math.round(item.measures.metric.amount)} {item.measures.metric.unitShort} </Text>
+	)}}
+
+	const MeasureUS = () => {
+
+	if (item.measures.us.unitShort==="g" || item.measures.us.unitShort==="ml" ||
+		item.measures.us.unitShort==="tsp" || item.measures.us.unitShort==="tsps" || 
+		item.measures.us.unitShort==="tbsp" || item.measures.us.unitShort==="tbsps" ||
+		item.measures.us.unitShort==="G" || item.measures.us.unitShort==="Ml" ||
+		item.measures.us.unitShort==="Tsp" || item.measures.us.unitShort==="Tsps" || 
+		item.measures.us.unitShort==="Tbsp" || item.measures.us.unitShort==="Tbsps"
+		) {
+  		return (
+  		  			<Text style={styles.logG} >{Math.round(item.measures.us.amount)}{item.measures.us.unitShort} </Text>
+	)} else {
+		return (
+			<Text style={styles.logG} >{Math.round(item.measures.us.amount)} {item.measures.us.unitShort} </Text>
 	)}}
 
 
@@ -46,7 +64,8 @@ const Item = ({item, onPress, style, check, box}) => {
 		</View>
 		<View>
 			<Text style={styles.name} >{item.name} </Text>
-			<Measure />
+			{measurement === 'metric' ? <Measure /> : <MeasureUS />}
+		
 		</View>
 			<MaterialCommunityIcons name={check} size={24} color={box} style={{ position: "absolute", right: 40}}/> 
 			

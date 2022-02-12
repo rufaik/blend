@@ -13,16 +13,24 @@ import {
 
 const ResultsDetailA = ({results1}) => {
 	console.log("ResultsDetailA1")
-	// const Time = () => {
-	// if (results1.readyInMinutes > 60) {
-	// 	let num = results1.readyInMinutes
-	// const hours = Math.floor(num / 60);  
- //  	const minutes = num % 60;
- //  		return (
- //  		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
-	// } else {
-	// 	return (<Text style={styles.icon}> {results1.readyInMinutes}mins</Text>)
-	// }}
+	
+	const Time = () => {
+	if (results1.recipe.totalTime > 60) {
+		let num = results1.recipe.totalTime 
+	const hours = Math.floor(num / 60);  
+  	const minutes = num % 60;
+  		return (
+  		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
+	} else if (results1.recipe.totalTime === 0) {
+		return (<Text style={styles.icon}> Quick </Text>)
+
+	 } else {
+		return (<Text style={styles.icon}> {results1.recipe.totalTime}mins</Text>)
+	}}
+
+
+
+
 
 	return(
 		<View style= {styles.container} >
@@ -33,6 +41,7 @@ const ResultsDetailA = ({results1}) => {
 			<Text style={styles.name} >{results1.recipe.label}</Text>
 			<View style={styles.time} >
 				<MaterialIcons  name="access-time" size={15} color="gray" />
+				<Time />
 			</View>
 		</View>
 		);

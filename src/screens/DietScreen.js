@@ -48,29 +48,29 @@ import { navigate } from '../navigationRef';
 
 const DATA = [
  {
-    id: "Laco Vegetarian",
-    title: "lacto vegetarian",
+    id: "dairy-free",
+    title: "dairy-free",
     imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food"
   },
   {
-    id: "Vegan",
+    id: "vegan",
     title: "vegan",
     imageUrl: "https://source.unsplash.com/featured/?British,dinner,food"
   },
   {
-    id: "Vegetarian",
-    title: "vegetarian",
+    id: "wheat-free",
+    title: "wheat-free",
     imageUrl: "https://source.unsplash.com/featured/?American,dinner,food"
   },
   
   {
-    id: "OVO Vegetarian",
-    title: "ovo vegetarian",
+    id: "gluten-free",
+    title: "gluten-free",
     imageUrl: "https://source.unsplash.com/featured/?Gelato,food"
   },
   {
-    id: "Pescatarian",
-    title: "pescetarian",
+    id: "vegetarian",
+    title: "vegetarian",
     imageUrl: "https://source.unsplash.com/featured/?Ethiopian,dinner,food"
   }
  
@@ -78,58 +78,63 @@ const DATA = [
 
 const DATA4 = [
   {
-    id: "Seafood",
-    title: "seafood",
+    id: "kosher",
+    title: "kosher",
     imageUrl: "https://source.unsplash.com/featured/?Healthy,dinner,food"
   },
   {
-    id: "Gluten",
-    title: "gluten",
+    id: "pescatarian",
+    title: "pescatarian",
     imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
   },
   {
-    id: "Nut",
-    title: "nut",
+    id: "soy-free",
+    title: "soy-free",
     imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food"
   },
   {
-    id: "Dairy Free",
-    title: "dairy",
+    id: "tree-nut-free",
+    title: "tree-nut-free",
     imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food"
   },
   {
-    id: "Wheat Free",
-    title: "wheat",
+    id: "keto-friendly",
+    title: "keto-friendly",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
-    id: "Peanut",
-    title: "peanut",
+    id: "kidney-friendly",
+    title: "kidney-friendly",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
-    id: "Tree nut",
-    title: "tree nut",
+    id: "low-sugar",
+    title: "low-sugar",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
-    id: "Sesame",
-    title: "sesame",
+    id: "lupine-free",
+    title: "lupine-free",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
-    id: "Soy Free",
-    title: "soy",
+    id: "no-oil-added",
+    title: "no-oil-added",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
-    id: "Sulphite",
-    title: "sulphite",
+    id: "red-meat-free",
+    title: "red-meat-free",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   },
   {
-    id: "Shellfish",
-    title: "shellfish",
+    id: "sesame-free",
+    title: "sesame-free",
+    imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
+  },
+  {
+    id: "shellfish-free",
+    title: "shellfish-free",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food"
   }
 ];
@@ -156,6 +161,7 @@ const Item = ({ item, onPress, style, color }) => (
 );
 
 const DietScreen = ({ onSubmit, navigation }) => {
+    const fetch = navigation.getParam('fetch');
   const [selectedId, setSelectedId] = useState(null);
   const [selectedId4, setSelectedId4] = useState(null);
   const [itemList, setItemList] = useState([]);
@@ -356,12 +362,12 @@ const [selectedId1, setSelectedId1] = useState(null);
       <Spacer />
      <View style={{ flexDirection: 'row', alignItems: 'center',}} >
      <Entypo style={styles.leftIcon} name="chevron-left" size={24} color="black" onPress={() => {
-          navigation.navigate('Home')}
+          navigation.navigate('Home', {fetch: fetch})}
     } />
     <Text style={styles.header} h1>
         Set your preferences</Text> 
     <TouchableOpacity onPress={() => {
-           navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})
+           navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4, fetch: fetch})
            createTrack1(list1); 
            createTrack2(itemList);
            createTrack3(itemList4); 
@@ -491,7 +497,7 @@ console.log("itemList", list1, itemList1, word1, itemList4)
         title="Get Started"
     // onPress={() => onSubmit(itemList)}
     onPress={() => {
-           navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4})
+           navigation.navigate('TrackList', {list:itemList, list1: list1, list2:itemList1, word1: word1, list4:itemList4, fetch: fetch})
            createTrack1(list1); 
            createTrack2(itemList);
            createTrack3(itemList4); 

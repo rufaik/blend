@@ -19,6 +19,9 @@ import SearchBar from '../components/SearchBar';
 import ResultsListE from '../components/ResultsListE'
 import ingred from '../api/ingred';
 import Item from '../components/ResultsDetailF'
+import spoon from '../api/spoon';
+import { appID, appKey, spoonKey } from '../api/keys';
+import edamam from '../api/edamam';
 
 
 
@@ -58,12 +61,14 @@ export const Ingred1 = ({ onSubmit, navigation, showD }) => {
 
 
 	const searchApi123 = async (showD) => {
-			const response1 = await recipe.get('/', {
+			const response1 = await spoon.get(`/`,{
 				params: {
-		    		ids: `${showD}`
+		    		apiKey: spoonKey,
+   					url: showD
 				}
 			 });
-			 setResultsd(response1.data[0])
+			 setResultsd(response1.data)
+			 console.log("resultsd.extendedIngredients.nameClean", response1.data.extendedIngredients.nameClean)
 			
 		}
 
@@ -75,16 +80,16 @@ export const Ingred1 = ({ onSubmit, navigation, showD }) => {
 
 
 
-const searchApi = async (showD) => {
-    console.log("working", showD);
-    const response = await nutrition.get(`${showD}/ingredientWidget.json`);
-    setResults(response.data.ingredients);
-     console.log("worki1ng", response.data.ingredients);
-  };
+// const searchApi = async (showD) => {
+//     console.log("working", showD);
+//     const response = await nutrition.get(`${showD}/ingredientWidget.json`);
+//     setResults(response.data.ingredients);
+//      console.log("worki1ng", response.data.ingredients);
+//   };
 
-	 useEffect(() => {
-    searchApi(showD);
-  }, []);
+// 	 useEffect(() => {
+//     searchApi(showD);
+//   }, []);
 
 
 
@@ -141,7 +146,7 @@ return(
       <ScrollView style={styles.card} >
       <ResultsListE 
       title="hey"
-      item={item}
+      item={resultsd.extendedIngredients}
 
       />
      </ScrollView>
@@ -178,9 +183,9 @@ export const Copy = ({ navigation, showD }) => {
 			
 		}
 
-	 useEffect(() => {
-     searchApii(showD)
-  }, []);
+	 // useEffect(() => {
+  //    searchApii(showD)
+  // }, []);
 
 	if(!resultsd) {
 		return null;
@@ -266,9 +271,9 @@ export const Picture = ({ navigation, showD }) => {
 
  
 
-	 useEffect(() => {
-    searchApii(showD)
-  }, []);
+	 // useEffect(() => {
+  //   searchApii(showD)
+  // }, []);
 
 	if(!resultsd) {
 		return null;
@@ -346,9 +351,9 @@ export const Prep = ({ navigation, showD }) => {
 
  
 
-	 useEffect(() => {
-    searchApii(showD)
-  }, []);
+	 // useEffect(() => {
+  //   searchApii(showD)
+  // }, []);
 
 	if(!resultsd) {
 		return null;
@@ -400,9 +405,9 @@ export const Directions = ({ navigation, showD }) => {
 
  
 
-	 useEffect(() => {
-    searchApii(showD)
-  }, []);
+	 // useEffect(() => {
+  //   searchApii(showD)
+  // }, []);
 
 	if(!resultsd) {
 		return null;
@@ -491,9 +496,9 @@ export const Nutrition1 = ({ navigation, showD }) => {
     }
   };
 
-	 useEffect(() => {
-    searchApiN(showD);
-  }, []);
+	 // useEffect(() => {
+  //   searchApiN(showD);
+  // }, []);
 
 
 

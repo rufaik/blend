@@ -54,7 +54,7 @@ const ResultsListD1 = ({ title, results2, navigation  }) => {
 
 				
 					return (
-						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.id })}>
+						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.recipe.url  })}>
 						<ResultsDetailD results2={item}  />
 						</TouchableOpacity>
 					)

@@ -13,7 +13,7 @@ import {
   View,
   TouchableOpacity
 } from "react-native";
-import ResultsListF from '../components/ResultsListF'
+import ResultsListA1 from '../components/ResultsListA1'
 import { withNavigation } from 'react-navigation';
 import yelp from '../api/yelp';
 import { 
@@ -28,17 +28,19 @@ import {
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
-
-
+import { appID, appKey } from '../api/keys';
+import spoon from '../api/spoon';
+import edamam from '../api/edamam';
 
 
 
 const Track1 = ({ navigation, word, alist }) => {
-	
+	console.log("TRACK11")
 	
 
 
   const [ errorMessage, seterrorMessage ] = useState('')
+
 
 
 
@@ -50,15 +52,16 @@ const Track1 = ({ navigation, word, alist }) => {
 
 	const searchApiH1 = async (searchTermH) => {
 		try {
-			const responseH1 = await yelp.get('/search', {
+			const responseH1 = await edamam.get('/api/recipes/v2', {
 				params: {
-		    		number: 1,
-		    		query: `${searchTermH},`,
-		    		cuisine: `${alist[0]}`,
+		    		q: `${searchTermH},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH1(responseH1.data.results)
-			 console.log("responseH1", response.data.results)
+			 // console.log("responseH1", responseH1.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH')
 		} 
@@ -75,6 +78,8 @@ const Track1 = ({ navigation, word, alist }) => {
 		} 
 	}, [])
 
+
+
   //-----------------------------------------------------------------------------------------------------------------------
 
 	const [ resultsH2, setResultsH2 ] = useState([]);
@@ -82,15 +87,17 @@ const Track1 = ({ navigation, word, alist }) => {
 
 	const searchApiH2 = async (searchTermH2) => {
 		try {
-			const responseH2 = await yelp.get('/search', {
+			const responseH2 = await edamam.get('/api/recipes/v2', {
 				params: {
 		    		number: 1,
-		    		query: `${searchTermH2},`,
-		    		cuisine: `${alist[0]}`,
+		    		q: `${searchTermH2},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH2(responseH2.data.results)
-			 console.log("responseH2", response.data.results)
+			 // console.log("responseH2", responseH2.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH2')
 		} 
@@ -114,15 +121,17 @@ const [ resultsH3, setResultsH3 ] = useState([]);
 
 	const searchApiH3 = async (searchTermH3) => {
 		try {
-			const responseH3 = await yelp.get('/search', {
+			const responseH3 = await edamam.get('/api/recipes/v2', {
 				params: {
 		    		number: 1,
-		    		query: `${searchTermH3},`,
-		    		cuisine: `${alist[0]}`,
+		    		q: `${searchTermH3},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH3(responseH3.data.results)
-			 console.log("responseH3", response.data.results)
+			 // console.log("responseH3", responseH3.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH3')
 		} 
@@ -146,15 +155,17 @@ const [ resultsH4, setResultsH4 ] = useState([]);
 
 	const searchApiH4 = async (searchTermH4) => {
 		try {
-			const responseH4 = await yelp.get('/search', {
+			const responseH4 = await edamam.get('/api/recipes/v2', {
 				params: {
 		    		number: 1,
-		    		query: `${searchTermH4},`,
-		    		cuisine: `${alist[0]}`,
+		    		q: `${searchTermH4},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH4(responseH4.data.results)
-			 console.log("searchTermH4", response.data.results)
+			 // console.log("responseH4", responseH4.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH4')
 		} 
@@ -178,15 +189,17 @@ const [ resultsH5, setResultsH5 ] = useState([]);
 
 	const searchApiH5 = async (searchTermH5) => {
 		try {
-			const responseH5 = await yelp.get('/search', {
+			const responseH5 = await edamam.get('/api/recipes/v2', {
 				params: {
 		    		number: 1,
 		    		query: `${searchTermH5},`,
-		    		cuisine: `${alist[0]}`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH5(responseH5.data.results)
-			 console.log("responseH5", response.data.results)
+			 // console.log("responseH5", responseH5.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH5')
 		} 
@@ -210,15 +223,17 @@ const [ resultsH6, setResultsH6 ] = useState([]);
 
 	const searchApiH6 = async (searchTermH6) => {
 		try {
-			const responseH6 = await yelp.get('/search', {
+			const responseH6 = await edamam.get('/api/recipes/v2', {
 				params: {
 		    		number: 1,
 		    		query: `${searchTermH6},`,
-		    		cuisine: `${alist[0]}`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH6(responseH6.data.results)
-			 console.log("responseH6", response.data.results)
+			 // console.log("responseH6", responseH6.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH6')
 		} 
@@ -242,15 +257,15 @@ const [ resultsH7, setResultsH7 ] = useState([]);
 
 	const searchApiH7 = async (searchTermH7) => {
 		try {
-			const responseH7 = await yelp.get('/search', {
+			const responseH7 = await edamam.get('/api/recipes/v2', {
 				params: {
 		    		number: 1,
 		    		query: `${searchTermH7},`,
-		    		cuisine: `${alist[0]}`,
+		    		cuisineType: `${alist[0]}`,
 				}
 			 });
 			 setResultsH7(responseH7.data.results)
-			 console.log("responseH7", response.data.results)
+			 // console.log("responseH7", responseH7.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH7')
 		} 
@@ -274,15 +289,17 @@ const [ resultsH8, setResultsH8 ] = useState([]);
 
 	const searchApiH8 = async (searchTermH8) => {
 		try {
-			const responseH8 = await yelp.get('/search', {
+			const responseH8 = await edamam.get('/api/recipes/v2', {
 				params: {
 		    		number: 1,
 		    		query: `${searchTermH8},`,
-		    		cuisine: `${alist[0]}`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH8(responseH8.data.results)
-			 console.log("responseH8", response.data.results)
+			 // console.log("responseH8", responseH8.data.results)
 		} catch (err) {
 			seterrorMessage('Something went wrongH8')
 		} 
@@ -308,37 +325,37 @@ const [ resultsH8, setResultsH8 ] = useState([]);
 	return(
 		<>
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH1} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH2} 
 			/>
 		</View>
 
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH3} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH4} 
 			/>
 		</View>
 
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH5} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH6} 
 			/>
 		</View>
 
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH7} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH8} 
 			/>
 		</View>

@@ -13,7 +13,7 @@ import {
   View,
   TouchableOpacity
 } from "react-native";
-import ResultsListF from '../components/ResultsListF'
+import ResultsListA1 from '../components/ResultsListA1'
 import { withNavigation } from 'react-navigation';
 import yelp from '../api/yelp';
 import { 
@@ -28,13 +28,13 @@ import {
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
-
+import edamam from '../api/edamam';
 
 
 
 
 const Track2 = ({ navigation, word, alist }) => {
-	
+	console.log("TRACK2")
 	
 
 
@@ -178,11 +178,12 @@ const [ resultsH5, setResultsH5 ] = useState([]);
 
 	const searchApiH5 = async (searchTermH5) => {
 		try {
-			const responseH5 = await yelp.get('/search', {
+			const responseH5 = await edamam.get('/api/recipes/v2', {
 				params: {
-		    		number: 1,
-		    		query: `${searchTermH5},`,
-		    		cuisine: `${alist[0]}`,
+		    		q: `${searchTermH5},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH5(responseH5.data.results)
@@ -210,11 +211,13 @@ const [ resultsH6, setResultsH6 ] = useState([]);
 
 	const searchApiH6 = async (searchTermH6) => {
 		try {
-			const responseH6 = await yelp.get('/search', {
+			const responseH6 = await edamam.get('/api/recipes/v2', {
 				params: {
-		    		number: 1,
-		    		query: `${searchTermH6},`,
-		    		cuisine: `${alist[0]}`,
+		    		q: `${searchTermH6},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
+
 				}
 			 });
 			 setResultsH6(responseH6.data.results)
@@ -242,11 +245,12 @@ const [ resultsH7, setResultsH7 ] = useState([]);
 
 	const searchApiH7 = async (searchTermH7) => {
 		try {
-			const responseH7 = await yelp.get('/search', {
+			const responseH7 = await edamam.get('/api/recipes/v2', {
 				params: {
-		    		number: 1,
-		    		query: `${searchTermH7},`,
-		    		cuisine: `${alist[0]}`,
+		    		q: `${searchTermH7},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
 				}
 			 });
 			 setResultsH7(responseH7.data.results)
@@ -274,12 +278,13 @@ const [ resultsH8, setResultsH8 ] = useState([]);
 
 	const searchApiH8 = async (searchTermH8) => {
 		try {
-			const responseH8 = await yelp.get('/search', {
+			const responseH8 = await edamam.get('/api/recipes/v2', {
 				params: {
-		    		number: 1,
-		    		query: `${searchTermH8},`,
-		    		cuisine: `${alist[0]}`,
-				}
+		    		q: `${searchTermH8},`,
+		    		cuisineType: `${alist[0]}`,
+		    		app_id: appID,
+   					app_key: appKey
+   				}
 			 });
 			 setResultsH8(responseH8.data.results)
 			 // console.log("AAAAAA", response.data.results)
@@ -308,37 +313,37 @@ const [ resultsH8, setResultsH8 ] = useState([]);
 	return(
 		<>
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH1} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH2} 
 			/>
 		</View>
 
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH3} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH4} 
 			/>
 		</View>
 
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH5} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH6} 
 			/>
 		</View>
 
 		<View style={styles.container}>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH7} 
 			/>
-			<ResultsListF
+			<ResultsListA1
 				results1={resultsH8} 
 			/>
 		</View>

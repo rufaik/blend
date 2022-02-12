@@ -27,24 +27,24 @@ const ResultsListE = ({ title, item, navigation }) => {
     //copy the selected item array
     let updatedItems = itemList;
     //use array.push to add it to the array
-    updatedItems.push(item.name);
+    updatedItems.push(item.nameClean);
 
     setItemList(updatedItems);
-    setSelectedId(item.name);
+    setSelectedId(item.nameClean);
   };
 
   const removeFromList = item => {
     //copy the slected item array
     let updatedItems = itemList;
     //find the current item in the array
-    let itemIndexToRemove = updatedItems.indexOf(item.name);
+    let itemIndexToRemove = updatedItems.indexOf(item.nameClean);
     //use splice to remove the item from list
     //https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
     updatedItems.splice(itemIndexToRemove, 1);
 
     setItemList(updatedItems);
     //this is weird but it makes it work - I can't unselect, so made a non-existing id
-    setSelectedId(item.name + "____");
+    setSelectedId(item.nameClean + "____");
     ;
   };
 
@@ -55,6 +55,7 @@ const renderItem = ({ item }) => {
     const backgroundColor = itemList.indexOf(item.id) > -1 ? "white" : "#F4F4F4"
     const shadowOpacity = itemList.indexOf(item.id) > -1 ? 0.2 : 0
     // const borderColor = item.id === selectedId ? "#14D08C" : "#FFFFFF";
+    console.log("itemitemitemitem",item)
 
     return (
       <Item
@@ -70,9 +71,9 @@ const renderItem = ({ item }) => {
   };
 
     
-	if (!item.length){
-		return null;
-	}
+	// if (!item.length){
+	// 	return null;
+	// }
 
 	return(
 		<View style={styles.container} >
@@ -86,17 +87,17 @@ const renderItem = ({ item }) => {
 				numColumns={1}
 				extraData={selectedId}
         		navigation={navigation}
-				keyExtractor={item => item.name}
+				keyExtractor={item => item.nameClean}
 				renderItem={({ item }) => {
-   					const borderColor = itemList.indexOf(item.name) > -1 ? "#14D08C" : "#D9D9D9";
-   					const color = itemList.indexOf(item.name) > -1 ? "#14D08C" : "#D9D9D9";
-   					const name = itemList.indexOf(item.name) > -1 ? "checkbox-marked"  : "checkbox-blank-outline";
+   					const borderColor = itemList.indexOf(item.nameClean) > -1 ? "#14D08C" : "#D9D9D9";
+   					const color = itemList.indexOf(item.nameClean) > -1 ? "#14D08C" : "#D9D9D9";
+   					const name = itemList.indexOf(item.nameClean) > -1 ? "checkbox-marked"  : "checkbox-blank-outline";
    					console.log(item)
 						return (
 					      	<Item
 					        	item={item}
 					        	onPress={() =>
-					          		itemList.indexOf(item.name) > -1
+					          		itemList.indexOf(item.nameClean) > -1
 					            	? removeFromList(item)
 					            	: addToList(item)
 					        	}

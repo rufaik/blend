@@ -32,148 +32,148 @@ import { Entypo } from '@expo/vector-icons';
 const DATA = [
   {
     id: "American",
-    title: "american",
+    title: "American",
     imageUrl: "https://source.unsplash.com/featured/?American,dinner,food",
     word: ["burgers","beef","chicken","apples","flour","potatoes","ribs","sugar"]
   },
   {
-    id: "African",
-    title: "african",
-    imageUrl: "https://source.unsplash.com/featured/?African,dinner,food",
-    word: ["yam","bell peppers","coconut milk","onions","tamarind","egusi","plantain","rice"]
+    id: "Asian",
+    title: "Asian",
+    imageUrl: "https://source.unsplash.com/featured/?Asian,dinner,food",
+    word: ["kochujang","garlic","rice","soy sauce","ginger","green onions","chili powder","sesame"]
   },
   {
     id: "British",
-    title: "british",
+    title: "British",
     imageUrl: "https://source.unsplash.com/featured/?British,dinner,food",
     word: ["potatoes","cheese","fish","beef","onion","bread","haddock","butter"]
   },
   {
-    id: "Cajun",
-    title: "cajun",
-    imageUrl: "https://source.unsplash.com/featured/?cajun,dinner,food",
+    id: "Central Europe",
+    title: "Central Europe",
+    imageUrl: "https://source.unsplash.com/featured/?Central%20Europe,dinner,food",
     word: ["onions","bell pepper","celery","rice","sausages","vinegar","chicken","pork"]
   },
   {
     id: "Caribbean",
-    title: "caribbean",
+    title: "Caribbean",
     imageUrl: "https://source.unsplash.com/featured/?Caribbean,dinner,food",
     word: ["plantain","beans","cassava","rice","coriander","peppers","chickpeas","tomaotes"]
   },
   {
     id: "Chinese",
-    title: "chinese",
+    title: "Chinese",
     imageUrl: "https://source.unsplash.com/featured/?Chinese,dinner,food",
     word: ["rice","noodles","garlic","chilli","ginger","soy sauce","chicken","prawns"]
   },
   {
     id: "Eastern European",
-    title: "eastern european",
+    title: "Eastern European",
     imageUrl: "https://source.unsplash.com/featured/?Eastern European,dinner,food",
     word: ["eggs","cabbage","paprika","potatoes","beef","carrots","onions","garlic"]
   },
   {
     id: "French",
-    title: "french",
+    title: "French",
     imageUrl: "https://source.unsplash.com/featured/?French,dinner,food",
     word:["garlic","flour","olive oil","cheese","truffles","mushrooms","tomatoes","butter"]
   },
-  {
-    id: "German",
-    title: "german",
-    imageUrl: "https://source.unsplash.com/featured/?German,dinner,food",
-    word: ["sausages","mustard","cabbage","quark","juniper berries","potatoes","pork","flour"]
-  },
-  {
-    id: "Greek",
-    title: "greek",
-    imageUrl: "https://source.unsplash.com/featured/?Greek,dinner,food",
-    word: ["olive oil","oregano","tomatoes","cheese","beef","chicken","chickpeas","yoghurt"]
-  },
+  // {
+  //   id: "German",
+  //   title: "german",
+  //   imageUrl: "https://source.unsplash.com/featured/?German,dinner,food",
+  //   word: ["sausages","mustard","cabbage","quark","juniper berries","potatoes","pork","flour"]
+  // },
+  // {
+  //   id: "Greek",
+  //   title: "greek",
+  //   imageUrl: "https://source.unsplash.com/featured/?Greek,dinner,food",
+  //   word: ["olive oil","oregano","tomatoes","cheese","beef","chicken","chickpeas","yoghurt"]
+  // },
   {
     id: "Indian",
-    title: "indian",
+    title: "Indian",
     imageUrl: "https://source.unsplash.com/featured/?Indian,dinner,food",
     word: ["lamb","cloves","cardamom","turmeric","cumin","coriander","masala","rice"]
   },
   {
     id: "Italian",
-    title: "italian",
+    title: "Italian",
     imageUrl: "https://source.unsplash.com/featured/?Italian,dinner,food",
     word: ["pasta","olive oil","basil","tomatoes","cheese","pesto","mushrooms","balsamic vinegar"]
   },
-  {
-    id: "Irish",
-    title: "irish",
-    imageUrl: "https://source.unsplash.com/featured/?Irish,dinner,food",
-    word: [ "butter","carrots","lamb","potatoes","beef","cabbage","kale","bread"]
-  },
+  // {
+  //   id: "Irish",
+  //   title: "irish",
+  //   imageUrl: "https://source.unsplash.com/featured/?Irish,dinner,food",
+  //   word: [ "butter","carrots","lamb","potatoes","beef","cabbage","kale","bread"]
+  // },
   {
     id: "Japanese",
-    title: "japanese",
+    title: "Japanese",
     imageUrl: "https://source.unsplash.com/featured/?Japanese,dinner,food",
     word: ["noodles","soy sauce","rice","mirin","nori","sesame","rice vinegar","chicken"]
   },
   {
-    id: "Jewish",
-    title: "jewish",
-    imageUrl: "https://source.unsplash.com/featured/?Jewish,dinner,food",
+    id: "Kosher",
+    title: "Kosher",
+    imageUrl: "https://source.unsplash.com/featured/?Kosher,dinner,food",
     word: ["eggs","chickpeas","flour","fish","chicken","potatoes","spinach","bulgur wheat"]
   },
   {
-    id: "Korean",
-    title: "korean",
-    imageUrl: "https://source.unsplash.com/featured/?Korean,dinner,food",
-    word: ["kochujang","garlic","rice","soy sauce","ginger","green onions","chili powder","sesame"]
+    id: "Mediterranean",
+     title: "Mediterranean",
+     imageUrl: "https://source.unsplash.com/featured/?Mediterranean,dinner,food",
+     word: ["olive oil","oregano","tomatoes","cheese","beef","chicken","chickpeas","yoghurt"]
   },
-  {
-    id: "Latin American",
-    title: "latin american",
-    imageUrl: "https://source.unsplash.com/featured/?Latin American,dinner,food",
-    word: ["corn","pork","fish","lemon juice","cheese","chili","chicken","onion"]
-  },
+  // {
+  //   id: "Latin American",
+  //   title: "latin american",
+  //   imageUrl: "https://source.unsplash.com/featured/?Latin American,dinner,food",
+  //   word: ["corn","pork","fish","lemon juice","cheese","chili","chicken","onion"]
+  // },
   {
     id: "Mexican",
-    title: "mexican",
+    title: "Mexican",
     imageUrl: "https://source.unsplash.com/featured/?Mexican,dinner,food",
     word: ["tortillas","beans","rice","avocado","coriander","limes","cheese","tomatoes"]
   },
   {
     id: "Middle Eastern",
-    title: "middle eastern,",
+    title: "Middle Eastern",
     imageUrl: "https://source.unsplash.com/featured/?Middle Eastern,dinner,food",
     word: ["flatbread","bulgur wheat","chickpeas","pistachios","lemon","tahini","houmous","sumac"]
   },
   {
     id: "Nordic",
-    title: "nordic",
+    title: "Nordic",
     imageUrl: "https://source.unsplash.com/featured/?nordic,dinner,food",
     word: ["bread","cheese","potatoes","beef","lamb","rye","herring","trout"]
   },
+  // {
+  //   id: "Spanish",
+  //   title: "spanish",
+  //   imageUrl: "https://source.unsplash.com/featured/?Spanish,dinner,food",
+  //   word: ["paprika","olive oil","peppers","garlic","onions","ham","olives","chorizo"]
+  // },
   {
-    id: "Spanish",
-    title: "spanish",
-    imageUrl: "https://source.unsplash.com/featured/?Spanish,dinner,food",
-    word: ["paprika","olive oil","peppers","garlic","onions","ham","olives","chorizo"]
+    id: "South American",
+    title: "South American",
+    imageUrl: "https://source.unsplash.com/featured/?South American,dinner,food",
+    word: ["chicken","cajun","flour","cheese","rice","onions","beans","tomatoes"]
   },
   {
-    id: "Southern",
-    title: "southern",
-    imageUrl: "https://source.unsplash.com/featured/?Southern,dinner,food",
-    word: ["chicken","cajun","flour","cornmeal","rice","onions","beans","tomatoes"]
-  },
-  {
-    id: "Thai",
-    title: "thai",
-    imageUrl: "https://source.unsplash.com/featured/?Thai,dinner,food",
+    id: "South East Asian",
+    title: "South East Asian",
+    imageUrl: "https://source.unsplash.com/featured/?South East Asian,dinner,food",
     word: ["thai basil","rice","noodles","coconut milk","oyster sauce","fish sauce","limes","palm sugar"]
   },
-  {
-    id: "Vietnamese",
-    title: "vietnamese",
-    imageUrl: "https://source.unsplash.com/featured/?Vietnamese,dinner,food",
-    word: ["green onions","rice","lemongrass","tamarind","fish sauce","thai basil","cardamom","mint"]
-  }
+  // {
+  //   id: "Vietnamese",
+  //   title: "vietnamese",
+  //   imageUrl: "https://source.unsplash.com/featured/?Vietnamese,dinner,food",
+  //   word: ["green onions","rice","lemongrass","tamarind","fish sauce","thai basil","cardamom","mint"]
+  // }
 ];
 
 const Item = ({ item, onPress, style }) => (
@@ -203,6 +203,7 @@ const Item = ({ item, onPress, style }) => (
 );
 
 const PreferencesScreen = ({ onSubmit, navigation }) => {
+  const fetch = navigation.getParam('fetch');
   const [selectedId, setSelectedId] = useState(null);
   const [selectedId1, setSelectedId1] = useState(null);
   const [itemList, setItemList] = useState([]);
@@ -267,7 +268,7 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
         Set your preferences</Text> 
     <TouchableOpacity onPress={() => {
           
-      navigation.navigate('Diet', {list1:itemList, word1: wordList})}
+      navigation.navigate('Diet', {list1:itemList, word1: wordList, fetch: fetch})}
     }>
       <Text style={styles.nextheader}>     Next </Text>
     </TouchableOpacity>
@@ -304,7 +305,7 @@ const PreferencesScreen = ({ onSubmit, navigation }) => {
     // onPress={() => onSubmit(itemList)}
     onPress={() => {
           
-      navigation.navigate('Diet', {list1:itemList, word1: wordList})}
+      navigation.navigate('Diet', {list1:itemList, word1: wordList, fetch: fetch})}
     }
       />
       <Spacer />

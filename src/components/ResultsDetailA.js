@@ -20,7 +20,10 @@ const ResultsDetailA = ({results1}) => {
   	const minutes = num % 60;
   		return (
   		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
-	} else {
+	}  else if (results1.readyInMinutes === 0) {
+		return (<Text style={styles.icon}> Quick </Text>)
+
+	 } else {
 		return (<Text style={styles.icon}> {results1.readyInMinutes}mins</Text>)
 	}}
 

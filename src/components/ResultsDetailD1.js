@@ -32,16 +32,19 @@ const [resultsA, setResultsA] = useState('');
 		
 	// 	}
 
-	// const Time = () => {
-	// if (resultsA.readyInMinutes > 60) {
-	// 	let num = resultsB.readyInMinutes
-	// const hours = Math.floor(num / 60);  
- //  	const minutes = num % 60;
- //  		return (
- //  		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
-	// } else {
-	// 	return (<Text style={styles.icon}> {resultsA.readyInMinutes}mins</Text>)
-	// }}
+	const Time = () => {
+	if (results2.recipe.totalTime > 60) {
+		let num = results2.recipe.totalTime
+	const hours = Math.floor(num / 60);  
+  	const minutes = num % 60;
+  		return (
+  		  			<Text style={styles.icon}>{`${hours}h${minutes}m`}</Text>)
+	} else if (results2.recipe.totalTime === 0) {
+		return (<Text style={styles.icon}> Quick </Text>)
+
+	 } else {
+		return (<Text style={styles.icon}> {results2.recipe.totalTime}mins</Text>)
+	}}
 
  
 
@@ -83,7 +86,7 @@ const [resultsA, setResultsA] = useState('');
             <View style={styles.box}>
         	<Entypo name="dot-single" size={20} color="white" />
             <MaterialIcons  name="access-time" size={13} color="white" style={{ paddingTop: 4 }} />
-			
+			<Time />
 			</View>
 			</View>
              </View>

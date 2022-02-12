@@ -9,7 +9,7 @@ const trackReducer = (state, action) => {
 		case 'add_error':
 			return { ...state, errorMessage: action.payload};
 		case 'fetch_tracks':
-			return { ...state, cuisine: action.payload[0].list1,
+			return { ...state,  cuisine: action.payload[0].list1,
 			 _id: action.payload[0]._id, 
 			 allergies: action.payload[0].itemList4,
 			avoid: action.payload[0].itemList1, 
@@ -54,6 +54,8 @@ const fetchTracks = dispatch => async () => {
 
 
 };
+
+
 
 const changeName1 = dispatch => (name) => {
 	dispatch({ type: 'change_name', payload: name })

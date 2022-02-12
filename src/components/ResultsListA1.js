@@ -28,6 +28,13 @@ const ResultsListA1 = ({ title, results1, navigation }) => {
 	// 	return null;
 	// }
 
+	const formatImageUrl = (url) => `${API_URL}${url}`
+	const getID = (url) => {
+		const strs = url.split('recipe_');
+		const id = strs[1]
+		return id
+	}
+
 	return(
 		<View style={styles.container}>
 		{results1
@@ -44,7 +51,7 @@ const ResultsListA1 = ({ title, results1, navigation }) => {
 					console.log("lets go ResultsListA")
 				
 					return (
-						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.id })}>
+						<TouchableOpacity onPress={() => navigation.navigate('Original', { showD: item.recipe.url })}>
 							<ResultsDetailA results1={item} />
 						</TouchableOpacity>
 					)
